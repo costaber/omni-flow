@@ -1,1 +1,1 @@
-# challenge-faas
+# Challenge FaaS
