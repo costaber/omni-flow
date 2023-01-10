@@ -42,5 +42,3 @@ build/
 venv/
 __pycache__/
 
-/src/main/resources/static/docs/asciidoc/CHANGELOG.adoc
-/src/main/resources/static/docs/asciidoc/LICENSE.adoc
