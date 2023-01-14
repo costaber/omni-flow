@@ -1,9 +1,8 @@
 package org.example.challenge.faas.domain
 
-data class Step<Argument, Result>(
+data class Step(
     val name: String,
     val description: String,
     val type: StepType,
-    val action: (Argument) -> Result,
-    val metadata: Map<String, *>,
+    val metadata: Map<String, Any>,
 )
