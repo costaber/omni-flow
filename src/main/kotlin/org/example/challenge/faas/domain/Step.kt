@@ -4,5 +4,12 @@ open class Step(
     val name: String,
     val description: String,
     val type: StepType = StepType.EXECUTION,
-    val parameters: Map<String, Any> = emptyMap(),
-)
+    val context: Context,
+) {
+
+    override fun toString() = "${Step::class.simpleName}(" +
+            "${Step::name.name}=$name, " +
+            "${Step::description.name}=$description, " +
+            "${Step::type.name}=$type, " +
+            "${Step::context.name}=$context )"
+}
