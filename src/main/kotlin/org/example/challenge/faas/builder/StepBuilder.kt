@@ -21,6 +21,6 @@ class StepBuilder : Builder<Step> {
         name = name,
         description = description,
         type = stepTypeBuilder.build(),
-        metadata = metadata
+        parameters = metadata
     )
 }
