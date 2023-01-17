@@ -10,6 +10,7 @@ class ExecutionContextBuilder : ContextBuilder {
     private lateinit var method: String
     private lateinit var url: String
     private lateinit var result: String
+
     // optional
     private val header: MutableMap<String, String> = mutableMapOf()
     private val query: MutableMap<String, String> = mutableMapOf()
