@@ -20,7 +20,7 @@ class WorkflowBuilder : Builder<Workflow> {
 
     fun description(value: String) = apply { this.description = value }
 
-    fun step(vararg value: StepBuilder) = apply { this.steps.addAll(value) }
+    fun steps(vararg value: StepBuilder) = apply { this.steps.addAll(value) }
 
     fun result(value: String) = apply { this.result = value }
 
@@ -32,4 +32,14 @@ class WorkflowBuilder : Builder<Workflow> {
         definition = steps.map { it.build() },
         result = result
     )
+
+    fun deploy() {
+        val workflow = build()
+        println(workflow)
+    }
+
+    fun deploy(date: String) {
+        val workflow = build()
+        println("Scheduling the deploy of: \n\t$workflow\non $date")
+    }
 }
