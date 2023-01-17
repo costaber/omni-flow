@@ -10,5 +10,5 @@ data class ExecutionContext(
     val body: Map<String, String> = emptyMap(),
     val authentication: Authentication? = null,
     val timeoutInSeconds: Long? = null,
-    val result: String
+    val result: String,
 ) : Context

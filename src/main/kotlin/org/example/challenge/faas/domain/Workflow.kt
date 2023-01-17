@@ -6,5 +6,5 @@ data class Workflow(
     val provider: CloudProvider,
     val description: String? = null,
     val definition: Collection<Step> = emptyList(),
-    val result: String
+    val result: String,
 )

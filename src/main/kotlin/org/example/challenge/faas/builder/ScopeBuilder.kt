@@ -7,6 +7,7 @@ class ScopeBuilder : Builder<Unit> {
     fun deployable(vararg workflow: WorkflowBuilder) {
         workflows.addAll(workflow)
     }
+
     override fun build() {
         workflows.map { it.build() }
             .forEach { println(it) }

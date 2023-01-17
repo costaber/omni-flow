@@ -4,5 +4,5 @@ import org.example.challenge.faas.domain.Context
 import org.example.challenge.faas.domain.StepType
 
 interface ContextBuilder : Builder<Context> {
-    fun stepType() : StepType
+    fun stepType(): StepType
 }
