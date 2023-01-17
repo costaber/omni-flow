@@ -1,8 +1,8 @@
 package org.example.challenge.faas.domain
 
-data class Step(
+open class Step(
     val name: String,
     val description: String,
-    val type: StepType,
-    val metadata: Map<String, Any>,
+    val type: StepType = StepType.EXECUTION,
+    val parameters: Map<String, Any> = emptyMap(),
 )
