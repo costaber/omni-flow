@@ -20,7 +20,7 @@ class WorkflowBuilder : Builder<Workflow> {
 
     fun description(value: String) = apply { this.description = value }
 
-    fun step(value: StepBuilder) = apply { this.steps.add(value) }
+    fun step(vararg value: StepBuilder) = apply { this.steps.addAll(value) }
 
     fun result(value: String) = apply { this.result = value }
 

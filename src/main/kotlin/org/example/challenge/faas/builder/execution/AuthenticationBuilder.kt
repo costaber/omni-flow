@@ -3,7 +3,7 @@ package org.example.challenge.faas.builder.execution
 import org.example.challenge.faas.builder.Builder
 import org.example.challenge.faas.domain.execution.Authentication
 
-class AuthenticationBuilder: Builder<Authentication> {
+class AuthenticationBuilder : Builder<Authentication> {
 
     private lateinit var type: String
     private var scope: String? = null
