@@ -127,3 +127,14 @@ Didn't happen, it was rescheduled for [January 04, 2023](#january-04-2023)
   - Workflow examples
 
 ## February 27, 2023
+
+- Update the paper structure
+  - Move patterns to chapter 2
+  - Create Chapter 4 with a timeline
+  - Make listing smaller
+- Introduction:
+  - Motivation for the work
+  - Problem to solve
+  - What was done in this area
+  - Proposal for a solution
+  - The structure of the document
