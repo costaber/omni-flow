@@ -1,5 +1,6 @@
 # ToDo
 
+* Use clouds providers library to do the deployment 
 
 # Future Work
 
