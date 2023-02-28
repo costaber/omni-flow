@@ -32,14 +32,4 @@ class WorkflowBuilder : Builder<Workflow> {
         definition = steps.map { it.build() },
         result = result
     )
-
-    fun deploy() {
-        val workflow = build()
-        println(workflow)
-    }
-
-    fun deploy(date: String) {
-        val workflow = build()
-        println("Scheduling the deploy of: \n\t$workflow\non $date")
-    }
 }
