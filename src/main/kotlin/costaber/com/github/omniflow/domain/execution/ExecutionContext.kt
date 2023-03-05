@@ -1,6 +1,6 @@
-package org.example.challenge.faas.domain.execution
+package costaber.com.github.omniflow.domain.execution
 
-import org.example.challenge.faas.domain.Context
+import costaber.com.github.omniflow.domain.Context
 
 data class ExecutionContext(
     val method: String,

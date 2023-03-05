@@ -1,6 +1,6 @@
-package org.example.challenge.faas.builder
+package costaber.com.github.omniflow.builder
 
-import org.example.challenge.faas.domain.Step
+import costaber.com.github.omniflow.domain.Step
 
 open class StepBuilder : Builder<Step> {
 

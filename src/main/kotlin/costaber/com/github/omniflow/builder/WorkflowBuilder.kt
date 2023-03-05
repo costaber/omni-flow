@@ -1,7 +1,7 @@
-package org.example.challenge.faas.builder
+package costaber.com.github.omniflow.builder
 
-import org.example.challenge.faas.domain.Workflow
-import org.example.challenge.faas.domain.getCloudProvider
+import costaber.com.github.omniflow.domain.Workflow
+import costaber.com.github.omniflow.domain.getCloudProvider
 
 class WorkflowBuilder : Builder<Workflow> {
 

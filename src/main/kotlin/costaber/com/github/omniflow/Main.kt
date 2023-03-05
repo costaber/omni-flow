@@ -1,8 +1,8 @@
-package org.example.challenge.faas
+package costaber.com.github.omniflow
 
-import org.example.challenge.faas.dsl.execution
-import org.example.challenge.faas.dsl.step
-import org.example.challenge.faas.dsl.workflow
+import costaber.com.github.omniflow.dsl.execution
+import costaber.com.github.omniflow.dsl.step
+import costaber.com.github.omniflow.dsl.workflow
 
 fun main() {
     val workflow = workflow {
