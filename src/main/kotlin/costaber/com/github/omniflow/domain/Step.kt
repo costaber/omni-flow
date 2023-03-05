@@ -1,4 +1,4 @@
-package org.example.challenge.faas.domain
+package costaber.com.github.omniflow.domain
 
 data class Step(
     val name: String,

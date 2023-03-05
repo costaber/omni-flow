@@ -1,7 +1,7 @@
-package org.example.challenge.faas.builder.execution
+package costaber.com.github.omniflow.builder.execution
 
-import org.example.challenge.faas.builder.Builder
-import org.example.challenge.faas.domain.execution.Authentication
+import costaber.com.github.omniflow.builder.Builder
+import costaber.com.github.omniflow.domain.execution.Authentication
 
 class AuthenticationBuilder : Builder<Authentication> {
 
