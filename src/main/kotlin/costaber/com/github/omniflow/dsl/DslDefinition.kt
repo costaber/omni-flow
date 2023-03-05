@@ -1,8 +1,8 @@
-package org.example.challenge.faas.dsl
+package costaber.com.github.omniflow.dsl
 
-import org.example.challenge.faas.builder.StepBuilder
-import org.example.challenge.faas.builder.WorkflowBuilder
-import org.example.challenge.faas.builder.execution.ExecutionContextBuilder
+import costaber.com.github.omniflow.builder.StepBuilder
+import costaber.com.github.omniflow.builder.WorkflowBuilder
+import costaber.com.github.omniflow.builder.execution.ExecutionContextBuilder
 
 fun workflow(workflowBuilder: WorkflowBuilder.() -> Unit): WorkflowBuilder {
     return WorkflowBuilder().apply(workflowBuilder)

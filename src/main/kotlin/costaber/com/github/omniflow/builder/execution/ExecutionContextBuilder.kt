@@ -1,8 +1,8 @@
-package org.example.challenge.faas.builder.execution
+package costaber.com.github.omniflow.builder.execution
 
-import org.example.challenge.faas.builder.ContextBuilder
-import org.example.challenge.faas.domain.StepType
-import org.example.challenge.faas.domain.execution.ExecutionContext
+import costaber.com.github.omniflow.builder.ContextBuilder
+import costaber.com.github.omniflow.domain.StepType
+import costaber.com.github.omniflow.domain.execution.ExecutionContext
 
 class ExecutionContextBuilder : ContextBuilder {
 

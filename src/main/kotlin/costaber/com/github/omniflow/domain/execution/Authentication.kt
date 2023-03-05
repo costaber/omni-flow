@@ -1,4 +1,4 @@
-package org.example.challenge.faas.domain.execution
+package costaber.com.github.omniflow.domain.execution
 
 data class Authentication(
     val type: String,
