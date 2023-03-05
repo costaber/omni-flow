@@ -1,7 +1,7 @@
-package org.example.challenge.faas.builder
+package costaber.com.github.omniflow.builder
 
-import org.example.challenge.faas.domain.Workflow
-import org.example.challenge.faas.domain.getCloudProvider
+import costaber.com.github.omniflow.domain.Workflow
+import costaber.com.github.omniflow.domain.getCloudProvider
 
 class WorkflowBuilder : Builder<Workflow> {
 
@@ -32,14 +32,4 @@ class WorkflowBuilder : Builder<Workflow> {
         definition = steps.map { it.build() },
         result = result
     )
-
-    fun deploy() {
-        val workflow = build()
-        println(workflow)
-    }
-
-    fun deploy(date: String) {
-        val workflow = build()
-        println("Scheduling the deploy of: \n\t$workflow\non $date")
-    }
 }
