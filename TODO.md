@@ -3,6 +3,7 @@
 * Use clouds providers library to do the deployment
 * Add dependency injection to the project
 * After knowing how to design the transpiler, create the tests first
+* Add Maven Wrapper to the project
 
 # Future Work
 

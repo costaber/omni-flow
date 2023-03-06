@@ -18,6 +18,7 @@
 - [February 13, 2023](#february-13-2023)
 - [February 20, 2023](#february-20-2023)
 - [February 27, 2023](#february-27-2023)
+- [March 6, 2023](#march-6-2023)
 
 ---
 
@@ -121,7 +122,7 @@ Didn't happen, it was rescheduled for [January 04, 2023](#january-04-2023)
 
 ## February 20, 2023
 
-- Complete paper introduction: 
+- Complete paper introduction:
   - Architecture chapter
   - Workflow examples
 
@@ -137,3 +138,8 @@ Didn't happen, it was rescheduled for [January 04, 2023](#january-04-2023)
   - What was done in this area
   - Proposal for a solution
   - The structure of the document
+
+## March 6, 2023
+
+- Paper improvements and comments
+- Brainstorming about the implementation of OmniFlow
