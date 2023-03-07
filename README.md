@@ -9,7 +9,7 @@ TODO
 Use maven wrapper [Maven Wrapper][maven-wrapper]:
 
 ```shell script
-./mvnw clean verify
+./mvnw clean package
 ```
 
 ## How to Test
