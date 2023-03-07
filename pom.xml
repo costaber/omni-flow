@@ -18,36 +18,29 @@
         <kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
 
         <!-- Plugin versions -->
-        <kotlin-maven-plugin>1.7.20</kotlin-maven-plugin>
-        <maven-surefire-plugin>2.22.2</maven-surefire-plugin>
-        <maven-failsafe-plugin>2.22.2</maven-failsafe-plugin>
+        <kotlin-maven-plugin.version>1.7.20</kotlin-maven-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
 
         <!-- - -->
-        <kotlin-stdlib>1.7.20</kotlin-stdlib>
+        <kotlin-stdlib.version>1.7.20</kotlin-stdlib.version>
 
         <!-- Testing -->
-        <kotlin-test-junit5>1.7.20</kotlin-test-junit5>
-        <junit-jupiter-engine>5.9.0</junit-jupiter-engine>
+        <junit-jupiter-engine.version>5.9.0</junit-jupiter-engine.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
-            <version>${kotlin-stdlib}</version>
+            <version>${kotlin-stdlib.version}</version>
         </dependency>
 
         <!-- Test -->
         <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test-junit5</artifactId>
-            <version>${kotlin-test-junit5}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-jupiter-engine}</version>
+            <version>${junit-jupiter-engine.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -60,7 +53,7 @@
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin-maven-plugin}</version>
+                <version>${kotlin-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>compile</id>
@@ -80,11 +73,11 @@
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin}</version>
+                <version>${maven-surefire-plugin.version}</version>
             </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${maven-failsafe-plugin}</version>
+                <version>${maven-failsafe-plugin.version}</version>
             </plugin>
         </plugins>
     </build>
