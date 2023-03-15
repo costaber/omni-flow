@@ -4,13 +4,9 @@
 
 - [October 17, 2022](#october-17-2022)
 - [October 24, 2022](#october-24-2022)
-- [October 31, 2022](#october-31-2022)
 - [November 03, 2022](#november-03-2022)
-- [November 14, 2022](#november-14-2022)
 - [November 21, 2022](#november-21-2022)
-- [November 28, 2022](#november-28-2022)
 - [December 06, 2022](#december-06-2022)
-- [December 14, 2022](#december-14-2022)
 - [January 04, 2023](#january-04-2023)
 - [January 09, 2023](#january-09-2023)
 - [January 18, 2023](#january-18-2023)
@@ -19,6 +15,7 @@
 - [February 20, 2023](#february-20-2023)
 - [February 27, 2023](#february-27-2023)
 - [March 6, 2023](#march-6-2023)
+- [March 15, 2023](#march-15-2023)
 
 ---
 
@@ -38,10 +35,6 @@
   - [AWS](https://aws.amazon.com/pt/lambda/)
   - [Azure](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview)
 
-## October 31, 2022
-
-Didn't happen, it was rescheduled for [November 03, 2022](#november-03-2022)
-
 ## November 03, 2022
 
 - Talk about the work done:
@@ -50,10 +43,6 @@ Didn't happen, it was rescheduled for [November 03, 2022](#november-03-2022)
 - Next Steps:
   - Create FaaS with Azure Provider
   - Explore Function orchestrators
-
-## November 14, 2022
-
-Didn't happen
 
 ## November 21, 2022
 
@@ -67,10 +56,6 @@ Didn't happen
   - Create a sample of orchestrators in GCP
   - Start document the function and orchestrators in the different provider (ideally also should be done in AWS)
 
-## November 28, 2022
-
-Didn't happen, it was rescheduled for [December 06, 2022](#december-06-2022)
-
 ## December 06, 2022
 
 - Cloud Functions and his orchestration in Azure and GCP
@@ -79,10 +64,6 @@ Didn't happen, it was rescheduled for [December 06, 2022](#december-06-2022)
   - Creation of a Domain Specific Language (DSL)
   - Transpile my DSL for each specific cloud provider DSL
 - Next meeting scheduled for [December 14, 2022](#december-14-2022)
-
-## December 14, 2022
-
-Didn't happen, it was rescheduled for [January 04, 2023](#january-04-2023)
 
 ## January 04, 2023
 
@@ -143,3 +124,8 @@ Didn't happen, it was rescheduled for [January 04, 2023](#january-04-2023)
 
 - Paper improvements and comments
 - Brainstorming about the implementation of OmniFlow
+
+## March 15, 2023
+
+- Add new Billing account with 50$ credits
+- Talking about the cloud client libraries for Workflows provided by each provider
