@@ -26,7 +26,7 @@
         <kotlin-stdlib.version>1.7.20</kotlin-stdlib.version>
 
         <!-- Testing -->
-        <junit-jupiter-engine.version>5.9.0</junit-jupiter-engine.version>
+        <junit-jupiter-engine.version>5.9.2</junit-jupiter-engine.version>
     </properties>
 
     <dependencies>
