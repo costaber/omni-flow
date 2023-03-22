@@ -5,8 +5,8 @@
 * After knowing how to design the transpiler, create the tests first
 * Convert to a multi-module project:
   * deployment
-  * app?
-  * auth?
+  * app
+  * auth (can be a possibility)
   * benchmark
 
 # Future Work

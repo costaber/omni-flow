@@ -129,3 +129,9 @@
 
 - Add new Billing account with 50$ credits
 - Talking about the cloud client libraries for Workflows provided by each provider
+
+## March 22, 2023
+
+- Demonstration of using the GCP and AWS client libraries
+- Alignment for the next steps and iteration for software 
+- Last phase would be the creation of a GUI for the lib
