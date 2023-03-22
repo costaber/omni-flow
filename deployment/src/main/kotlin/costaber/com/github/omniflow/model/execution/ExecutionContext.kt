@@ -1,6 +1,6 @@
-package costaber.com.github.omniflow.domain.execution
+package costaber.com.github.omniflow.model.execution
 
-import costaber.com.github.omniflow.domain.Context
+import costaber.com.github.omniflow.model.Context
 
 data class ExecutionContext(
     val method: String,

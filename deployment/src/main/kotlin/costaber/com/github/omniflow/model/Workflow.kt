@@ -1,4 +1,4 @@
-package costaber.com.github.omniflow.domain
+package costaber.com.github.omniflow.model
 
 data class Workflow(
     val name: String,

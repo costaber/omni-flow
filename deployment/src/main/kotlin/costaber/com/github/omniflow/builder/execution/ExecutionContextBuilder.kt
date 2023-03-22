@@ -1,8 +1,8 @@
 package costaber.com.github.omniflow.builder.execution
 
 import costaber.com.github.omniflow.builder.ContextBuilder
-import costaber.com.github.omniflow.domain.StepType
-import costaber.com.github.omniflow.domain.execution.ExecutionContext
+import costaber.com.github.omniflow.model.StepType
+import costaber.com.github.omniflow.model.execution.ExecutionContext
 
 class ExecutionContextBuilder : ContextBuilder {
 
