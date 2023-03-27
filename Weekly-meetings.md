@@ -14,8 +14,9 @@
 - [February 13, 2023](#february-13-2023)
 - [February 20, 2023](#february-20-2023)
 - [February 27, 2023](#february-27-2023)
-- [March 6, 2023](#march-6-2023)
+- [March 06, 2023](#march-06-2023)
 - [March 15, 2023](#march-15-2023)
+- [March 22, 2023](#march-22-2023)
 
 ---
 
@@ -23,7 +24,7 @@
 
 - Thesis objective
 - First steps
-- Introduction to QuickFaas
+- Introduction to QuickFaaS
 - `Paper Deadline:` around June
 
 ## October 24, 2022
@@ -63,7 +64,6 @@
 - Next Steps:
   - Creation of a Domain Specific Language (DSL)
   - Transpile my DSL for each specific cloud provider DSL
-- Next meeting scheduled for [December 14, 2022](#december-14-2022)
 
 ## January 04, 2023
 
@@ -80,7 +80,7 @@
 
 - Talking about the model and diagrams
 - Checking for some related work:
-  - [OpenFaas](https://github.com/s8sg/faas-flow)
+  - [FaasFlow](https://github.com/s8sg/faas-flow)
   - [ASPLOS'22 Session 7](https://www.youtube.com/watch?v=xCMx4J6Ur_c)
 
 ## January 18, 2023
@@ -120,7 +120,7 @@
   - Proposal for a solution
   - The structure of the document
 
-## March 6, 2023
+## March 06, 2023
 
 - Paper improvements and comments
 - Brainstorming about the implementation of OmniFlow
