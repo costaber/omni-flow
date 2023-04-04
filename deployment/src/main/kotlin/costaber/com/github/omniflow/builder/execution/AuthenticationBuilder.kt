@@ -1,7 +1,7 @@
 package costaber.com.github.omniflow.builder.execution
 
 import costaber.com.github.omniflow.builder.Builder
-import costaber.com.github.omniflow.domain.execution.Authentication
+import costaber.com.github.omniflow.model.execution.Authentication
 
 class AuthenticationBuilder : Builder<Authentication> {
 
