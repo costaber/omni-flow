@@ -4,13 +4,9 @@
 
 - [October 17, 2022](#october-17-2022)
 - [October 24, 2022](#october-24-2022)
-- [October 31, 2022](#october-31-2022)
 - [November 03, 2022](#november-03-2022)
-- [November 14, 2022](#november-14-2022)
 - [November 21, 2022](#november-21-2022)
-- [November 28, 2022](#november-28-2022)
 - [December 06, 2022](#december-06-2022)
-- [December 14, 2022](#december-14-2022)
 - [January 04, 2023](#january-04-2023)
 - [January 09, 2023](#january-09-2023)
 - [January 18, 2023](#january-18-2023)
@@ -18,7 +14,9 @@
 - [February 13, 2023](#february-13-2023)
 - [February 20, 2023](#february-20-2023)
 - [February 27, 2023](#february-27-2023)
-- [March 6, 2023](#march-6-2023)
+- [March 06, 2023](#march-06-2023)
+- [March 15, 2023](#march-15-2023)
+- [March 22, 2023](#march-22-2023)
 
 ---
 
@@ -26,7 +24,7 @@
 
 - Thesis objective
 - First steps
-- Introduction to QuickFaas
+- Introduction to QuickFaaS
 - `Paper Deadline:` around June
 
 ## October 24, 2022
@@ -38,10 +36,6 @@
   - [AWS](https://aws.amazon.com/pt/lambda/)
   - [Azure](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview)
 
-## October 31, 2022
-
-Didn't happen, it was rescheduled for [November 03, 2022](#november-03-2022)
-
 ## November 03, 2022
 
 - Talk about the work done:
@@ -50,10 +44,6 @@ Didn't happen, it was rescheduled for [November 03, 2022](#november-03-2022)
 - Next Steps:
   - Create FaaS with Azure Provider
   - Explore Function orchestrators
-
-## November 14, 2022
-
-Didn't happen
 
 ## November 21, 2022
 
@@ -67,10 +57,6 @@ Didn't happen
   - Create a sample of orchestrators in GCP
   - Start document the function and orchestrators in the different provider (ideally also should be done in AWS)
 
-## November 28, 2022
-
-Didn't happen, it was rescheduled for [December 06, 2022](#december-06-2022)
-
 ## December 06, 2022
 
 - Cloud Functions and his orchestration in Azure and GCP
@@ -78,11 +64,6 @@ Didn't happen, it was rescheduled for [December 06, 2022](#december-06-2022)
 - Next Steps:
   - Creation of a Domain Specific Language (DSL)
   - Transpile my DSL for each specific cloud provider DSL
-- Next meeting scheduled for [December 14, 2022](#december-14-2022)
-
-## December 14, 2022
-
-Didn't happen, it was rescheduled for [January 04, 2023](#january-04-2023)
 
 ## January 04, 2023
 
@@ -99,7 +80,7 @@ Didn't happen, it was rescheduled for [January 04, 2023](#january-04-2023)
 
 - Talking about the model and diagrams
 - Checking for some related work:
-  - [OpenFaas](https://github.com/s8sg/faas-flow)
+  - [FaasFlow](https://github.com/s8sg/faas-flow)
   - [ASPLOS'22 Session 7](https://www.youtube.com/watch?v=xCMx4J6Ur_c)
 
 ## January 18, 2023
@@ -139,7 +120,18 @@ Didn't happen, it was rescheduled for [January 04, 2023](#january-04-2023)
   - Proposal for a solution
   - The structure of the document
 
-## March 6, 2023
+## March 06, 2023
 
 - Paper improvements and comments
 - Brainstorming about the implementation of OmniFlow
+
+## March 15, 2023
+
+- Add new Billing account with 50$ credits
+- Talking about the cloud client libraries for Workflows provided by each provider
+
+## March 22, 2023
+
+- Demonstration of using the GCP and AWS client libraries
+- Alignment for the next steps and iteration for software 
+- Last phase would be the creation of a GUI for the lib

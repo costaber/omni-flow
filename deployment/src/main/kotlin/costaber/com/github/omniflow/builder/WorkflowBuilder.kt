@@ -1,7 +1,7 @@
 package costaber.com.github.omniflow.builder
 
-import costaber.com.github.omniflow.domain.Workflow
-import costaber.com.github.omniflow.domain.getCloudProvider
+import costaber.com.github.omniflow.model.Workflow
+import costaber.com.github.omniflow.model.getCloudProvider
 
 class WorkflowBuilder : Builder<Workflow> {
 

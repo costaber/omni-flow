@@ -1,6 +1,6 @@
 package costaber.com.github.omniflow.builder
 
-import costaber.com.github.omniflow.domain.Step
+import costaber.com.github.omniflow.model.Step
 
 open class StepBuilder : Builder<Step> {
 
