@@ -3,7 +3,7 @@ package costaber.com.github.omniflow
 import costaber.com.github.omniflow.dsl.execution
 import costaber.com.github.omniflow.dsl.step
 import costaber.com.github.omniflow.dsl.workflow
-import org.junit.jupiter.api.Test
+import org.junit.Test
 
 internal class WorkflowTest {
 
