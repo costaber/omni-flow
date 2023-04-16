@@ -1,6 +1,5 @@
-package costaber.com.github.omniflow.serializer
+package costaber.com.github.omniflow.service
 
-import costaber.com.github.omniflow.service.AwsStateMachineService
 import costaber.com.github.omniflow.util.getResourceContent
 import org.junit.Test
 

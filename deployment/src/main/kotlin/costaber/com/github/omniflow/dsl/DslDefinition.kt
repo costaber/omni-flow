@@ -3,9 +3,10 @@ package costaber.com.github.omniflow.dsl
 import costaber.com.github.omniflow.builder.StepBuilder
 import costaber.com.github.omniflow.builder.WorkflowBuilder
 import costaber.com.github.omniflow.builder.execution.ExecutionContextBuilder
+import costaber.com.github.omniflow.model.Workflow
 
-fun workflow(workflowBuilder: WorkflowBuilder.() -> Unit): WorkflowBuilder {
-    return WorkflowBuilder().apply(workflowBuilder)
+fun workflow(workflowBuilder: WorkflowBuilder.() -> Unit): Workflow {
+    return WorkflowBuilder().apply(workflowBuilder).build()
 }
 
 fun step(stepBuilder: StepBuilder.() -> Unit): StepBuilder {

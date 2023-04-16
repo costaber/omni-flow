@@ -1,17 +1,19 @@
 package costaber.com.github.omniflow
 
+import costaber.com.github.omniflow.deployer.google.GoogleCloudDeployer
+import costaber.com.github.omniflow.deployer.google.GoogleDeployContext
 import costaber.com.github.omniflow.dsl.execution
 import costaber.com.github.omniflow.dsl.step
 import costaber.com.github.omniflow.dsl.workflow
+import costaber.com.github.omniflow.mappers.GoogleMapper
+import costaber.com.github.omniflow.service.GcpWorkflowService
 import org.junit.Test
 
 internal class WorkflowTest {
 
     @Test
     fun test() {
-        workflow {
-            zone("eu-west")
-            provider("GCP")
+        val workflow = workflow {
             name("myFirstWorkflow")
             description("My first Workflow")
             steps(
@@ -56,6 +58,29 @@ internal class WorkflowTest {
                 }
             )
             result("increment3")
-        }.build()
+        }
+
+        // version 1
+        val mapper = GoogleMapper()
+        val gcpWorkflowService = GcpWorkflowService()
+        val context = GoogleDeployContext(
+            projectId = "",
+            zone = "",
+            serviceAccount = "",
+            workflowId = "",
+            workflowDescription = "",
+            workflowLabels = mapOf()
+        )
+        GoogleCloudDeployer(mapper, gcpWorkflowService).deploy(workflow, context)
+
+        // version 2
+//        AwsStateMachineService.Builder()
+//            .stateMachineName("")
+//            .arnRole("")
+//            .zone("")
+//            .build()
+//            .deploy(workflow)
+
+
     }
 }

@@ -23,4 +23,4 @@ main:
                 increment: ${result2.body}
         result: result3
     - returnOutput:
-            return: ${result3.body}
+        return: ${result3.body}

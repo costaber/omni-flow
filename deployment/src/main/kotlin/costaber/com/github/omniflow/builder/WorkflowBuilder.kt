@@ -1,20 +1,13 @@
 package costaber.com.github.omniflow.builder
 
 import costaber.com.github.omniflow.model.Workflow
-import costaber.com.github.omniflow.model.getCloudProvider
 
 class WorkflowBuilder : Builder<Workflow> {
 
-    private lateinit var zone: String
-    private lateinit var provider: String
     private lateinit var name: String
     private lateinit var description: String
     private lateinit var result: String
     private val steps = mutableListOf<StepBuilder>()
-
-    fun zone(value: String) = apply { this.zone = value }
-
-    fun provider(value: String) = apply { this.provider = value }
 
     fun name(value: String) = apply { this.name = value }
 
@@ -25,11 +18,9 @@ class WorkflowBuilder : Builder<Workflow> {
     fun result(value: String) = apply { this.result = value }
 
     override fun build() = Workflow(
-        zone = zone,
-        provider = getCloudProvider(provider),
         name = name,
         description = description,
-        definition = steps.map { it.build() },
+        steps = steps.map { it.build() },
         result = result
     )
 }
