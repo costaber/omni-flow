@@ -1,5 +1,6 @@
 package costaber.com.github.omniflow.service
 
+import costaber.com.github.omniflow.cloud.provider.aws.service.AwsStateMachineService
 import costaber.com.github.omniflow.util.getResourceContent
 import org.junit.Test
 

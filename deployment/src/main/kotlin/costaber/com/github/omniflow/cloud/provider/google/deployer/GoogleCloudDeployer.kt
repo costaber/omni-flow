@@ -1,9 +1,9 @@
-package costaber.com.github.omniflow.deployer.google
+package costaber.com.github.omniflow.cloud.provider.google.deployer
 
 import costaber.com.github.omniflow.deployer.CloudDeployer
-import costaber.com.github.omniflow.mappers.google.GoogleWorkflowMapper
+import costaber.com.github.omniflow.cloud.provider.google.mapper.GoogleWorkflowMapper
 import costaber.com.github.omniflow.model.Workflow
-import costaber.com.github.omniflow.service.GcpWorkflowService
+import costaber.com.github.omniflow.cloud.provider.google.service.GcpWorkflowService
 
 class GoogleCloudDeployer(
     private val googleWorkflowMapper: GoogleWorkflowMapper,

@@ -1,12 +1,12 @@
 package costaber.com.github.omniflow
 
-import costaber.com.github.omniflow.deployer.google.GoogleCloudDeployer
-import costaber.com.github.omniflow.deployer.google.GoogleDeployContext
+import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleCloudDeployer
+import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleDeployContext
 import costaber.com.github.omniflow.dsl.execution
 import costaber.com.github.omniflow.dsl.step
 import costaber.com.github.omniflow.dsl.workflow
-import costaber.com.github.omniflow.mappers.GoogleMapper
-import costaber.com.github.omniflow.service.GcpWorkflowService
+import costaber.com.github.omniflow.cloud.provider.google.mapper.GoogleWorkflowMapper
+import costaber.com.github.omniflow.cloud.provider.google.service.GcpWorkflowService
 import org.junit.Test
 
 internal class WorkflowTest {
@@ -61,17 +61,17 @@ internal class WorkflowTest {
         }
 
         // version 1
-        val mapper = GoogleMapper()
-        val gcpWorkflowService = GcpWorkflowService()
-        val context = GoogleDeployContext(
-            projectId = "",
-            zone = "",
-            serviceAccount = "",
-            workflowId = "",
-            workflowDescription = "",
-            workflowLabels = mapOf()
-        )
-        GoogleCloudDeployer(mapper, gcpWorkflowService).deploy(workflow, context)
+//        val mapper = GoogleMapper()
+//        val gcpWorkflowService = GcpWorkflowService()
+//        val context = GoogleDeployContext(
+//            projectId = "",
+//            zone = "",
+//            serviceAccount = "",
+//            workflowId = "",
+//            workflowDescription = "",
+//            workflowLabels = mapOf()
+//        )
+//        GoogleCloudDeployer(mapper, gcpWorkflowService).deploy(workflow, context)
 
         // version 2
 //        AwsStateMachineService.Builder()

@@ -1,4 +1,4 @@
-package costaber.com.github.omniflow.service
+package costaber.com.github.omniflow.cloud.provider.google.service
 
 import com.google.cloud.workflows.v1.*
 import costaber.com.github.omniflow.resource.exception.ExternalCloudClientException

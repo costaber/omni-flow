@@ -1,4 +1,4 @@
-package costaber.com.github.omniflow.service
+package costaber.com.github.omniflow.cloud.provider.aws.service
 
 import costaber.com.github.omniflow.resource.exception.ExternalCloudClientException
 import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider

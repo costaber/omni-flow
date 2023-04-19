@@ -1,5 +1,6 @@
 package costaber.com.github.omniflow.service
 
+import costaber.com.github.omniflow.cloud.provider.google.service.GcpWorkflowService
 import costaber.com.github.omniflow.util.getResourceContent
 import org.junit.Test
 

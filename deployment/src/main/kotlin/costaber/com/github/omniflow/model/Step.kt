@@ -5,4 +5,4 @@ data class Step(
     val description: String,
     val type: StepType = StepType.EXECUTION,
     val context: Context,
-)
+) : Node
