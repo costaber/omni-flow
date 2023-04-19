@@ -1,7 +1,8 @@
 # ToDo
 
 * Add dependency injection to the project
-* After knowing how to design the transpiler, create the tests first
+* Organize packages by provider
+* CAD presentation
 * Convert to a multi-module project:
   * deployment
   * app

@@ -17,6 +17,7 @@
 - [March 06, 2023](#march-06-2023)
 - [March 15, 2023](#march-15-2023)
 - [March 22, 2023](#march-22-2023)
+- [April 19, 2023](#april-19-2023)
 
 ---
 
@@ -135,3 +136,10 @@
 - Demonstration of using the GCP and AWS client libraries
 - Alignment for the next steps and iteration for software 
 - Last phase would be the creation of a GUI for the lib
+
+## April 19, 2023
+
+- Demonstration of the current work done
+- Explanation of the library architecture
+- Date pick for the CAD presentation - `9 of June`
+- Presentation topics
