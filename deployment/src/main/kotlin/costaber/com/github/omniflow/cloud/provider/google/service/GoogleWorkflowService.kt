@@ -1,9 +1,12 @@
 package costaber.com.github.omniflow.cloud.provider.google.service
 
-import com.google.cloud.workflows.v1.*
+import com.google.cloud.workflows.v1.CreateWorkflowRequest
+import com.google.cloud.workflows.v1.LocationName
+import com.google.cloud.workflows.v1.Workflow
+import com.google.cloud.workflows.v1.WorkflowsClient
 import costaber.com.github.omniflow.resource.exception.ExternalCloudClientException
 
-class GcpWorkflowService {
+class GoogleWorkflowService {
 
     /**
      * REQUIRED 1 ENV VARIABLE

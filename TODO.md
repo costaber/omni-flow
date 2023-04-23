@@ -3,6 +3,7 @@
 * Add dependency injection to the project
 * Organize packages by provider
 * CAD presentation
+* Add more tasks to the backlog
 * Convert to a multi-module project:
   * deployment
   * app

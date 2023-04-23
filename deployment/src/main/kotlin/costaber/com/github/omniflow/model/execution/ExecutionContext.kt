@@ -1,6 +1,7 @@
 package costaber.com.github.omniflow.model.execution
 
-import costaber.com.github.omniflow.model.Context
+import costaber.com.github.omniflow.model.Node
+import costaber.com.github.omniflow.model.StepContext
 
 data class ExecutionContext(
     val method: String,
@@ -11,4 +12,17 @@ data class ExecutionContext(
     val header: Map<String, String> = emptyMap(),
     val query: Map<String, String> = emptyMap(),
     val timeoutInSeconds: Long? = null,
-) : Context
+) : StepContext, Node {
+
+    override fun childNodes(): List<Node> {
+        return emptyList()
+    }
+
+    override fun childNodeSize(): Int {
+        return 0
+    }
+
+    override fun childNode(index: Int): Node? {
+        return null
+    }
+}

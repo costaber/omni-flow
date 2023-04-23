@@ -1,6 +1,6 @@
 package costaber.com.github.omniflow.cloud.provider.google.deployer
 
-import costaber.com.github.omniflow.deployer.IDeployContext
+import costaber.com.github.omniflow.deployer.DeployContext
 
 data class GoogleDeployContext(
     val projectId: String,
@@ -9,4 +9,4 @@ data class GoogleDeployContext(
     val workflowId: String,
     val workflowDescription: String,
     val workflowLabels: Map<String, String>
-) : IDeployContext
+) : DeployContext
