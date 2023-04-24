@@ -25,6 +25,7 @@ internal class WorkflowTest {
                         method(GET)
                         url("https://us-central1-function-test-366510.cloudfunctions.net/function-1")
                         query("increment" to "\${input.number}")
+                        header("Content-Type" to "application/json")
                         result("result1")
                     }
                 )
@@ -37,6 +38,7 @@ internal class WorkflowTest {
                         method(GET)
                         url("https://us-central1-function-test-366510.cloudfunctions.net/function-1")
                         query("increment" to "\${result1.body}")
+                        header("Content-Type" to "application/json")
                         result("result2")
                     }
                 )
@@ -49,6 +51,7 @@ internal class WorkflowTest {
                         method(GET)
                         url("https://us-central1-function-test-366510.cloudfunctions.net/function-1")
                         query("increment" to "\${result2.body}")
+                        header("Content-Type" to "application/json")
                         result("result3")
                     }
                 )
@@ -57,11 +60,7 @@ internal class WorkflowTest {
         result("\${result3.body}")
     }
 
-    @Test
-    fun test() {
-
-
-        // version 1
+// Version 1
 //        val mapper = GoogleMapper()
 //        val gcpWorkflowService = GcpWorkflowService()
 //        val context = GoogleDeployContext(
@@ -74,17 +73,13 @@ internal class WorkflowTest {
 //        )
 //        GoogleCloudDeployer(mapper, gcpWorkflowService).deploy(workflow, context)
 
-        // version 2
+// Version 2
 //        AwsStateMachineService.Builder()
 //            .stateMachineName("")
 //            .arnRole("")
 //            .zone("")
 //            .build()
 //            .deploy(workflow)
-
-
-    }
-
 
     @Test
     fun `test visitor`() {
