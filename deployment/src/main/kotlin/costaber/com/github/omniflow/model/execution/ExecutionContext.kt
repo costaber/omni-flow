@@ -4,7 +4,7 @@ import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.model.StepContext
 
 data class ExecutionContext(
-    val method: String,
+    val method: HttpMethod,
     val result: String,
     val url: String,
     val authentication: Authentication? = null,

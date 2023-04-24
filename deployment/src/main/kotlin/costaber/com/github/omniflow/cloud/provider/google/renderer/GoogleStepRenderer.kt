@@ -12,7 +12,7 @@ class GoogleStepRenderer(
 
     override fun internalBeginRender(renderingContext: RenderingContext): String {
         val prefix = getIndentationString(renderingContext)
-        return "$prefix- ${step.name}:"
+        return "${prefix}- ${step.name}:"
     }
 
     override fun internalEndRender(renderingContext: RenderingContext) = "" // nothing

@@ -15,7 +15,8 @@ class GoogleExecutionRenderer(
     override fun internalBeginRender(renderingContext: RenderingContext): String {
         val prefix = getIndentationString(renderingContext)
         val stepBuilder = StringBuilder()
-        stepBuilder.appendLine("${prefix}call: http.${executionContext.method}")
+        val httpMethod = executionContext.method.name.lowercase()
+        stepBuilder.appendLine("${prefix}call: http.${httpMethod}")
         stepBuilder.appendLine("${prefix}args:")
         stepBuilder.append("${prefix}${TAB}url: ${executionContext.url}")
         renderMap("headers", executionContext.header, prefix, stepBuilder)

@@ -23,16 +23,16 @@ class GoogleCloudDeployer(
         val content = nodeTraversor.traverse(contextVisitor, workflow, context)
             .filter { it != "" }
             .joinToString("\n")
-//        googleWorkflowService.deploy(
-//            projectId = deployContext.projectId,
-//            zone = deployContext.zone,
-//            serviceAccount = deployContext.serviceAccount,
-//            workflowId = deployContext.workflowId,
-//            workflowDescription = deployContext.workflowDescription,
-//            workflowLabels = deployContext.workflowLabels,
-//            workflowSourceContents = content,
-//        )
-        print(content)
+        println("##### YAML GENERATED #####\n$content")
+        googleWorkflowService.deploy(
+            projectId = deployContext.projectId,
+            zone = deployContext.zone,
+            serviceAccount = deployContext.serviceAccount,
+            workflowId = deployContext.workflowId,
+            workflowDescription = deployContext.workflowDescription,
+            workflowLabels = deployContext.workflowLabels,
+            workflowSourceContents = content,
+        )
     }
 
     private fun createStrategyFactory(): NodeRendererStrategyDecider {

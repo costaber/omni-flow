@@ -2,7 +2,7 @@ package costaber.com.github.omniflow.cloud.provider.google.renderer
 
 import costaber.com.github.omniflow.renderer.LazyNodeRenderer
 import costaber.com.github.omniflow.renderer.RenderingContext
-import costaber.com.github.omniflow.resource.TAB
+import costaber.com.github.omniflow.resource.NUM_SPACES
 
 interface GoogleRenderer : LazyNodeRenderer<String> {
 
@@ -25,17 +25,8 @@ interface GoogleRenderer : LazyNodeRenderer<String> {
         return (renderingContext as GoogleRenderingContext).indentationLevel
     }
 
-    // TODO: improve this method
-    fun getIndentationString(renderingContext: RenderingContext): String {
-        val indentationLevel = getIndentationLevel(renderingContext)
-        var str = ""
-        var idx = 0
-        while (idx < indentationLevel) {
-            str += TAB
-            idx += 1
-        }
-        return str
-    }
+    fun getIndentationString(renderingContext: RenderingContext): String =
+        String.format("%${NUM_SPACES * getIndentationLevel(renderingContext)}s", "")
 
     fun incIndentationLevel(renderingContext: RenderingContext) {
         val context = renderingContext as GoogleRenderingContext
@@ -46,7 +37,5 @@ interface GoogleRenderer : LazyNodeRenderer<String> {
         val context = renderingContext as GoogleRenderingContext
         context.indentationLevel -= 1
     }
-
-
 
 }

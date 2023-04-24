@@ -3,11 +3,12 @@ package costaber.com.github.omniflow.builder.execution
 import costaber.com.github.omniflow.builder.ContextBuilder
 import costaber.com.github.omniflow.model.StepType
 import costaber.com.github.omniflow.model.execution.ExecutionContext
+import costaber.com.github.omniflow.model.execution.HttpMethod
 
 class ExecutionContextBuilder : ContextBuilder {
 
     // mandatory
-    private lateinit var method: String
+    private lateinit var method: HttpMethod
     private lateinit var url: String
     private lateinit var result: String
 
@@ -20,7 +21,7 @@ class ExecutionContextBuilder : ContextBuilder {
 
     fun url(value: String) = apply { this.url = value }
 
-    fun method(value: String) = apply { this.method = value }
+    fun method(value: HttpMethod) = apply { this.method = value }
 
     fun header(vararg value: Pair<String, String>) = apply { value.forEach { header[it.first] = it.second } }
 
@@ -42,7 +43,7 @@ class ExecutionContextBuilder : ContextBuilder {
         header = header,
         query = query,
         body = body,
-        authentication = authenticationBuilder?.let { it.build() },
+        authentication = authenticationBuilder?.build(),
         timeoutInSeconds = timeout,
         result = result
     )

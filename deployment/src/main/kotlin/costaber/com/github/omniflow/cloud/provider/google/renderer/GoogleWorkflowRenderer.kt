@@ -23,7 +23,7 @@ class GoogleWorkflowRenderer(private val workflow: Workflow) : GoogleRenderer {
         val prefix = getIndentationString(renderingContext)
         val workflowStringBuilder = StringBuilder()
         workflowStringBuilder.appendLine("$prefix- returnOutput:")
-        workflowStringBuilder.appendLine("$prefix${TAB}return: ${workflow.result}")
+        workflowStringBuilder.append("$prefix${TAB}return: ${workflow.result}")
         return workflowStringBuilder.toString()
     }
 }

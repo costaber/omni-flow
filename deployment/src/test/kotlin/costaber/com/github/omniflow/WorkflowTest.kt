@@ -6,6 +6,7 @@ import costaber.com.github.omniflow.cloud.provider.google.service.GoogleWorkflow
 import costaber.com.github.omniflow.dsl.execution
 import costaber.com.github.omniflow.dsl.step
 import costaber.com.github.omniflow.dsl.workflow
+import costaber.com.github.omniflow.model.execution.HttpMethod.*
 import costaber.com.github.omniflow.traversor.DepthFirstNodeTraversor
 import org.junit.Test
 
@@ -21,11 +22,10 @@ internal class WorkflowTest {
                 description("Increment the input number by one")
                 context(
                     execution {
-                        method("GET")
+                        method(GET)
                         url("https://us-central1-function-test-366510.cloudfunctions.net/function-1")
-                        query("increment" to "::input.number::")
-                        header("Content-Type" to "application/json")
-                        result("increment1")
+                        query("increment" to "\${input.number}")
+                        result("result1")
                     }
                 )
             },
@@ -34,11 +34,10 @@ internal class WorkflowTest {
                 description("Increment the input number by one, second time")
                 context(
                     execution {
-                        method("GET")
+                        method(GET)
                         url("https://us-central1-function-test-366510.cloudfunctions.net/function-1")
-                        query("increment" to "::increment1.body::")
-                        header("Content-Type" to "application/json")
-                        result("increment2")
+                        query("increment" to "\${result1.body}")
+                        result("result2")
                     }
                 )
             },
@@ -47,16 +46,15 @@ internal class WorkflowTest {
                 description("Increment the input number by one, third time")
                 context(
                     execution {
-                        method("GET")
+                        method(GET)
                         url("https://us-central1-function-test-366510.cloudfunctions.net/function-1")
-                        query("increment" to "::increment2.body::")
-                        header("Content-Type" to "application/json")
-                        result("increment3")
+                        query("increment" to "\${result2.body}")
+                        result("result3")
                     }
                 )
             }
         )
-        result("increment3")
+        result("\${result3.body}")
     }
 
     @Test
@@ -90,14 +88,19 @@ internal class WorkflowTest {
 
     @Test
     fun `test visitor`() {
-        val deployer = GoogleCloudDeployer(DepthFirstNodeTraversor(), GoogleWorkflowService())
-        deployer.deploy(workflow, GoogleDeployContext(
-            projectId = "",
-            zone = "",
-            serviceAccount = "",
-            workflowId = "",
-            workflowDescription = "",
-            workflowLabels = mapOf()
-        ))
+        val nodeTraversor = DepthFirstNodeTraversor()
+        val googleWorkflowService = GoogleWorkflowService()
+        val deployer = GoogleCloudDeployer(nodeTraversor, googleWorkflowService)
+
+        val googleDeployContext = GoogleDeployContext(
+            projectId = "workflow-test-380423",
+            zone = "us-east1",
+            serviceAccount = "projects/workflow-test-380423/serviceAccounts/" +
+                    "service-account-test@workflow-test-380423.iam.gserviceaccount.com",
+            workflowId = "testing_client_library_3",
+            workflowDescription = "Testing the creation of a workflow using Client Library",
+            workflowLabels = mapOf("environment" to "testing", "app" to "omni-flow"),
+        )
+        deployer.deploy(workflow, googleDeployContext)
     }
 }
