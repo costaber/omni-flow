@@ -1,8 +1,7 @@
 # ToDo
 
-* Add dependency injection to the project
-* Organize packages by provider
 * CAD presentation
+* Until 2 of May send the presentation
 * Add more tasks to the backlog
 * Convert to a multi-module project:
   * deployment

@@ -18,6 +18,7 @@
 - [March 15, 2023](#march-15-2023)
 - [March 22, 2023](#march-22-2023)
 - [April 19, 2023](#april-19-2023)
+- [April 26, 2023](#april-26-2023)
 
 ---
 
@@ -142,4 +143,10 @@
 - Demonstration of the current work done
 - Explanation of the library architecture
 - Date pick for the CAD presentation - `9 of June`
+- Presentation topics
+
+## April 26, 2023
+
+- Google workflow deployment demonstration using the library
+- Thesis next plans and future work
 - Presentation topics
