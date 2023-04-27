@@ -8,7 +8,7 @@ import software.amazon.awssdk.services.sfn.model.CreateStateMachineRequest
 import software.amazon.awssdk.services.sfn.model.CreateStateMachineResponse
 import software.amazon.awssdk.services.sfn.model.Tag
 
-class AwsStateMachineService {
+class AmazonStateMachineService {
 
     /**
      * REQUIRED 2 ENV VARIABLES:

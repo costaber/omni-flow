@@ -9,11 +9,26 @@ import costaber.com.github.omniflow.deployer.CloudDeployer
 import costaber.com.github.omniflow.factory.DefaultNodeRendererStrategyDecider
 import costaber.com.github.omniflow.factory.NodeRendererStrategyDecider
 import costaber.com.github.omniflow.model.Workflow
-import costaber.com.github.omniflow.traversor.NodeTraversor
+import costaber.com.github.omniflow.traversor.DepthFirstNodeTraversor
 import costaber.com.github.omniflow.visitor.NodeContextVisitor
 
-class GoogleCloudDeployer(
-    private val nodeTraversor: NodeTraversor,
+interface DeciderFactory {
+    fun createDecider(): NodeRendererStrategyDecider
+}
+
+class GoogleFactory: DeciderFactory {
+    override fun createDecider(): NodeRendererStrategyDecider {
+        return DefaultNodeRendererStrategyDecider.Builder()
+            .addRendererStrategy(GoogleWorkflowRendererStrategyFactory())
+            .addRendererStrategy(GoogleStepStrategyFactory())
+            .addRendererStrategy(GoogleExecutionStrategyFactory())
+            .build()
+    }
+}
+
+
+internal class GoogleCloudDeployer(
+    private val nodeTraversor: DepthFirstNodeTraversor,
     private val googleWorkflowService: GoogleWorkflowService,
 ) : CloudDeployer<GoogleDeployContext> {
 

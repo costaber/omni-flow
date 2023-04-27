@@ -12,7 +12,7 @@ import org.junit.Test
 
 internal class WorkflowTest {
 
-    val workflow = workflow {
+    private val workflow = workflow {
         name("myFirstWorkflow")
         description("My first Workflow")
         params("input")

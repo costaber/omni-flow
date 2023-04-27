@@ -11,19 +11,31 @@ class GoogleWorkflowRenderer(private val workflow: Workflow) : GoogleRenderer {
 
     override fun internalBeginRender(renderingContext: RenderingContext): String {
         val prefix = getIndentationString(renderingContext)
-        val workflowStringBuilder = StringBuilder()
-        workflowStringBuilder.appendLine("main:")
-        workflowStringBuilder.appendLine("${prefix}params: [ ${workflow.input} ]")
-        workflowStringBuilder.append("${prefix}steps:")
-        return workflowStringBuilder.toString()
+        return buildString {
+            appendLine("main:")
+            appendLine("${prefix}params: [ ${workflow.input} ]")
+            append("${prefix}steps:")
+        }
     }
 
     override fun internalEndRender(renderingContext: RenderingContext): String {
         incIndentationLevel(renderingContext)
         val prefix = getIndentationString(renderingContext)
-        val workflowStringBuilder = StringBuilder()
-        workflowStringBuilder.appendLine("$prefix- returnOutput:")
-        workflowStringBuilder.append("$prefix${TAB}return: ${workflow.result}")
-        return workflowStringBuilder.toString()
+        return buildString {
+            appendLine("$prefix- returnOutput:")
+            append("$prefix${TAB}return: ${workflow.result}")
+        }.apply { decIndentationLevel(renderingContext) }
     }
 }
+
+/*
+fun withIdentation = with(getIdentationLevel())
+
+class Merdas(val xpto: Int)
+
+context(Merdas)
+fun StringBuilder.appendLinesTab(s: String) {
+    List(xpto) { TAB }.joinTo(this)
+    appendLine(s)
+}
+*/

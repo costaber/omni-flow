@@ -14,16 +14,16 @@ class GoogleExecutionRenderer(
 
     override fun internalBeginRender(renderingContext: RenderingContext): String {
         val prefix = getIndentationString(renderingContext)
-        val stepBuilder = StringBuilder()
-        val httpMethod = executionContext.method.name.lowercase()
-        stepBuilder.appendLine("${prefix}call: http.${httpMethod}")
-        stepBuilder.appendLine("${prefix}args:")
-        stepBuilder.append("${prefix}${TAB}url: ${executionContext.url}")
-        renderMap("headers", executionContext.header, prefix, stepBuilder)
-        renderMap("query", executionContext.query, prefix, stepBuilder)
-        renderAuth(executionContext, prefix, stepBuilder)
-        renderTimeout(executionContext, prefix, stepBuilder)
-        return stepBuilder.toString()
+        return buildString {
+            val httpMethod = executionContext.method.name.lowercase()
+            appendLine("${prefix}call: http.${httpMethod}")
+            appendLine("${prefix}args:")
+            append("${prefix}${TAB}url: ${executionContext.url}")
+            renderMap("headers", executionContext.header, prefix, this)
+            renderAuth(executionContext, prefix, this)
+            renderMap("query", executionContext.query, prefix, this)
+            renderTimeout(executionContext, prefix, this)
+        }
     }
 
     override fun internalEndRender(renderingContext: RenderingContext): String {
@@ -40,10 +40,12 @@ class GoogleExecutionRenderer(
         if (mapToRender.isEmpty())
             return
 
-        stringBuilder.appendLine()
-        stringBuilder.appendLine("${prefix}${TAB}$mapName:")
-        mapToRender.forEach {
-            stringBuilder.append("${prefix}${TAB}${TAB}${it.key}: ${it.value}")
+        stringBuilder.run {
+            appendLine()
+            appendLine("${prefix}${TAB}$mapName:")
+            mapToRender.forEach {
+                append("${prefix}${TAB}${TAB}${it.key}: ${it.value}")
+            }
         }
     }
 
