@@ -23,14 +23,13 @@ class AmazonCloudDeployer internal constructor(
         val content = nodeTraversor.traverse(contextVisitor, workflow, context)
             .filter { it != "" }
             .joinToString("\n")
-        println(content)
-//        amazonStateMachineService.createStateMachine(
-//            roleArn = deployContext.roleArn,
-//            region = deployContext.region,
-//            tags = deployContext.tags,
-//            stateMachineName = deployContext.stateMachineName,
-//            stateMachineDefinition = content,
-//        )
+        amazonStateMachineService.createStateMachine(
+            roleArn = deployContext.roleArn,
+            region = deployContext.region,
+            tags = deployContext.tags,
+            stateMachineName = deployContext.stateMachineName,
+            stateMachineDefinition = content,
+        )
     }
 
     class Builder {

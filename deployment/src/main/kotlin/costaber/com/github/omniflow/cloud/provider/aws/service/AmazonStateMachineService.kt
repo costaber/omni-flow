@@ -11,7 +11,7 @@ import software.amazon.awssdk.services.sfn.model.Tag
 class AmazonStateMachineService {
 
     /**
-     * TODO REQUIRED 2 ENV VARIABLES:
+     * REQUIRED 2 ENV VARIABLES:
      * - AWS_ACCESS_KEY_ID -> default credentials
      * - AWS_SECRET_ACCESS_KEY -> default credentials
      * - AWS_REGION -> default Region

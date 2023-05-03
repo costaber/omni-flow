@@ -22,7 +22,7 @@ class GoogleWorkflowService {
         workflowSourceContents: String,
     ) {
         val workflowsClient = WorkflowsClient.create()
-        return try {
+        try {
             val projectLocation = LocationName.of(projectId, zone).toString()
             val workflow = Workflow.newBuilder()
                 .setDescription(workflowDescription)
@@ -35,11 +35,7 @@ class GoogleWorkflowService {
                 .setWorkflowId(workflowId)
                 .setWorkflow(workflow)
                 .build()
-            val response = workflowsClient.createWorkflowAsync(createWorkflowRequest)
-            val workflowResponse = response.get()
-            println("Workflow: $workflowResponse")
-            val responseMetadata = response.metadata.get()
-            println("Metadata: $responseMetadata")
+            workflowsClient.createWorkflowAsync(createWorkflowRequest)
         } catch (exception: Exception) {
             throw ExternalCloudClientException(
                 workflowName = workflowId,
