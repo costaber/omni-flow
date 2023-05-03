@@ -2,7 +2,7 @@ package costaber.com.github.omniflow.visitor
 
 import costaber.com.github.omniflow.factory.NodeRendererStrategyDecider
 import costaber.com.github.omniflow.model.Node
-import costaber.com.github.omniflow.renderer.LazyNodeRenderer
+import costaber.com.github.omniflow.renderer.NodeRenderer
 import costaber.com.github.omniflow.renderer.RenderingContext
 
 class NodeContextVisitor(
@@ -21,7 +21,7 @@ class NodeContextVisitor(
      * @param node the node
      * @return a renderer for the node
      */
-    private fun getRenderer(node: Node): LazyNodeRenderer<*> {
+    private fun getRenderer(node: Node): NodeRenderer<*> {
         return nodeRendererStrategyDecider.decideRenderer(node)
     }
 

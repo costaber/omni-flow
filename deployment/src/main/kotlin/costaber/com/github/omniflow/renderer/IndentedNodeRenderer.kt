@@ -1,10 +1,8 @@
-package costaber.com.github.omniflow.cloud.provider.google.renderer
+package costaber.com.github.omniflow.renderer
 
-import costaber.com.github.omniflow.renderer.LazyNodeRenderer
-import costaber.com.github.omniflow.renderer.RenderingContext
 import costaber.com.github.omniflow.resource.NUM_SPACES
 
-interface GoogleRenderer : LazyNodeRenderer<String> {
+interface IndentedNodeRenderer: NodeRenderer<String> {
 
     override fun beginRender(renderingContext: RenderingContext): String {
         incIndentationLevel(renderingContext)
@@ -22,19 +20,19 @@ interface GoogleRenderer : LazyNodeRenderer<String> {
     fun internalEndRender(renderingContext: RenderingContext): String
 
     fun getIndentationLevel(renderingContext: RenderingContext): Int {
-        return (renderingContext as GoogleRenderingContext).indentationLevel
+        return (renderingContext as IndentedRenderingContext).indentationLevel
     }
 
     fun getIndentationString(renderingContext: RenderingContext): String =
         String.format("%${NUM_SPACES * getIndentationLevel(renderingContext)}s", "")
 
     fun incIndentationLevel(renderingContext: RenderingContext) {
-        val context = renderingContext as GoogleRenderingContext
+        val context = renderingContext as IndentedRenderingContext
         context.indentationLevel += 1
     }
 
     fun decIndentationLevel(renderingContext: RenderingContext) {
-        val context = renderingContext as GoogleRenderingContext
+        val context = renderingContext as IndentedRenderingContext
         context.indentationLevel -= 1
     }
 

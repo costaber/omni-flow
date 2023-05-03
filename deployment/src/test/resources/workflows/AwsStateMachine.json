@@ -22,6 +22,7 @@
     "Increment2": {
       "Type": "Task",
       "Resource": "arn:aws:states:::apigateway:invoke",
+      "InputPath": "$.number",
       "Parameters": {
         "ApiEndpoint": "ak7u4tmof2.execute-api.us-east-1.amazonaws.com",
         "Method": "GET",
@@ -34,12 +35,12 @@
       "ResultSelector": {
         "number.$": "$.ResponseBody"
       },
-      "InputPath": "$.number",
       "Next": "Increment3"
     },
     "Increment3": {
       "Type": "Task",
       "Resource": "arn:aws:states:::apigateway:invoke",
+      "InputPath": "$.number",
       "Parameters": {
         "ApiEndpoint": "ak7u4tmof2.execute-api.us-east-1.amazonaws.com",
         "Method": "GET",
@@ -52,7 +53,6 @@
       "ResultSelector": {
         "number.$": "$.ResponseBody"
       },
-      "InputPath": "$.number",
       "End": true
     }
   }

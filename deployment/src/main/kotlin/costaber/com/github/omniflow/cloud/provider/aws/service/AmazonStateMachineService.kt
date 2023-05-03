@@ -11,14 +11,14 @@ import software.amazon.awssdk.services.sfn.model.Tag
 class AmazonStateMachineService {
 
     /**
-     * REQUIRED 2 ENV VARIABLES:
+     * TODO REQUIRED 2 ENV VARIABLES:
      * - AWS_ACCESS_KEY_ID -> default credentials
      * - AWS_SECRET_ACCESS_KEY -> default credentials
      * - AWS_REGION -> default Region
      */
     fun createStateMachine(
         roleArn: String,
-        region: String = "us-east-1",
+        region: String,
         tags: Map<String, String>,
         stateMachineName: String,
         stateMachineDefinition: String,

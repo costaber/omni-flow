@@ -11,9 +11,6 @@ class GoogleWorkflowService {
     /**
      * REQUIRED 1 ENV VARIABLE
      * - GOOGLE_APPLICATION_CREDENTIALS -> path to a json file defining the credentials
-     *
-     * TODO THE ARGUMENTS ALSO HAVE SOME REQUIREMENTS --- MUST BE INDICATED!!!!
-     * @param projectId - bla bla bla
      */
     fun deploy(
         projectId: String,
@@ -52,5 +49,4 @@ class GoogleWorkflowService {
             )
         }
     }
-
 }

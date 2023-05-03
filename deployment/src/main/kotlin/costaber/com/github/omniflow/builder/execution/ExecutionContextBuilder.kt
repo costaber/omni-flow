@@ -9,7 +9,8 @@ class ExecutionContextBuilder : ContextBuilder {
 
     // mandatory
     private lateinit var method: HttpMethod
-    private lateinit var url: String
+    private lateinit var host: String
+    private lateinit var path: String
     private lateinit var result: String
 
     // optional
@@ -19,7 +20,9 @@ class ExecutionContextBuilder : ContextBuilder {
     private var authenticationBuilder: AuthenticationBuilder? = null
     private var timeout: Long? = null
 
-    fun url(value: String) = apply { this.url = value }
+    fun host(value: String) = apply { this.host = value }
+
+    fun path(value: String) = apply { this.path = value }
 
     fun method(value: HttpMethod) = apply { this.method = value }
 
@@ -38,7 +41,8 @@ class ExecutionContextBuilder : ContextBuilder {
     override fun stepType() = StepType.EXECUTION
 
     override fun build() = ExecutionContext(
-        url = url,
+        host = host,
+        path = path,
         method = method,
         header = header,
         query = query,

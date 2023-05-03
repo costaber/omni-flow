@@ -1,6 +1,5 @@
 package costaber.com.github.omniflow.cloud.provider.google.deployer
 
-import costaber.com.github.omniflow.cloud.provider.google.renderer.GoogleRenderingContext
 import costaber.com.github.omniflow.cloud.provider.google.service.GoogleWorkflowService
 import costaber.com.github.omniflow.cloud.provider.google.strategy.GoogleExecutionStrategyFactory
 import costaber.com.github.omniflow.cloud.provider.google.strategy.GoogleStepStrategyFactory
@@ -9,36 +8,21 @@ import costaber.com.github.omniflow.deployer.CloudDeployer
 import costaber.com.github.omniflow.factory.DefaultNodeRendererStrategyDecider
 import costaber.com.github.omniflow.factory.NodeRendererStrategyDecider
 import costaber.com.github.omniflow.model.Workflow
+import costaber.com.github.omniflow.renderer.IndentedRenderingContext
 import costaber.com.github.omniflow.traversor.DepthFirstNodeTraversor
 import costaber.com.github.omniflow.visitor.NodeContextVisitor
 
-interface DeciderFactory {
-    fun createDecider(): NodeRendererStrategyDecider
-}
-
-class GoogleFactory: DeciderFactory {
-    override fun createDecider(): NodeRendererStrategyDecider {
-        return DefaultNodeRendererStrategyDecider.Builder()
-            .addRendererStrategy(GoogleWorkflowRendererStrategyFactory())
-            .addRendererStrategy(GoogleStepStrategyFactory())
-            .addRendererStrategy(GoogleExecutionStrategyFactory())
-            .build()
-    }
-}
-
-
-internal class GoogleCloudDeployer(
+class GoogleCloudDeployer internal constructor(
     private val nodeTraversor: DepthFirstNodeTraversor,
+    private val contextVisitor: NodeContextVisitor,
     private val googleWorkflowService: GoogleWorkflowService,
 ) : CloudDeployer<GoogleDeployContext> {
 
     override fun deploy(workflow: Workflow, deployContext: GoogleDeployContext) {
-        val context = GoogleRenderingContext(0)
-        val contextVisitor = NodeContextVisitor(createStrategyFactory())
+        val context = IndentedRenderingContext(0)
         val content = nodeTraversor.traverse(contextVisitor, workflow, context)
             .filter { it != "" }
             .joinToString("\n")
-        println("##### YAML GENERATED #####\n$content")
         googleWorkflowService.deploy(
             projectId = deployContext.projectId,
             zone = deployContext.zone,
@@ -50,11 +34,19 @@ internal class GoogleCloudDeployer(
         )
     }
 
-    private fun createStrategyFactory(): NodeRendererStrategyDecider {
-        return DefaultNodeRendererStrategyDecider.Builder()
-            .addRendererStrategy(GoogleWorkflowRendererStrategyFactory())
-            .addRendererStrategy(GoogleStepStrategyFactory())
-            .addRendererStrategy(GoogleExecutionStrategyFactory())
-            .build()
+    class Builder {
+        fun build() = GoogleCloudDeployer(
+            nodeTraversor = DepthFirstNodeTraversor(),
+            contextVisitor = NodeContextVisitor(createNodeRendererStrategyDecider()),
+            googleWorkflowService = GoogleWorkflowService(),
+        )
+
+        private fun createNodeRendererStrategyDecider(): NodeRendererStrategyDecider {
+            return DefaultNodeRendererStrategyDecider.Builder()
+                .addRendererStrategy(GoogleWorkflowRendererStrategyFactory())
+                .addRendererStrategy(GoogleStepStrategyFactory())
+                .addRendererStrategy(GoogleExecutionStrategyFactory())
+                .build()
+        }
     }
 }

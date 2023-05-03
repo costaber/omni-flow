@@ -8,7 +8,7 @@ import costaber.com.github.omniflow.model.Node
  *
  * @param <T> the concrete node type
 </T> */
-interface LazyNodeRenderer<T> {
+interface NodeRenderer<T> {
     /**
      * The element being rendered
      *

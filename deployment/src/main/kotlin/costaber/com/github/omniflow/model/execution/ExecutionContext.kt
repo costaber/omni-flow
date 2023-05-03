@@ -6,7 +6,8 @@ import costaber.com.github.omniflow.model.StepContext
 data class ExecutionContext(
     val method: HttpMethod,
     val result: String,
-    val url: String,
+    val host: String,
+    val path: String,
     val authentication: Authentication? = null,
     val body: Map<String, String> = emptyMap(),
     val header: Map<String, String> = emptyMap(),

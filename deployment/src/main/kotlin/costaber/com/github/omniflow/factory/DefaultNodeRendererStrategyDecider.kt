@@ -1,13 +1,13 @@
 package costaber.com.github.omniflow.factory
 
 import costaber.com.github.omniflow.model.Node
-import costaber.com.github.omniflow.renderer.LazyNodeRenderer
+import costaber.com.github.omniflow.renderer.NodeRenderer
 
 class DefaultNodeRendererStrategyDecider private constructor(
     private val rendererStrategyFactories: List<NodeRendererStrategyFactory<*>>,
 ) : NodeRendererStrategyDecider {
 
-    override fun decideRenderer(node: Node): LazyNodeRenderer<*> {
+    override fun decideRenderer(node: Node): NodeRenderer<*> {
         return rendererStrategyFactories.stream()
             .filter { it.getMatcher().test(node) }
             .findFirst()
@@ -20,13 +20,8 @@ class DefaultNodeRendererStrategyDecider private constructor(
 
         fun addRendererStrategy(
             elementRendererStrategyFactory: NodeRendererStrategyFactory<*>
-        ): Builder {
-            factories.add(elementRendererStrategyFactory)
-            return this
-        }
+        ): Builder = apply { factories.add(elementRendererStrategyFactory) }
 
-        fun build(): DefaultNodeRendererStrategyDecider {
-            return DefaultNodeRendererStrategyDecider(factories)
-        }
+        fun build() = DefaultNodeRendererStrategyDecider(factories)
     }
 }
