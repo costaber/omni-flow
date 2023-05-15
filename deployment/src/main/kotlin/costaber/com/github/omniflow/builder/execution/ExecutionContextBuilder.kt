@@ -2,6 +2,7 @@ package costaber.com.github.omniflow.builder.execution
 
 import costaber.com.github.omniflow.builder.ContextBuilder
 import costaber.com.github.omniflow.model.StepType
+import costaber.com.github.omniflow.model.Value
 import costaber.com.github.omniflow.model.execution.ExecutionContext
 import costaber.com.github.omniflow.model.execution.HttpMethod
 
@@ -14,9 +15,9 @@ class ExecutionContextBuilder : ContextBuilder {
     private lateinit var result: String
 
     // optional
-    private val header: MutableMap<String, String> = mutableMapOf()
-    private val query: MutableMap<String, String> = mutableMapOf()
-    private val body: MutableMap<String, String> = mutableMapOf()
+    private val header: MutableMap<String, Value> = mutableMapOf()
+    private val query: MutableMap<String, Value> = mutableMapOf()
+    private val body: MutableMap<String, Value> = mutableMapOf()
     private var authenticationBuilder: AuthenticationBuilder? = null
     private var timeout: Long? = null
 
@@ -28,7 +29,7 @@ class ExecutionContextBuilder : ContextBuilder {
 
     fun header(vararg value: Pair<String, String>) = apply { value.forEach { header[it.first] = it.second } }
 
-    fun query(vararg value: Pair<String, String>) = apply { value.forEach { query[it.first] = it.second } }
+    fun query(vararg value: Pair<String, String>) = apply { value.forEach { query[it.first] = Value(it.second } }
 
     fun body(vararg value: Pair<String, String>) = apply { value.forEach { body[it.first] = it.second } }
 

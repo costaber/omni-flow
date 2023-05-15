@@ -1,5 +1,6 @@
 package costaber.com.github.omniflow.cloud.provider.aws.renderer
 
+import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_COMMENT
 import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.model.Step
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
@@ -14,7 +15,7 @@ class AmazonStateRenderer(private val step: Step) : IndentedNodeRenderer {
         val prefix = getIndentationString(renderingContext)
         return buildString {
             appendLine("${prefix}\"${step.name}\": {")
-            append("${prefix}${TAB}\"Comment\": \"${step.description}\",")
+            append("${prefix}${TAB}\"${AMAZON_COMMENT}\": \"${step.description}\",")
         }
     }
 

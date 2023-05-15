@@ -1,6 +1,7 @@
 package costaber.com.github.omniflow.cloud.provider.google.renderer
 
 import costaber.com.github.omniflow.model.Node
+import costaber.com.github.omniflow.model.Value
 import costaber.com.github.omniflow.model.execution.ExecutionContext
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.RenderingContext
@@ -20,7 +21,7 @@ class GoogleExecutionRenderer(
             val httpMethod = executionContext.method.name.lowercase()
             appendLine("${prefix}call: http.${httpMethod}")
             appendLine("${prefix}args:")
-            append("${prefix}${TAB}url: ${url}")
+            append("${prefix}${TAB}url: $url")
             renderMap("headers", executionContext.header, prefix, this)
             renderAuth(executionContext, prefix, this)
             renderMap("query", executionContext.query, prefix, this)
@@ -35,7 +36,7 @@ class GoogleExecutionRenderer(
 
     private fun renderMap(
         mapName: String,
-        mapToRender: Map<String, String>,
+        mapToRender: Map<String, Value>,
         prefix: String,
         stringBuilder: StringBuilder,
     ) {
@@ -46,7 +47,7 @@ class GoogleExecutionRenderer(
             appendLine()
             appendLine("${prefix}${TAB}$mapName:")
             mapToRender.forEach {
-                append("${prefix}${TAB}${TAB}${it.key}: ${it.value}")
+                append("${prefix}${TAB}${TAB}${it.key}: ${it.value.name}")
             }
         }
     }

@@ -14,7 +14,7 @@ class AmazonStateMachineRenderer(private val workflow: Workflow) : IndentedNodeR
     override val element: Node = workflow
 
     override fun internalBeginRender(renderingContext: RenderingContext): String {
-        // TODO: the steps are mandatory so make a validation somewhere
+        // TODO: the steps are mandatory so, make validation somewhere
 
         // Add steps to the context
         val context = renderingContext as AmazonRenderingContext

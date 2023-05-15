@@ -4,19 +4,26 @@ import costaber.com.github.omniflow.cloud.provider.aws.deployer.AmazonCloudDeplo
 import costaber.com.github.omniflow.cloud.provider.aws.deployer.AmazonDeployContext
 import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleCloudDeployer
 import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleDeployContext
-import costaber.com.github.omniflow.dsl.authentication
-import costaber.com.github.omniflow.dsl.execution
-import costaber.com.github.omniflow.dsl.step
-import costaber.com.github.omniflow.dsl.workflow
+import costaber.com.github.omniflow.dsl.*
 import costaber.com.github.omniflow.model.execution.HttpMethod.GET
 import org.junit.Test
+import java.util.*
 
 internal class WorkflowTest {
 
     private val workflow = workflow {
         name("myFirstWorkflow")
         description("My first Workflow")
-        params("input")
+        variables(
+            variable {
+                name("number")
+                value(0)
+            },
+            variable {
+                name("randomNumber")
+                value(Random().nextInt())
+            },
+        )
         steps(
             step {
                 name("increment1")
@@ -26,7 +33,7 @@ internal class WorkflowTest {
                         method(GET)
                         host("https://us-central1-function-test-366510.cloudfunctions.net")
                         path("/function-1")
-                        query("increment" to "\${input.number}")
+                        query("increment" to variable("input.number"))
                         header("Content-Type" to "application/json")
                         result("result1")
                     }
