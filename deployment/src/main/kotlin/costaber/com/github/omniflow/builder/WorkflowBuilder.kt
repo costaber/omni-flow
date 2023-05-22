@@ -1,35 +1,38 @@
 package costaber.com.github.omniflow.builder
 
 import costaber.com.github.omniflow.model.Workflow
-import costaber.com.github.omniflow.model.getCloudProvider
 
 class WorkflowBuilder : Builder<Workflow> {
 
-    private lateinit var zone: String
-    private lateinit var provider: String
+    // mandatory
     private lateinit var name: String
     private lateinit var description: String
-    private lateinit var result: String
     private val steps = mutableListOf<StepBuilder>()
+    private lateinit var result: VariableBuilder<Unit>
 
-    fun zone(value: String) = apply { this.zone = value }
-
-    fun provider(value: String) = apply { this.provider = value }
+    // optional
+    private var params: VariableBuilder<Unit>? = null
+    private val variables = mutableListOf<VariableBuilder<*>>()
 
     fun name(value: String) = apply { this.name = value }
 
     fun description(value: String) = apply { this.description = value }
 
+    fun params(value: VariableBuilder<Unit>) = apply { this.params = value }
+
+    fun variables(vararg value: VariableBuilder<Any>) = apply { this.variables.addAll(value) }
+
     fun steps(vararg value: StepBuilder) = apply { this.steps.addAll(value) }
 
-    fun result(value: String) = apply { this.result = value }
+    fun result(value: VariableBuilder<Unit>) = apply { this.result = value }
 
     override fun build() = Workflow(
-        zone = zone,
-        provider = getCloudProvider(provider),
         name = name,
         description = description,
-        definition = steps.map { it.build() },
-        result = result
+        input = params?.build(),
+        variables = variables.map { it.build() }
+            .associateBy { name },
+        steps = steps.map { it.build() },
+        result = result.build()
     )
 }

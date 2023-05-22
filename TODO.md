@@ -1,7 +1,8 @@
 # ToDo
 
-* Add dependency injection to the project
-* After knowing how to design the transpiler, create the tests first
+* CAD presentation
+* Until 2 of May send the presentation
+* Add more tasks to the backlog
 * Convert to a multi-module project:
   * deployment
   * app

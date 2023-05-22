@@ -17,6 +17,9 @@
 - [March 06, 2023](#march-06-2023)
 - [March 15, 2023](#march-15-2023)
 - [March 22, 2023](#march-22-2023)
+- [April 19, 2023](#april-19-2023)
+- [April 26, 2023](#april-26-2023)
+- [May 09, 2023](#may-09-2023)
 
 ---
 
@@ -135,3 +138,21 @@
 - Demonstration of using the GCP and AWS client libraries
 - Alignment for the next steps and iteration for software 
 - Last phase would be the creation of a GUI for the lib
+
+## April 19, 2023
+
+- Demonstration of the current work done
+- Explanation of the library architecture
+- Date pick for the CAD presentation - `9 of May`
+- Presentation topics
+
+## April 26, 2023
+
+- Google workflow deployment demonstration using the library
+- Thesis next plans and future work
+- Presentation topics
+
+## May 09, 2023
+
+- Progress Report Discussion
+- Overall project feedback

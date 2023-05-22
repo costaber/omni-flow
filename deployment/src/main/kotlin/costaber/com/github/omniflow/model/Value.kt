@@ -1,3 +1,5 @@
 package costaber.com.github.omniflow.model
 
-interface Context
+open class Value(
+    val name: String
+)
