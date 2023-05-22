@@ -47,7 +47,7 @@ class GoogleExecutionRenderer(
             appendLine()
             appendLine("${prefix}${TAB}$mapName:")
             mapToRender.forEach {
-                append("${prefix}${TAB}${TAB}${it.key}: ${it.value.name}")
+                append("${prefix}${TAB}${TAB}${it.key}: ${it.value.process()}")
             }
         }
     }

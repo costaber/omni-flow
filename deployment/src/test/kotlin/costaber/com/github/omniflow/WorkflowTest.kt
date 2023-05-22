@@ -5,6 +5,8 @@ import costaber.com.github.omniflow.cloud.provider.aws.deployer.AmazonDeployCont
 import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleCloudDeployer
 import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleDeployContext
 import costaber.com.github.omniflow.dsl.*
+import costaber.com.github.omniflow.model.Value
+import costaber.com.github.omniflow.model.Variable
 import costaber.com.github.omniflow.model.execution.HttpMethod.GET
 import org.junit.Test
 import java.util.*
@@ -14,6 +16,7 @@ internal class WorkflowTest {
     private val workflow = workflow {
         name("myFirstWorkflow")
         description("My first Workflow")
+        params(Value("input"))
         variables(
             variable {
                 name("number")
@@ -33,8 +36,13 @@ internal class WorkflowTest {
                         method(GET)
                         host("https://us-central1-function-test-366510.cloudfunctions.net")
                         path("/function-1")
-                        query("increment" to variable("input.number"))
-                        header("Content-Type" to "application/json")
+                        query("increment" to Variable<Unit>("input.number"))
+                        header("Content-Type" to Value("application/json"))
+                        authentication(
+                            authentication {
+                                type("IAM_ROLE")
+                            }
+                        )
                         result("result1")
                     }
                 )
@@ -47,8 +55,13 @@ internal class WorkflowTest {
                         method(GET)
                         host("https://us-central1-function-test-366510.cloudfunctions.net")
                         path("/function-1")
-                        query("increment" to "\${result1.body}")
-                        header("Content-Type" to "application/json")
+                        query("increment" to Variable<Unit>("result1.body"))
+                        header("Content-Type" to Value("application/json"))
+                        authentication(
+                            authentication {
+                                type("IAM_ROLE")
+                            }
+                        )
                         result("result2")
                     }
                 )
@@ -61,77 +74,19 @@ internal class WorkflowTest {
                         method(GET)
                         host("https://us-central1-function-test-366510.cloudfunctions.net")
                         path("/function-1")
-                        query("increment" to "\${result2.body}")
-                        header("Content-Type" to "application/json")
+                        query("increment" to Variable<Unit>("result2.body"))
+                        header("Content-Type" to Value("application/json"))
+                        authentication(
+                            authentication {
+                                type("IAM_ROLE")
+                            }
+                        )
                         result("result3")
                     }
                 )
             }
         )
-        result("\${result3.body}")
-    }
-
-    private val workflow2 = workflow {
-        name("myFirstWorkflow")
-        description("A description of my state machine")
-        params("input")
-        steps(
-            step {
-                name("Increment1")
-                description("Increment the input number by one")
-                context(
-                    execution {
-                        method(GET)
-                        host("ak7u4tmof2.execute-api.us-east-1.amazonaws.com")
-                        path("/default/increment")
-                        query("increment.$" to "States.Array(States.Format('{}', \$.number))")
-                        authentication(
-                            authentication {
-                                type("IAM_ROLE")
-                            }
-                        )
-                        result("number")
-                    }
-                )
-            },
-            step {
-                name("Increment2")
-                description("Increment the input number by one, second time")
-                context(
-                    execution {
-                        method(GET)
-                        host("ak7u4tmof2.execute-api.us-east-1.amazonaws.com")
-                        path("/default/increment")
-                        query("increment.\$" to "States.Array(States.Format('{}', \$.number))")
-                        authentication(
-                            authentication {
-                                type("IAM_ROLE")
-                            }
-                        )
-                        result("number")
-                    }
-                )
-            },
-            step {
-                name("Increment3")
-                description("Increment the input number by one, third time")
-                context(
-                    execution {
-                        method(GET)
-                        host("ak7u4tmof2.execute-api.us-east-1.amazonaws.com")
-                        path("/default/increment")
-                        query("increment.\$" to "States.Array(States.Format('{}', \$.number))")
-                        authentication(
-                            authentication {
-                                type("IAM_ROLE")
-                            }
-                        )
-                        result("number")
-                    }
-                )
-            }
-        )
-        result("\${result3.body}")
+        result(Variable<Unit>("result3.body"))
     }
 
 // Version 1
@@ -183,6 +138,6 @@ internal class WorkflowTest {
             ),
             stateMachineName = "state_machine_test_deployment_1"
         )
-        deployer.deploy(workflow2, amazonDeployContext)
+        deployer.deploy(workflow, amazonDeployContext)
     }
 }

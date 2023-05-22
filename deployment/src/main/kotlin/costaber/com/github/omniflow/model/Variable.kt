@@ -2,5 +2,6 @@ package costaber.com.github.omniflow.model
 
 class Variable<T>(
     name: String,
-    val context: VariableContext<T>? = null, // when this value is null is just a variable declaration/usage
+    // When the context is null is a variable declaration/usage
+    val context: VariableContext<T>? = null,
 ): Value(name)

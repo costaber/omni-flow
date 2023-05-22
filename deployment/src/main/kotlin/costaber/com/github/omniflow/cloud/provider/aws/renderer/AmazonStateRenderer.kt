@@ -15,7 +15,7 @@ class AmazonStateRenderer(private val step: Step) : IndentedNodeRenderer {
         val prefix = getIndentationString(renderingContext)
         return buildString {
             appendLine("${prefix}\"${step.name}\": {")
-            append("${prefix}${TAB}\"${AMAZON_COMMENT}\": \"${step.description}\",")
+            append("${prefix}${TAB}${AMAZON_COMMENT}: \"${step.description}\",")
         }
     }
 

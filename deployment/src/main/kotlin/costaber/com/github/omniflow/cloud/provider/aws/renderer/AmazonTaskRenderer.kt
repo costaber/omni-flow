@@ -51,11 +51,11 @@ class AmazonTaskRenderer(private val executionContext: ExecutionContext) : Inden
     private fun renderQueryParameters(builder: StringBuilder, prefix: String) {
         if (executionContext.query.isNotEmpty()) {
             builder.appendLine()
-            builder.appendLine("${prefix}${AMAZON_QUERY_PARAMETERS}")
+            builder.appendLine("${prefix}${TAB}${AMAZON_QUERY_PARAMETERS}")
             executionContext.query.forEach {
-                builder.appendLine("${prefix}${TAB}\"${it.key}\": \"${it.value.name}\"")
+                builder.appendLine("${prefix}${TAB}${TAB}\"${it.key}\": \"${it.value.amazonProcess()}\"")
             }
-            builder.append("${prefix}},")
+            builder.append("${prefix}${TAB}},")
         }
     }
 
@@ -69,7 +69,7 @@ class AmazonTaskRenderer(private val executionContext: ExecutionContext) : Inden
     private fun renderAuth(builder: StringBuilder, prefix: String) {
         executionContext.authentication?.let {
             builder.appendLine()
-            builder.append("${prefix}${AMAZON_AUTH_TYPE}\"${it.type}\"")
+            builder.append("${prefix}${TAB}${AMAZON_AUTH_TYPE}\"${it.type}\"")
         }
     }
 

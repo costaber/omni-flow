@@ -27,11 +27,11 @@ class ExecutionContextBuilder : ContextBuilder {
 
     fun method(value: HttpMethod) = apply { this.method = value }
 
-    fun header(vararg value: Pair<String, String>) = apply { value.forEach { header[it.first] = it.second } }
+    fun header(vararg value: Pair<String, Value>) = apply { value.forEach { header[it.first] = it.second } }
 
-    fun query(vararg value: Pair<String, String>) = apply { value.forEach { query[it.first] = Value(it.second } }
+    fun query(vararg value: Pair<String, Value>) = apply { value.forEach { query[it.first] = it.second } }
 
-    fun body(vararg value: Pair<String, String>) = apply { value.forEach { body[it.first] = it.second } }
+    fun body(vararg value: Pair<String, Value>) = apply { value.forEach { body[it.first] = it.second } }
 
     fun authentication(value: AuthenticationBuilder) = apply { this.authenticationBuilder = value }
 
