@@ -20,6 +20,7 @@
 - [April 19, 2023](#april-19-2023)
 - [April 26, 2023](#april-26-2023)
 - [May 09, 2023](#may-09-2023)
+- [May 24, 2023](#may-24-2023)
 
 ---
 
@@ -156,3 +157,12 @@
 
 - Progress Report Discussion
 - Overall project feedback
+
+## May 24, 2023
+
+- Demonstration of variables usage
+- Alignment for the next project steps
+- Benchmarking the project
+  - Execution and Deployment time for complex workflows
+  - CPU and Memory allocation
+  - The time spent for rendering the workflow (exponential or linear)
