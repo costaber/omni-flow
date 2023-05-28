@@ -2,7 +2,7 @@ package costaber.com.github.omniflow.renderer
 
 import costaber.com.github.omniflow.resource.NUM_SPACES
 
-interface IndentedNodeRenderer: NodeRenderer<String> {
+interface IndentedNodeRenderer : NodeRenderer<String> {
 
     override fun beginRender(renderingContext: RenderingContext): String {
         incIndentationLevel(renderingContext)

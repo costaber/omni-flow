@@ -1,42 +1,41 @@
 package costaber.com.github.omniflow.cloud.provider.google.renderer
 
 import costaber.com.github.omniflow.model.Node
-import costaber.com.github.omniflow.model.Value
-import costaber.com.github.omniflow.model.execution.ExecutionContext
+import costaber.com.github.omniflow.model.call.CallContext
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.RenderingContext
 import costaber.com.github.omniflow.resource.TAB
 
-class GoogleExecutionRenderer(
-    private val executionContext: ExecutionContext,
+class GoogleCallRenderer(
+    private val callContext: CallContext,
     //private val variableResolver: VariableResolver,
 ) : IndentedNodeRenderer {
 
-    override val element: Node = executionContext
+    override val element: Node = callContext
 
     override fun internalBeginRender(renderingContext: RenderingContext): String {
         val prefix = getIndentationString(renderingContext)
-        val url = executionContext.host + executionContext.path
+        val url = callContext.host + callContext.path
         return buildString {
-            val httpMethod = executionContext.method.name.lowercase()
+            val httpMethod = callContext.method.name.lowercase()
             appendLine("${prefix}call: http.${httpMethod}")
             appendLine("${prefix}args:")
             append("${prefix}${TAB}url: $url")
-            renderMap("headers", executionContext.header, prefix, this)
-            renderAuth(executionContext, prefix, this)
-            renderMap("query", executionContext.query, prefix, this)
-            renderTimeout(executionContext, prefix, this)
+            renderMap("headers", callContext.header, prefix, this)
+            renderAuth(callContext, prefix, this)
+            renderMap("query", callContext.query, prefix, this)
+            renderTimeout(callContext, prefix, this)
         }
     }
 
     override fun internalEndRender(renderingContext: RenderingContext): String {
         val prefix = getIndentationString(renderingContext)
-        return "${prefix}result: ${executionContext.result}"
+        return "${prefix}result: ${callContext.result}"
     }
 
     private fun renderMap(
         mapName: String,
-        mapToRender: Map<String, Value>,
+        mapToRender: Map<String, String>,
         prefix: String,
         stringBuilder: StringBuilder,
     ) {
@@ -47,17 +46,17 @@ class GoogleExecutionRenderer(
             appendLine()
             appendLine("${prefix}${TAB}$mapName:")
             mapToRender.forEach {
-                append("${prefix}${TAB}${TAB}${it.key}: ${it.value.process()}")
+                append("${prefix}${TAB}${TAB}${it.key}: ${it.value}")
             }
         }
     }
 
     private fun renderAuth(
-        executionContext: ExecutionContext,
+        callContext: CallContext,
         prefix: String,
         stringBuilder: StringBuilder
     ) {
-        executionContext.authentication?.let {
+        callContext.authentication?.let {
             stringBuilder.appendLine()
             stringBuilder.appendLine("${prefix}${TAB}auth:")
             stringBuilder.appendLine("${prefix}${TAB}${TAB}type: ${it.type}")
@@ -68,11 +67,11 @@ class GoogleExecutionRenderer(
     }
 
     private fun renderTimeout(
-        executionContext: ExecutionContext,
+        callContext: CallContext,
         prefix: String,
         stringBuilder: StringBuilder
     ) {
-        executionContext.timeoutInSeconds?.let {
+        callContext.timeoutInSeconds?.let {
             stringBuilder.appendLine()
             stringBuilder.append("${prefix}${TAB}timeout: $it")
         }
