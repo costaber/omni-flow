@@ -2,14 +2,14 @@ package costaber.com.github.omniflow.cloud.provider.aws.renderer
 
 import costaber.com.github.omniflow.cloud.provider.aws.*
 import costaber.com.github.omniflow.model.Node
-import costaber.com.github.omniflow.model.execution.ExecutionContext
+import costaber.com.github.omniflow.model.call.CallContext
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.RenderingContext
 import costaber.com.github.omniflow.resource.TAB
 
-class AmazonTaskRenderer(private val executionContext: ExecutionContext) : IndentedNodeRenderer {
+class AmazonTaskRenderer(private val callContext: CallContext) : IndentedNodeRenderer {
 
-    override val element: Node = executionContext
+    override val element: Node = callContext
 
     override fun internalBeginRender(renderingContext: RenderingContext): String {
         val prefix = getIndentationString(renderingContext)
@@ -18,9 +18,9 @@ class AmazonTaskRenderer(private val executionContext: ExecutionContext) : Inden
             appendLine("${prefix}${AMAZON_RESOURCE}")
             appendLine("${prefix}${AMAZON_INPUT_PATH}\"\$\",")
             appendLine("${prefix}${AMAZON_PARAMETERS}")
-            appendLine("${prefix}${TAB}${AMAZON_API_ENDPOINT}\"${executionContext.host}\",")
-            appendLine("${prefix}${TAB}${AMAZON_METHOD}\"${executionContext.method}\",")
-            append("${prefix}${TAB}${AMAZON_PATH}\"${executionContext.path}\",")
+            appendLine("${prefix}${TAB}${AMAZON_API_ENDPOINT}\"${callContext.host}\",")
+            appendLine("${prefix}${TAB}${AMAZON_METHOD}\"${callContext.method}\",")
+            append("${prefix}${TAB}${AMAZON_PATH}\"${callContext.path}\",")
             renderQueryParameters(this, prefix)
             renderHeaders(this, prefix)
             renderAuth(this, prefix)
@@ -37,7 +37,7 @@ class AmazonTaskRenderer(private val executionContext: ExecutionContext) : Inden
 
         return buildString {
             appendLine("${prefix}${AMAZON_RESULT_SELECTOR}")
-            appendLine("${prefix}${TAB}\"${executionContext.result}.\$\": \"\$.${AMAZON_RESPONSE_BODY}\"")
+            appendLine("${prefix}${TAB}\"${callContext.result}.\$\": \"\$.${AMAZON_RESPONSE_BODY}\"")
             appendLine("${prefix}},")
             val finish = if (nextStepName == null) {
                 AMAZON_END
@@ -49,28 +49,27 @@ class AmazonTaskRenderer(private val executionContext: ExecutionContext) : Inden
     }
 
     private fun renderQueryParameters(builder: StringBuilder, prefix: String) {
-        if (executionContext.query.isNotEmpty()) {
+        if (callContext.query.isNotEmpty()) {
             builder.appendLine()
-            builder.appendLine("${prefix}${AMAZON_QUERY_PARAMETERS}")
-            executionContext.query.forEach {
-                builder.appendLine("${prefix}${TAB}\"${it.key}\": \"${it.value.name}\"")
+            builder.appendLine("${prefix}${TAB}${AMAZON_QUERY_PARAMETERS}")
+            callContext.query.forEach {
+                builder.appendLine("${prefix}${TAB}${TAB}\"${it.key}\": \"${it.value}\"")
             }
-            builder.append("${prefix}},")
+            builder.append("${prefix}${TAB}},")
         }
     }
 
     private fun renderHeaders(builder: StringBuilder, prefix: String) {
-        if (executionContext.header.isNotEmpty()) {
+        if (callContext.header.isNotEmpty()) {
             //builder.appendLine()
             //builder.append("")
         }
     }
 
     private fun renderAuth(builder: StringBuilder, prefix: String) {
-        executionContext.authentication?.let {
+        callContext.authentication?.let {
             builder.appendLine()
-            builder.append("${prefix}${AMAZON_AUTH_TYPE}\"${it.type}\"")
+            builder.append("${prefix}${TAB}${AMAZON_AUTH_TYPE}\"${it.type}\"")
         }
     }
-
 }

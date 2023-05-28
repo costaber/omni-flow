@@ -14,8 +14,17 @@ class GoogleWorkflowRenderer(private val workflow: Workflow) : IndentedNodeRende
         val prefix = getIndentationString(renderingContext)
         return buildString {
             appendLine("main:")
-            appendLine("${prefix}params: [ ${workflow.input} ]")
+            renderInput(this, prefix)
             append("${prefix}steps:")
+        }
+    }
+
+    private fun renderInput(
+        stringBuilder: StringBuilder,
+        prefix: String,
+    ) {
+        workflow.input?.let {
+            stringBuilder.appendLine("${prefix}params: [ ${workflow.input} ]")
         }
     }
 
@@ -28,15 +37,3 @@ class GoogleWorkflowRenderer(private val workflow: Workflow) : IndentedNodeRende
         }.apply { decIndentationLevel(renderingContext) }
     }
 }
-
-/*
-fun withIdentation = with(getIdentationLevel())
-
-class Merdas(val xpto: Int)
-
-context(Merdas)
-fun StringBuilder.appendLinesTab(s: String) {
-    List(xpto) { TAB }.joinTo(this)
-    appendLine(s)
-}
-*/

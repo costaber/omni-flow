@@ -3,10 +3,10 @@ package costaber.com.github.omniflow.model
 data class Workflow(
     val name: String,
     val description: String? = null,
-    val input: Value? = null,
-    val variables: Map<String, Value> = emptyMap(),
+    val input: String? = null,
+    val variables: Map<String, Variable<*>> = emptyMap(),
     val steps: Collection<Step> = emptyList(),
-    val result: Value,
+    val result: String,
 ) : Node {
 
     override fun childNodes(): List<Node> {

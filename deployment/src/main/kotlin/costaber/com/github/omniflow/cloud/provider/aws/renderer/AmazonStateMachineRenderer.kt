@@ -24,9 +24,9 @@ class AmazonStateMachineRenderer(private val workflow: Workflow) : IndentedNodeR
         val firstStepName = context.getNextStepNameAndAdvance()
         return buildString {
             appendLine("{")
-            appendLine("${prefix}\"${AMAZON_COMMENT}\": \"${workflow.description}\",")
-            appendLine("${prefix}\"${AMAZON_START_AT}\": \"${firstStepName}\",")
-            append("${TAB}\"${AMAZON_STATES}\": {")
+            appendLine("${prefix}${AMAZON_COMMENT}: \"${workflow.description}\",")
+            appendLine("${prefix}${AMAZON_START_AT}: \"${firstStepName}\",")
+            append("${TAB}${AMAZON_STATES}: {")
         }
     }
 

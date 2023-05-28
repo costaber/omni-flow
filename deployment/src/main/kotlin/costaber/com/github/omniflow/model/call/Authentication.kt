@@ -1,4 +1,4 @@
-package costaber.com.github.omniflow.model.execution
+package costaber.com.github.omniflow.model.call
 
 data class Authentication(
     val type: String,

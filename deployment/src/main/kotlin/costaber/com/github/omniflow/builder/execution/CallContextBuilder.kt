@@ -2,11 +2,10 @@ package costaber.com.github.omniflow.builder.execution
 
 import costaber.com.github.omniflow.builder.ContextBuilder
 import costaber.com.github.omniflow.model.StepType
-import costaber.com.github.omniflow.model.Value
-import costaber.com.github.omniflow.model.execution.ExecutionContext
-import costaber.com.github.omniflow.model.execution.HttpMethod
+import costaber.com.github.omniflow.model.call.CallContext
+import costaber.com.github.omniflow.model.call.HttpMethod
 
-class ExecutionContextBuilder : ContextBuilder {
+class CallContextBuilder : ContextBuilder {
 
     // mandatory
     private lateinit var method: HttpMethod
@@ -15,9 +14,9 @@ class ExecutionContextBuilder : ContextBuilder {
     private lateinit var result: String
 
     // optional
-    private val header: MutableMap<String, Value> = mutableMapOf()
-    private val query: MutableMap<String, Value> = mutableMapOf()
-    private val body: MutableMap<String, Value> = mutableMapOf()
+    private val header: MutableMap<String, String> = mutableMapOf()
+    private val query: MutableMap<String, String> = mutableMapOf()
+    private var body: Any? = null
     private var authenticationBuilder: AuthenticationBuilder? = null
     private var timeout: Long? = null
 
@@ -29,9 +28,9 @@ class ExecutionContextBuilder : ContextBuilder {
 
     fun header(vararg value: Pair<String, String>) = apply { value.forEach { header[it.first] = it.second } }
 
-    fun query(vararg value: Pair<String, String>) = apply { value.forEach { query[it.first] = Value(it.second } }
+    fun query(vararg value: Pair<String, String>) = apply { value.forEach { query[it.first] = it.second } }
 
-    fun body(vararg value: Pair<String, String>) = apply { value.forEach { body[it.first] = it.second } }
+    fun body(value: Any) = apply { this.body = value }
 
     fun authentication(value: AuthenticationBuilder) = apply { this.authenticationBuilder = value }
 
@@ -39,9 +38,9 @@ class ExecutionContextBuilder : ContextBuilder {
 
     fun result(value: String) = apply { this.result = value }
 
-    override fun stepType() = StepType.EXECUTION
+    override fun stepType() = StepType.CALL
 
-    override fun build() = ExecutionContext(
+    override fun build() = CallContext(
         host = host,
         path = path,
         method = method,
