@@ -1,6 +1,7 @@
 package costaber.com.github.omniflow.cloud.provider.google.deployer
 
 import costaber.com.github.omniflow.cloud.provider.google.service.GoogleWorkflowService
+import costaber.com.github.omniflow.cloud.provider.google.strategy.GoogleAssignStrategyFactory
 import costaber.com.github.omniflow.cloud.provider.google.strategy.GoogleCallStrategyFactory
 import costaber.com.github.omniflow.cloud.provider.google.strategy.GoogleStepStrategyFactory
 import costaber.com.github.omniflow.cloud.provider.google.strategy.GoogleWorkflowRendererStrategyFactory
@@ -53,6 +54,7 @@ class GoogleCloudDeployer internal constructor(
                 .addRendererStrategy(GoogleWorkflowRendererStrategyFactory())
                 .addRendererStrategy(GoogleStepStrategyFactory())
                 .addRendererStrategy(GoogleCallStrategyFactory())
+                .addRendererStrategy(GoogleAssignStrategyFactory())
                 .build()
         }
     }

@@ -17,7 +17,7 @@ internal class WorkflowTest {
         params("input")
         steps(
             step {
-                name("Variables")
+                name("assign_vars")
                 description("Initialize variables")
                 context(
                     assign {
@@ -78,7 +78,7 @@ internal class WorkflowTest {
                 description("Initialize variables")
                 context(
                     assign {
-                        variable("number" equal  0)
+                        variable("number" equal 0)
                         variable("randomNumber" equal Random().nextInt())
                     }
                 )
@@ -141,6 +141,58 @@ internal class WorkflowTest {
         result("result")
     }
 
+    private val generalWorkflow = workflow {
+        name("calculatorWorkflow")
+        description("Calculator example")
+        steps(
+            step {
+                name("Variables")
+                description("Initialize variables")
+                context(
+                    assign {
+                        variable("a" equal Random().nextInt())
+                        variable("b" equal Random().nextInt())
+                    }
+                )
+            },
+            step {
+                name("Sum")
+                description("Sum 2 random numbers")
+                context(
+                    call {
+                        method(GET)
+                        host("https://us-central1-workflow-test-380423.cloudfunctions.net")
+                        path("/calculator")
+                        query(
+                            "number1" to variable("a"),
+                            "number2" to variable("b"),
+                            "op" to value("add")
+                        )
+                        result("sumResult")
+                    }
+                )
+            },
+            step {
+                name("DivByTwo")
+                description("Divide the previous result by 2")
+                context(
+                    call {
+                        method(GET)
+                        host("https://us-central1-workflow-test-380423.cloudfunctions.net")
+                        path("/calculator")
+                        query(
+                            "number1" to variable("sumResult"),
+                            "number2" to value(2),
+                            "op" to value("div")
+                        )
+                        result("divResult")
+                    }
+                )
+            }
+        )
+        result("divResult")
+    }
+
     @Test
     fun `test google full deployment`() {
         val deployer = GoogleCloudDeployer.Builder().build()
@@ -149,11 +201,11 @@ internal class WorkflowTest {
             zone = "us-east1",
             serviceAccount = "projects/workflow-test-380423/serviceAccounts/" +
                     "service-account-test@workflow-test-380423.iam.gserviceaccount.com",
-            workflowId = "testing_client_library_3",
-            workflowDescription = "Testing the creation of a workflow using Client Library",
+            workflowId = "calculator_workflow",
+            workflowDescription = "Calculator Workflow for testing",
             workflowLabels = mapOf("environment" to "testing", "app" to "omni-flow"),
         )
-        deployer.deploy(googleWorkflow, googleDeployContext)
+        deployer.deploy(generalWorkflow, googleDeployContext)
     }
 
     @Test
@@ -167,8 +219,8 @@ internal class WorkflowTest {
                 "environment" to "testing",
                 "app" to "omni-flow"
             ),
-            stateMachineName = "state_machine_test_deployment_1"
+            stateMachineName = "state_machine_calculator"
         )
-        deployer.deploy(amazonWorkflow, amazonDeployContext)
+        deployer.deploy(generalWorkflow, amazonDeployContext)
     }
 }

@@ -56,8 +56,8 @@ class AmazonTaskRenderer(
             builder.appendLine()
             builder.appendLine("${prefix}${TAB}${AMAZON_QUERY_PARAMETERS}")
             callContext.query.forEach {
-                val value = amazonTermResolver.resolver(it.value)
-                builder.appendLine("${prefix}${TAB}${TAB}\"${it.key}.\$\": \"${value}\"")
+                val value = amazonTermResolver.resolve(it.value)
+                builder.appendLine("${prefix}${TAB}${TAB}\"${it.key}.\$\": ${value}")
             }
             builder.append("${prefix}${TAB}},")
         }

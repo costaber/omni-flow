@@ -36,7 +36,7 @@ class GoogleCallRenderer(
 
     private fun renderMap(
         mapName: String,
-        mapToRender: Map<String, Term>,
+        mapToRender: Map<String, Term<*>>,
         prefix: String,
         stringBuilder: StringBuilder,
     ) {
@@ -48,7 +48,7 @@ class GoogleCallRenderer(
             append("${prefix}${TAB}$mapName:")
             mapToRender.forEach {
                 appendLine()
-                val value = googleTermResolver.resolver(it.value)
+                val value = googleTermResolver.resolve(it.value)
                 append("${prefix}${TAB}${TAB}${it.key}: ${value}")
             }
         }

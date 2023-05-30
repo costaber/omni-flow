@@ -2,6 +2,7 @@ package costaber.com.github.omniflow.cloud.provider.aws.deployer
 
 import costaber.com.github.omniflow.cloud.provider.aws.renderer.AmazonRenderingContext
 import costaber.com.github.omniflow.cloud.provider.aws.service.AmazonStateMachineService
+import costaber.com.github.omniflow.cloud.provider.aws.strategy.AmazonPassStrategyFactory
 import costaber.com.github.omniflow.cloud.provider.aws.strategy.AmazonStateMachineStrategyFactory
 import costaber.com.github.omniflow.cloud.provider.aws.strategy.AmazonStateStrategyFactory
 import costaber.com.github.omniflow.cloud.provider.aws.strategy.AmazonTaskStrategyFactory
@@ -51,6 +52,7 @@ class AmazonCloudDeployer internal constructor(
                 .addRendererStrategy(AmazonStateMachineStrategyFactory())
                 .addRendererStrategy(AmazonStateStrategyFactory())
                 .addRendererStrategy(AmazonTaskStrategyFactory())
+                .addRendererStrategy(AmazonPassStrategyFactory())
                 .build()
         }
     }

@@ -1,18 +1,18 @@
-package costaber.com.github.omniflow.cloud.provider.aws.strategy
+package costaber.com.github.omniflow.cloud.provider.google.strategy
 
-import costaber.com.github.omniflow.cloud.provider.aws.renderer.AmazonStateRenderer
+import costaber.com.github.omniflow.cloud.provider.google.renderer.GoogleAssignRenderer
 import costaber.com.github.omniflow.factory.NodeRendererStrategyFactory
 import costaber.com.github.omniflow.model.Node
-import costaber.com.github.omniflow.model.Step
+import costaber.com.github.omniflow.model.variable.AssignContext
 import costaber.com.github.omniflow.predicate.DefaultPredicate
 import costaber.com.github.omniflow.renderer.NodeRenderer
 import java.util.function.Predicate
 
-class AmazonStateStrategyFactory : NodeRendererStrategyFactory<String> {
+class GoogleAssignStrategyFactory : NodeRendererStrategyFactory<String> {
 
     override fun getMatcher(): Predicate<Node> =
-        DefaultPredicate(Step::class)
+        DefaultPredicate(AssignContext::class)
 
     override fun getRenderer(node: Node): NodeRenderer<String> =
-        AmazonStateRenderer(node as Step)
+        GoogleAssignRenderer(node as AssignContext)
 }

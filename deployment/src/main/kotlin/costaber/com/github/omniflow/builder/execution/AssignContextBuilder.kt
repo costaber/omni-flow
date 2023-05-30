@@ -20,8 +20,8 @@ class AssignContextBuilder : ContextBuilder {
     override fun build() = AssignContext(
         variables = variables.map {
             VariableInitialization(
-                name = Variable(it.first),
-                value = Value(it.second)
+                variable = Variable(it.first),
+                term = Value(it.second)
             )
         }
     )
