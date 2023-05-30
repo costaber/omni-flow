@@ -4,7 +4,6 @@ data class Workflow(
     val name: String,
     val description: String? = null,
     val input: String? = null,
-    val variables: Collection<VariableInitialization<*>> = emptyList(),
     val steps: Collection<Step> = emptyList(),
     val result: String,
 ) : Node {

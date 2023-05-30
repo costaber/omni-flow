@@ -15,17 +15,17 @@ internal class WorkflowTest {
         name("myFirstWorkflow")
         description("My first Workflow")
         params("input")
-        variables(
-            variable {
-                name("number")
-                value(0)
-            },
-            variable {
-                name("randomNumber")
-                value(Random().nextInt())
-            },
-        )
         steps(
+            step {
+                name("Variables")
+                description("Initialize variables")
+                context(
+                    assign {
+                        variable("number" equal 0)
+                        variable("randomNumber" equal Random().nextInt())
+                    }
+                )
+            },
             step {
                 name("increment1")
                 description("Increment the input number by one")
@@ -72,17 +72,17 @@ internal class WorkflowTest {
     private val amazonWorkflow = workflow {
         name("myFirstWorkflow")
         description("A description of my state machine")
-        variables(
-            variable {
-                name("number")
-                value(0)
-            },
-            variable {
-                name("randomNumber")
-                value(Random().nextInt())
-            },
-        )
         steps(
+            step {
+                name("Variables")
+                description("Initialize variables")
+                context(
+                    assign {
+                        variable("number" equal  0)
+                        variable("randomNumber" equal Random().nextInt())
+                    }
+                )
+            },
             step {
                 name("Increment1")
                 description("Increment the input number by one")
