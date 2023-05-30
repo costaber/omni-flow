@@ -4,6 +4,7 @@ import costaber.com.github.omniflow.builder.ContextBuilder
 import costaber.com.github.omniflow.model.StepType
 import costaber.com.github.omniflow.model.call.CallContext
 import costaber.com.github.omniflow.model.call.HttpMethod
+import costaber.com.github.omniflow.model.variable.Term
 
 class CallContextBuilder : ContextBuilder {
 
@@ -14,8 +15,8 @@ class CallContextBuilder : ContextBuilder {
     private lateinit var result: String
 
     // optional
-    private val header: MutableMap<String, String> = mutableMapOf()
-    private val query: MutableMap<String, String> = mutableMapOf()
+    private val header: MutableMap<String, Term> = mutableMapOf()
+    private val query: MutableMap<String, Term> = mutableMapOf()
     private var body: Any? = null
     private var authenticationBuilder: AuthenticationBuilder? = null
     private var timeout: Long? = null
@@ -26,9 +27,9 @@ class CallContextBuilder : ContextBuilder {
 
     fun method(value: HttpMethod) = apply { this.method = value }
 
-    fun header(vararg value: Pair<String, String>) = apply { value.forEach { header[it.first] = it.second } }
+    fun header(vararg value: Pair<String, Term>) = apply { value.forEach { header[it.first] = it.second } }
 
-    fun query(vararg value: Pair<String, String>) = apply { value.forEach { query[it.first] = it.second } }
+    fun query(vararg value: Pair<String, Term>) = apply { value.forEach { query[it.first] = it.second } }
 
     fun body(value: Any) = apply { this.body = value }
 

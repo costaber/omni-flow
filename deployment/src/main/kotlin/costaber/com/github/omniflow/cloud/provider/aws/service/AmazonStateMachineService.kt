@@ -1,14 +1,18 @@
 package costaber.com.github.omniflow.cloud.provider.aws.service
 
 import costaber.com.github.omniflow.resource.exception.ExternalCloudClientException
+import mu.KotlinLogging
 import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider
 import software.amazon.awssdk.regions.Region
 import software.amazon.awssdk.services.sfn.SfnClient
 import software.amazon.awssdk.services.sfn.model.CreateStateMachineRequest
-import software.amazon.awssdk.services.sfn.model.CreateStateMachineResponse
 import software.amazon.awssdk.services.sfn.model.Tag
 
 class AmazonStateMachineService {
+
+    private companion object {
+        private val logger = KotlinLogging.logger { }
+    }
 
     /**
      * REQUIRED 2 ENV VARIABLES:
@@ -22,7 +26,8 @@ class AmazonStateMachineService {
         tags: Map<String, String>,
         stateMachineName: String,
         stateMachineDefinition: String,
-    ): CreateStateMachineResponse {
+    ) {
+        logger.info { "Creating deployment request for State Machine $stateMachineName" }
         val profile = EnvironmentVariableCredentialsProvider.create()
         val awsTags = mapTags(tags)
         val sfnClient = SfnClient.builder()
@@ -36,7 +41,8 @@ class AmazonStateMachineService {
                 .roleArn(roleArn)
                 .tags(awsTags)
                 .build()
-            sfnClient.createStateMachine(machineRequest)
+            val createStateMachineResponse = sfnClient.createStateMachine(machineRequest)
+            logger.info { "State Machine creation result: $createStateMachineResponse" }
         } catch (ex: Exception) {
             throw ExternalCloudClientException(
                 workflowName = stateMachineName,

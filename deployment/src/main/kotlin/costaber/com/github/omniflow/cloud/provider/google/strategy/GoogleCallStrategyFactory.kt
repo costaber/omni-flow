@@ -1,6 +1,7 @@
 package costaber.com.github.omniflow.cloud.provider.google.strategy
 
 import costaber.com.github.omniflow.cloud.provider.google.renderer.GoogleCallRenderer
+import costaber.com.github.omniflow.cloud.provider.google.renderer.GoogleTermResolver
 import costaber.com.github.omniflow.factory.NodeRendererStrategyFactory
 import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.model.call.CallContext
@@ -14,5 +15,5 @@ class GoogleCallStrategyFactory : NodeRendererStrategyFactory<String> {
         DefaultPredicate(CallContext::class)
 
     override fun getRenderer(node: Node): NodeRenderer<String> =
-        GoogleCallRenderer(node as CallContext)
+        GoogleCallRenderer(node as CallContext, GoogleTermResolver)
 }

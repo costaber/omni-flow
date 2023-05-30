@@ -33,7 +33,7 @@ class GoogleWorkflowRenderer(private val workflow: Workflow) : IndentedNodeRende
         val prefix = getIndentationString(renderingContext)
         return buildString {
             appendLine("$prefix- returnOutput:")
-            append("$prefix${TAB}return: ${workflow.result}")
+            append("$prefix${TAB}return: \${${workflow.result}}")
         }.apply { decIndentationLevel(renderingContext) }
     }
 }

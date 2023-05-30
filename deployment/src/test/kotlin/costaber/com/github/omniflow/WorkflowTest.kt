@@ -34,7 +34,7 @@ internal class WorkflowTest {
                         method(GET)
                         host("https://us-central1-function-test-366510.cloudfunctions.net")
                         path("/function-1")
-                        query("increment" to "\${input.number}")
+                        query("increment" to variable("input.number"))
                         result("result1")
                     }
                 )
@@ -47,7 +47,7 @@ internal class WorkflowTest {
                         method(GET)
                         host("https://us-central1-function-test-366510.cloudfunctions.net")
                         path("/function-1")
-                        query("increment" to "\${result1.body}")
+                        query("increment" to variable("result1.body"))
                         result("result2")
                     }
                 )
@@ -60,13 +60,13 @@ internal class WorkflowTest {
                         method(GET)
                         host("https://us-central1-function-test-366510.cloudfunctions.net")
                         path("/function-1")
-                        query("increment" to "\${result2.body}")
+                        query("increment" to variable("result2.body"))
                         result("result3")
                     }
                 )
             }
         )
-        result("\${result3.body}")
+        result("result3.body")
     }
 
     private val amazonWorkflow = workflow {
@@ -91,7 +91,7 @@ internal class WorkflowTest {
                         method(GET)
                         host("ak7u4tmof2.execute-api.us-east-1.amazonaws.com")
                         path("/default/increment")
-                        query("increment.\$" to "States.Array(States.Format('{}', $.number))")
+                        query("increment" to variable("number"))
                         authentication(
                             authentication {
                                 type("IAM_ROLE")
@@ -109,7 +109,7 @@ internal class WorkflowTest {
                         method(GET)
                         host("ak7u4tmof2.execute-api.us-east-1.amazonaws.com")
                         path("/default/increment")
-                        query("increment.\$" to "States.Array(States.Format('{}', $))")
+                        query("increment" to variable(""))
                         authentication(
                             authentication {
                                 type("IAM_ROLE")
@@ -127,7 +127,7 @@ internal class WorkflowTest {
                         method(GET)
                         host("ak7u4tmof2.execute-api.us-east-1.amazonaws.com")
                         path("/default/increment")
-                        query("increment.\$" to "States.Array(States.Format('{}', $))")
+                        query("increment" to variable(""))
                         authentication(
                             authentication {
                                 type("IAM_ROLE")

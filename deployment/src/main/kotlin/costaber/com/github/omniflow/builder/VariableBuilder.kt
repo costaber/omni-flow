@@ -1,21 +1,20 @@
 package costaber.com.github.omniflow.builder
 
-import costaber.com.github.omniflow.model.Variable
-import costaber.com.github.omniflow.model.VariableContext
+import costaber.com.github.omniflow.model.VariableInitialization
+import costaber.com.github.omniflow.model.variable.Value
+import costaber.com.github.omniflow.model.variable.Variable
 
-class VariableBuilder<T> : Builder<Variable<T>> {
+class VariableBuilder<T : Any> : Builder<VariableInitialization<T>> {
 
     private lateinit var name: String
-    private var value: T? = null
+    private lateinit var value: T
 
     fun name(value: String) = apply { this.name = value }
 
     fun value(value: T) = apply { this.value = value }
 
-    override fun build() = Variable(
-        name = name,
-        context = VariableContext(
-            value = value
-        )
+    override fun build() = VariableInitialization(
+        name = Variable(name),
+        value = Value(value)
     )
 }

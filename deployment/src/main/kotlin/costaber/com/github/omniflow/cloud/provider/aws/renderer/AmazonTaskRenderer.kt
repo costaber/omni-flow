@@ -7,7 +7,10 @@ import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.RenderingContext
 import costaber.com.github.omniflow.resource.TAB
 
-class AmazonTaskRenderer(private val callContext: CallContext) : IndentedNodeRenderer {
+class AmazonTaskRenderer(
+    private val callContext: CallContext,
+    private val amazonTermResolver: AmazonTermResolver,
+) : IndentedNodeRenderer {
 
     override val element: Node = callContext
 
@@ -53,7 +56,8 @@ class AmazonTaskRenderer(private val callContext: CallContext) : IndentedNodeRen
             builder.appendLine()
             builder.appendLine("${prefix}${TAB}${AMAZON_QUERY_PARAMETERS}")
             callContext.query.forEach {
-                builder.appendLine("${prefix}${TAB}${TAB}\"${it.key}\": \"${it.value}\"")
+                val value = amazonTermResolver.resolver(it.value)
+                builder.appendLine("${prefix}${TAB}${TAB}\"${it.key}.\$\": \"${value}\"")
             }
             builder.append("${prefix}${TAB}},")
         }

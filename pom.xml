@@ -31,6 +31,8 @@
         <kotlin-stdlib.version>1.7.20</kotlin-stdlib.version>
         <google-cloud-workflows.version>2.12.0</google-cloud-workflows.version>
         <aws-sdk.version>2.9.14</aws-sdk.version>
+        <kotlin-logging-jvm.version>2.0.11</kotlin-logging-jvm.version>
+        <logback-classic.version>1.2.9</logback-classic.version>
 
         <!-- Testing -->
         <junit.version>4.13.2</junit.version>

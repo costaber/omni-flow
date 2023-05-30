@@ -38,6 +38,17 @@
             <artifactId>google-cloud-workflows</artifactId>
             <version>${google-cloud-workflows.version}</version>
         </dependency>
+        <!-- Logger -->
+        <dependency>
+            <groupId>io.github.microutils</groupId>
+            <artifactId>kotlin-logging-jvm</artifactId>
+            <version>${kotlin-logging-jvm.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
+        </dependency>
 
         <!-- Test -->
         <dependency>

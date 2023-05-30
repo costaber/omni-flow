@@ -30,8 +30,7 @@ class WorkflowBuilder : Builder<Workflow> {
         name = name,
         description = description,
         input = params,
-        variables = variables.map { it.build() }
-            .associateBy { name },
+        variables = variables.map { it.build() },
         steps = steps.map { it.build() },
         result = result
     )

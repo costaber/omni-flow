@@ -2,13 +2,14 @@ package costaber.com.github.omniflow.cloud.provider.google.renderer
 
 import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.model.call.CallContext
+import costaber.com.github.omniflow.model.variable.Term
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.RenderingContext
 import costaber.com.github.omniflow.resource.TAB
 
 class GoogleCallRenderer(
     private val callContext: CallContext,
-    //private val variableResolver: VariableResolver,
+    private val googleTermResolver: GoogleTermResolver,
 ) : IndentedNodeRenderer {
 
     override val element: Node = callContext
@@ -35,7 +36,7 @@ class GoogleCallRenderer(
 
     private fun renderMap(
         mapName: String,
-        mapToRender: Map<String, String>,
+        mapToRender: Map<String, Term>,
         prefix: String,
         stringBuilder: StringBuilder,
     ) {
@@ -44,9 +45,11 @@ class GoogleCallRenderer(
 
         stringBuilder.run {
             appendLine()
-            appendLine("${prefix}${TAB}$mapName:")
+            append("${prefix}${TAB}$mapName:")
             mapToRender.forEach {
-                append("${prefix}${TAB}${TAB}${it.key}: ${it.value}")
+                appendLine()
+                val value = googleTermResolver.resolver(it.value)
+                append("${prefix}${TAB}${TAB}${it.key}: ${value}")
             }
         }
     }
