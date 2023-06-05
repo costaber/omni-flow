@@ -21,6 +21,7 @@
 - [April 26, 2023](#april-26-2023)
 - [May 09, 2023](#may-09-2023)
 - [May 24, 2023](#may-24-2023)
+- [June 02, 2023](#june-02-2023)
 
 ---
 
@@ -84,7 +85,7 @@
 
 - Talking about the model and diagrams
 - Checking for some related work:
-  - [FaasFlow](https://github.com/s8sg/faas-flow)
+  - [FaaSFlow](https://github.com/s8sg/faas-flow)
   - [ASPLOS'22 Session 7](https://www.youtube.com/watch?v=xCMx4J6Ur_c)
 
 ## January 18, 2023
@@ -166,3 +167,10 @@
   - Execution and Deployment time for complex workflows
   - CPU and Memory allocation
   - The time spent for rendering the workflow (exponential or linear)
+
+## June 02, 2023
+
+- Alignment about the project state
+  - Variables
+  - Conditional step
+- Evaluate the next steps: Benchmarking

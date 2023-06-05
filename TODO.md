@@ -1,13 +1,9 @@
 # ToDo
 
-* CAD presentation
-* Until 2 of May send the presentation
-* Add more tasks to the backlog
-* Convert to a multi-module project:
-  * deployment
-  * app
-  * auth (can be a possibility)
-  * benchmark
+- Add the `.body` to the Google variables coming from the result
+- Do unit and integration tests
+- Understand which metrics should be benchmarked
+- Create graphics with examples
 
 # Future Work
 
