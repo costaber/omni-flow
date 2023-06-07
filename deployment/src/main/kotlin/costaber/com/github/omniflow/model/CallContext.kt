@@ -1,8 +1,4 @@
-package costaber.com.github.omniflow.model.call
-
-import costaber.com.github.omniflow.model.Node
-import costaber.com.github.omniflow.model.StepContext
-import costaber.com.github.omniflow.model.variable.Term
+package costaber.com.github.omniflow.model
 
 data class CallContext(
     val method: HttpMethod,

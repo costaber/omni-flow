@@ -1,13 +1,9 @@
 package costaber.com.github.omniflow.dsl
 
-import costaber.com.github.omniflow.builder.StepBuilder
-import costaber.com.github.omniflow.builder.WorkflowBuilder
-import costaber.com.github.omniflow.builder.execution.AssignContextBuilder
-import costaber.com.github.omniflow.builder.execution.AuthenticationBuilder
-import costaber.com.github.omniflow.builder.execution.CallContextBuilder
+import costaber.com.github.omniflow.builder.*
+import costaber.com.github.omniflow.model.Value
+import costaber.com.github.omniflow.model.Variable
 import costaber.com.github.omniflow.model.Workflow
-import costaber.com.github.omniflow.model.variable.Value
-import costaber.com.github.omniflow.model.variable.Variable
 
 fun workflow(workflowBuilder: WorkflowBuilder.() -> Unit): Workflow {
     return WorkflowBuilder().apply(workflowBuilder).build()
@@ -32,3 +28,11 @@ fun assign(assignContextBuilder: AssignContextBuilder.() -> Unit): AssignContext
 fun variable(name: String): Variable = Variable(name)
 
 fun <T : Any> value(value: T): Value<T> = Value(value)
+
+fun switch(switchContextBuilder: SwitchContextBuilder.() -> Unit): SwitchContextBuilder {
+    return SwitchContextBuilder().apply(switchContextBuilder)
+}
+
+fun condition(switchConditionBuilder: SwitchConditionBuilder.() -> Unit): SwitchConditionBuilder {
+    return SwitchConditionBuilder().apply(switchConditionBuilder)
+}

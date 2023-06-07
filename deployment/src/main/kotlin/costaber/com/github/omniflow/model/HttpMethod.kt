@@ -1,4 +1,4 @@
-package costaber.com.github.omniflow.model.call
+package costaber.com.github.omniflow.model
 
 enum class HttpMethod {
     DELETE,

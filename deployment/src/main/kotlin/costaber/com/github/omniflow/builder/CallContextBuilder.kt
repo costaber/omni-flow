@@ -1,10 +1,9 @@
-package costaber.com.github.omniflow.builder.execution
+package costaber.com.github.omniflow.builder
 
-import costaber.com.github.omniflow.builder.ContextBuilder
+import costaber.com.github.omniflow.model.CallContext
+import costaber.com.github.omniflow.model.HttpMethod
 import costaber.com.github.omniflow.model.StepType
-import costaber.com.github.omniflow.model.call.CallContext
-import costaber.com.github.omniflow.model.call.HttpMethod
-import costaber.com.github.omniflow.model.variable.Term
+import costaber.com.github.omniflow.model.Term
 
 class CallContextBuilder : ContextBuilder {
 

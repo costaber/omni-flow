@@ -1,4 +1,4 @@
-package costaber.com.github.omniflow.model.variable
+package costaber.com.github.omniflow.model
 
 data class Variable(
     val name: String

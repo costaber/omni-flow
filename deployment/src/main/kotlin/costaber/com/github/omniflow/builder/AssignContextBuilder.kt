@@ -1,11 +1,6 @@
-package costaber.com.github.omniflow.builder.execution
+package costaber.com.github.omniflow.builder
 
-import costaber.com.github.omniflow.builder.ContextBuilder
-import costaber.com.github.omniflow.model.StepType
-import costaber.com.github.omniflow.model.variable.AssignContext
-import costaber.com.github.omniflow.model.variable.Value
-import costaber.com.github.omniflow.model.variable.Variable
-import costaber.com.github.omniflow.model.variable.VariableInitialization
+import costaber.com.github.omniflow.model.*
 
 class AssignContextBuilder : ContextBuilder {
 

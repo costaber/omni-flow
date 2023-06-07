@@ -1,7 +1,6 @@
-package costaber.com.github.omniflow.builder.execution
+package costaber.com.github.omniflow.builder
 
-import costaber.com.github.omniflow.builder.Builder
-import costaber.com.github.omniflow.model.call.Authentication
+import costaber.com.github.omniflow.model.Authentication
 
 class AuthenticationBuilder : Builder<Authentication> {
 

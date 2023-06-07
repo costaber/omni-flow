@@ -2,6 +2,7 @@
 
 - Add the `.body` to the Google variables coming from the result
 - Do unit and integration tests
+- Create a script to generate N workflows 
 - Understand which metrics should be benchmarked
 - Create graphics with examples
 

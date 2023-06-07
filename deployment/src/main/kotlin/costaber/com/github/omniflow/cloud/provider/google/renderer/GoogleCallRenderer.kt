@@ -1,8 +1,8 @@
 package costaber.com.github.omniflow.cloud.provider.google.renderer
 
+import costaber.com.github.omniflow.model.CallContext
 import costaber.com.github.omniflow.model.Node
-import costaber.com.github.omniflow.model.call.CallContext
-import costaber.com.github.omniflow.model.variable.Term
+import costaber.com.github.omniflow.model.Term
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.RenderingContext
 import costaber.com.github.omniflow.resource.TAB

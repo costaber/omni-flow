@@ -1,6 +1,6 @@
 package costaber.com.github.omniflow.cloud.provider.aws.renderer
 
-import costaber.com.github.omniflow.model.variable.Variable
+import costaber.com.github.omniflow.model.Variable
 import costaber.com.github.omniflow.renderer.TermResolver
 
 object AmazonTermResolver : TermResolver {

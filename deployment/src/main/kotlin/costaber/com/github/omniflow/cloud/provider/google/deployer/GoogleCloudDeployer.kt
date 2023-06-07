@@ -31,15 +31,16 @@ class GoogleCloudDeployer internal constructor(
         val content = nodeTraversor.traverse(contextVisitor, workflow, context)
             .filterNot(String::isEmpty)
             .joinToStringNewLines()
-        googleWorkflowService.deploy(
-            projectId = deployContext.projectId,
-            zone = deployContext.zone,
-            serviceAccount = deployContext.serviceAccount,
-            workflowId = deployContext.workflowId,
-            workflowDescription = deployContext.workflowDescription,
-            workflowLabels = deployContext.workflowLabels,
-            workflowSourceContents = content,
-        )
+        println(content)
+//        googleWorkflowService.deploy(
+//            projectId = deployContext.projectId,
+//            zone = deployContext.zone,
+//            serviceAccount = deployContext.serviceAccount,
+//            workflowId = deployContext.workflowId,
+//            workflowDescription = deployContext.workflowDescription,
+//            workflowLabels = deployContext.workflowLabels,
+//            workflowSourceContents = content,
+//        )
     }
 
     class Builder {

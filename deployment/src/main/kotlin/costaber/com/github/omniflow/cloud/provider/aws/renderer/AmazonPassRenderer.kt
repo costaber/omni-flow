@@ -3,9 +3,9 @@ package costaber.com.github.omniflow.cloud.provider.aws.renderer
 import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_END
 import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_NEXT
 import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_PASS_TYPE
+import costaber.com.github.omniflow.model.AssignContext
 import costaber.com.github.omniflow.model.Node
-import costaber.com.github.omniflow.model.variable.AssignContext
-import costaber.com.github.omniflow.model.variable.VariableInitialization
+import costaber.com.github.omniflow.model.VariableInitialization
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.RenderingContext
 import costaber.com.github.omniflow.resource.TAB

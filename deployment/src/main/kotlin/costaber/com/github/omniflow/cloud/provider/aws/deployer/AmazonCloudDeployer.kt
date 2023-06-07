@@ -31,13 +31,14 @@ class AmazonCloudDeployer internal constructor(
         val content = nodeTraversor.traverse(contextVisitor, workflow, context)
             .filterNot(String::isEmpty)
             .joinToStringNewLines()
-        amazonStateMachineService.createStateMachine(
-            roleArn = deployContext.roleArn,
-            region = deployContext.region,
-            tags = deployContext.tags,
-            stateMachineName = deployContext.stateMachineName,
-            stateMachineDefinition = content,
-        )
+        println(content)
+//        amazonStateMachineService.createStateMachine(
+//            roleArn = deployContext.roleArn,
+//            region = deployContext.region,
+//            tags = deployContext.tags,
+//            stateMachineName = deployContext.stateMachineName,
+//            stateMachineDefinition = content,
+//        )
     }
 
     class Builder {
