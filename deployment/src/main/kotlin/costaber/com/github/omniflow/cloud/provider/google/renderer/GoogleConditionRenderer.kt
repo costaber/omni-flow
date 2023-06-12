@@ -28,7 +28,7 @@ class GoogleConditionRenderer(private val condition: Condition) : IndentedNodeRe
 
     private fun renderUnaryExpression(unaryExpression: UnaryExpression<*>): String {
         if (unaryExpression.term is Variable)
-            "${unaryExpression.operator.render()}\${${unaryExpression.term.term()}}"
+            return "${unaryExpression.operator.render()}\${${unaryExpression.term.term()}}"
         return "${unaryExpression.operator.render()}${unaryExpression.term.term()}"
     }
 
@@ -42,6 +42,7 @@ class GoogleConditionRenderer(private val condition: Condition) : IndentedNodeRe
     }
 
     private fun BinaryOperator.render(): String {
+        // TODO check how google use the operators
         return when (this) {
             BinaryOperator.AND -> "&&"
             BinaryOperator.EQUAL_TO -> "=="
@@ -52,6 +53,7 @@ class GoogleConditionRenderer(private val condition: Condition) : IndentedNodeRe
     }
 
     private fun UnaryOperator.render(): String {
+        // TODO same here
         return when (this) {
             UnaryOperator.NOT -> "!"
         }

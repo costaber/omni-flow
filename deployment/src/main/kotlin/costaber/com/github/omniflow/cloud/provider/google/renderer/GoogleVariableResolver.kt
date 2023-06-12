@@ -6,7 +6,7 @@ import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
 import costaber.com.github.omniflow.resource.util.render
 
-class GoogleVariableInitializationResolver(
+class GoogleVariableResolver(
     private val variableInitialization: VariableInitialization<*>
 ) : IndentedNodeRenderer {
 

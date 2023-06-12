@@ -1,6 +1,6 @@
 package costaber.com.github.omniflow.cloud.provider.google.strategy
 
-import costaber.com.github.omniflow.cloud.provider.google.renderer.GoogleVariableInitializationResolver
+import costaber.com.github.omniflow.cloud.provider.google.renderer.GoogleVariableResolver
 import costaber.com.github.omniflow.factory.NodeRendererStrategyFactory
 import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.model.VariableInitialization
@@ -14,5 +14,5 @@ class GoogleVariableInitializationStrategyFactory : NodeRendererStrategyFactory<
         DefaultPredicate(VariableInitialization::class)
 
     override fun getRenderer(node: Node): NodeRenderer<String> =
-        GoogleVariableInitializationResolver(node as VariableInitialization<*>)
+        GoogleVariableResolver(node as VariableInitialization<*>)
 }

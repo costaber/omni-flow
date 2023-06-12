@@ -23,9 +23,9 @@ class GoogleCallRenderer(
                 add("url: ${callContext.host + callContext.path}")
             }
             renderMap("headers", callContext.header)
-            renderAuth(callContext)
             renderMap("query", callContext.query)
-            renderTimeout(callContext)
+            renderAuth()
+            renderTimeout()
         }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String =
@@ -47,13 +47,13 @@ class GoogleCallRenderer(
                 addEmptyLine()
                 val value = googleTermResolver.resolve(it.value)
                 tab {
-                    add("${it.key}: ${value}")
+                    add("${it.key}: $value")
                 }
             }
         }
     }
 
-    private fun IndentedRenderingContext.renderAuth(callContext: CallContext) {
+    private fun IndentedRenderingContext.renderAuth() {
         callContext.authentication?.let {
             addEmptyLine()
             tab {
@@ -68,7 +68,7 @@ class GoogleCallRenderer(
         }
     }
 
-    private fun IndentedRenderingContext.renderTimeout(callContext: CallContext) {
+    private fun IndentedRenderingContext.renderTimeout() {
         callContext.timeoutInSeconds?.let {
             addEmptyLine()
             tab {
