@@ -9,12 +9,11 @@ class GoogleConditionRenderer(private val condition: Condition) : IndentedNodeRe
 
     override val element: Node = condition
 
-    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String {
-        return render(renderingContext) {
+    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
+        render(renderingContext) {
             addLine("- condition: ${renderExpression()}")
             add("  next: ${condition.jump}")
         }
-    }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext) = "" // nothing
 

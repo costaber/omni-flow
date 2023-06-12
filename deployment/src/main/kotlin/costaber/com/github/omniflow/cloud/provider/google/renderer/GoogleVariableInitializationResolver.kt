@@ -12,11 +12,10 @@ class GoogleVariableInitializationResolver(
 
     override val element: Node = variableInitialization
 
-    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String {
-        return render(renderingContext) {
+    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
+        render(renderingContext) {
             add("- ${variableInitialization.variable.name}: ${variableInitialization.term.term()}")
         }
-    }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext) = "" // nothing
 

@@ -16,11 +16,10 @@ class GoogleSwitchRenderer(private val switchContext: SwitchContext) : IndentedN
         }
 
 
-    override fun internalEndRender(renderingContext: IndentedRenderingContext): String {
-        return switchContext.default?.let {
+    override fun internalEndRender(renderingContext: IndentedRenderingContext): String =
+        switchContext.default?.also {
             render(renderingContext) {
                 add("next: $it")
             }
         }.orEmpty()
-    }
 }

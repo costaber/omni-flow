@@ -10,13 +10,10 @@ class GoogleStepRenderer(private val step: Step) : IndentedNodeRenderer {
 
     override val element: Node = step
 
-    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String {
-        return render(renderingContext) {
+    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
+        render(renderingContext) {
             add("- ${step.name}:")
         }
-//        val prefix = renderingContext.getIndentationString()
-//        return "${prefix}- ${step.name}:"
-    }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext) = "" // nothing
 

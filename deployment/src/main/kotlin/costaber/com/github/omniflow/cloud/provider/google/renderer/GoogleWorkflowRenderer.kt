@@ -10,35 +10,21 @@ class GoogleWorkflowRenderer(private val workflow: Workflow) : IndentedNodeRende
 
     override val element: Node = workflow
 
-    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String {
-//        val prefix = renderingContext.getIndentationString()
-//        return buildString {
-//            appendLine("main:")
-//            renderInput(this, prefix)
-//            append("${prefix}steps:")
-//        }
-        return render(renderingContext) {
+    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
+        render(renderingContext) {
             addLine("main:")
             incIndentationLevel()
             renderInput()
             add("steps:")
         }
-    }
 
-    override fun internalEndRender(renderingContext: IndentedRenderingContext): String {
-//        renderingContext.incIndentationLevel()
-//        val prefix = renderingContext.getIndentationString()
-//        return buildString {
-//            appendLine("$prefix- returnOutput:")
-//            append("$prefix${TAB}return: \${${workflow.result}}")
-//        }.apply { renderingContext.decIndentationLevel() }
-        return render(renderingContext) {
+    override fun internalEndRender(renderingContext: IndentedRenderingContext): String =
+        render(renderingContext) {
             addLine("- returnOutput:")
             tab {
                 add("return: \${${workflow.result}}")
             }
         }.apply { renderingContext.decIndentationLevel() }
-    }
 
     private fun IndentedRenderingContext.renderInput() {
         workflow.input?.let {
