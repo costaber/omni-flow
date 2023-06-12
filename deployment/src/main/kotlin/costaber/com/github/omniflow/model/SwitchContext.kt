@@ -6,6 +6,6 @@ data class SwitchContext(
 ) : StepContext, Node {
 
     override fun childNodes(): List<Node> {
-        return emptyList()
+        return conditions.toList()
     }
 }

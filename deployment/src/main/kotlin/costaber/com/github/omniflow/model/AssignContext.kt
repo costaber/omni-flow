@@ -5,6 +5,6 @@ data class AssignContext(
 ) : StepContext, Node {
 
     override fun childNodes(): List<Node> {
-        return emptyList()
+        return variables.toList()
     }
 }

@@ -44,13 +44,17 @@ internal class WorkflowTest {
                 )
             },
             step {
-                 name("Condition")
+                name("Condition")
                 description("condition")
                 context(
                     switch {
                         conditions(
                             condition {
-                                match((variable("c") equalTo value("0")).not())
+                                match(variable("c") equalTo value("0"))
+                                jump("DivWithC")
+                            },
+                            condition {
+                                match(variable("randomBoolean"))
                                 jump("DivWithC")
                             }
                         )

@@ -4,7 +4,7 @@ import costaber.com.github.omniflow.cloud.provider.aws.*
 import costaber.com.github.omniflow.model.CallContext
 import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
-import costaber.com.github.omniflow.renderer.RenderingContext
+import costaber.com.github.omniflow.renderer.IndentedRenderingContext
 import costaber.com.github.omniflow.resource.TAB
 
 class AmazonTaskRenderer(
@@ -14,8 +14,8 @@ class AmazonTaskRenderer(
 
     override val element: Node = callContext
 
-    override fun internalBeginRender(renderingContext: RenderingContext): String {
-        val prefix = getIndentationString(renderingContext)
+    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String {
+        val prefix = renderingContext.getIndentationString()
         return buildString {
             appendLine("${prefix}${AMAZON_TASK_TYPE}")
             appendLine("${prefix}${AMAZON_RESOURCE}")
@@ -32,11 +32,11 @@ class AmazonTaskRenderer(
         }
     }
 
-    override fun internalEndRender(renderingContext: RenderingContext): String {
+    override fun internalEndRender(renderingContext: IndentedRenderingContext): String {
         val amazonContext = renderingContext as AmazonRenderingContext
         val nextStepName = amazonContext.getNextStepName()
 
-        val prefix = getIndentationString(renderingContext)
+        val prefix = renderingContext.getIndentationString()
 
         return buildString {
             appendLine("${prefix}${AMAZON_RESULT_SELECTOR}")

@@ -6,7 +6,7 @@ import costaber.com.github.omniflow.visitor.ContextVisitor
 /**
  * A generic interface for traversing nodes
  */
-interface NodeTraversor {
+interface NodeVisitorTraversor {
     /**
      * Traverses the root node making use
      * of the given visitor using the given context
@@ -14,8 +14,8 @@ interface NodeTraversor {
      * @param visitor the visitor to use while traversing
      * @param root    the node to traverse
      * @param context the context to use while visiting
-     * @param <K>     the context type
-    </K> */
+     * @param <K>     the context type </K>
+     **/
     fun <K, R> traverse(
         visitor: ContextVisitor<Node, K, R>,
         root: Node, context: K

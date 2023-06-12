@@ -1,7 +1,7 @@
 package costaber.com.github.omniflow.model
 
-data class BinaryExpression(
-    val left: Expression,
+data class BinaryExpression<T, R>(
+    val left: Term<T>,
     val operator: BinaryOperator,
-    val right: Expression,
+    val right: Term<R>,
 ) : Expression

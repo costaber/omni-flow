@@ -16,39 +16,39 @@ class SwitchConditionBuilder : Builder<Condition> {
         jump = jump,
     )
 
-    fun Expression.not() = UnaryExpression(
-        expression = this,
+    fun <T> Term<T>.not() = UnaryExpression(
+        term = this,
         operator = UnaryOperator.NOT,
     )
 
-    infix fun Expression.and(expression: Expression) = BinaryExpression(
+    infix fun <T, R> Term<T>.and(rightTerm: Term<R>) = BinaryExpression(
         left = this,
         operator = BinaryOperator.AND,
-        right = expression,
+        right = rightTerm,
     )
 
-    infix fun Expression.equalTo(expression: Expression) = BinaryExpression(
+    infix fun <T, R> Term<T>.equalTo(rightTerm: Term<R>) = BinaryExpression(
         left = this,
         operator = BinaryOperator.EQUAL_TO,
-        right = expression,
+        right = rightTerm,
     )
 
-    infix fun Expression.greaterThan(expression: Expression) = BinaryExpression(
+    infix fun <T, R> Term<T>.greaterThan(rightTerm: Term<R>) = BinaryExpression(
         left = this,
         operator = BinaryOperator.GREATER_THAN,
-        right = expression,
+        right = rightTerm,
     )
 
-    infix fun Expression.lessThan(expression: Expression) = BinaryExpression(
+    infix fun <T, R> Term<T>.lessThan(rightTerm: Term<R>) = BinaryExpression(
         left = this,
         operator = BinaryOperator.LESS_THAN,
-        right = expression,
+        right = rightTerm,
     )
 
-    infix fun Expression.or(expression: Expression) = BinaryExpression(
+    infix fun <T, R> Term<T>.or(rightTerm: Term<R>) = BinaryExpression(
         left = this,
         operator = BinaryOperator.OR,
-        right = expression,
+        right = rightTerm,
     )
 
 }

@@ -3,7 +3,7 @@ package costaber.com.github.omniflow.traversor
 import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.visitor.ContextVisitor
 
-class DepthFirstNodeTraversor : NodeTraversor {
+class DepthFirstNodeVisitorTraversor : NodeVisitorTraversor {
 
     override fun <K, R> traverse(
         visitor: ContextVisitor<Node, K, R>,

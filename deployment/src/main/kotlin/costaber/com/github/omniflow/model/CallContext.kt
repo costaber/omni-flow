@@ -12,7 +12,5 @@ data class CallContext(
     val result: String,
 ) : StepContext, Node {
 
-    override fun childNodes(): List<Node> {
-        return emptyList()
-    }
+    override fun childNodes() = emptyList<Node>()
 }
