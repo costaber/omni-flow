@@ -11,9 +11,8 @@ interface IndentedNodeRenderer : NodeRenderer<String> {
 
     override fun endRender(renderingContext: RenderingContext): String {
         val indentedRenderingContext = renderingContext as IndentedRenderingContext
-        val render = internalEndRender(indentedRenderingContext)
         indentedRenderingContext.decIndentationLevel()
-        return render
+        return internalEndRender(indentedRenderingContext)
     }
 
     fun internalBeginRender(renderingContext: IndentedRenderingContext): String

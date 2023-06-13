@@ -54,7 +54,7 @@ class GoogleCloudDeployer internal constructor(
                 .addRendererStrategy(GoogleConditionStrategyFactory())
                 .addRendererStrategy(GoogleStepStrategyFactory())
                 .addRendererStrategy(GoogleSwitchStrategyFactory())
-                .addRendererStrategy(GoogleVariableInitializationStrategyFactory())
+                .addRendererStrategy(GoogleVariableStrategyFactory())
                 .addRendererStrategy(GoogleWorkflowStrategyFactory())
                 .build()
         }

@@ -10,7 +10,7 @@ data class CallContext(
     val query: Map<String, Term<*>> = emptyMap(),
     val timeoutInSeconds: Long? = null,
     val result: String,
-) : StepContext, Node {
+) : StepContext {
 
     override fun childNodes() = emptyList<Node>()
 }

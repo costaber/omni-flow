@@ -1,10 +1,11 @@
 # ToDo
 
 - Add the `.body` to the Google variables coming from the result
+- Fix bugs with aws deploy
+- Finish the TODOs
+- Check headers/Query string and more fields for amazon and google
 - Do unit and integration tests
 - Create a script to generate N workflows
-- Understand which metrics should be benchmarked
-- Create graphics with examples
 
 # Future Work
 

@@ -54,7 +54,7 @@ internal class WorkflowTest {
                                 jump("DivWithC")
                             },
                             condition {
-                                match(variable("randomBoolean"))
+                                match(variable("number") greaterThan value(123))
                                 jump("DivWithC")
                             }
                         )

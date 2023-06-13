@@ -20,7 +20,7 @@ class AmazonTaskRenderer(
             addLine(AMAZON_TASK_TYPE)
             addLine(AMAZON_RESOURCE)
             addLine("$AMAZON_INPUT_PATH\"\$\",")
-            addLine(AMAZON_PARAMETERS)
+            addLine(AMAZON_START_PARAMETERS)
             tab {
                 addLine("${AMAZON_API_ENDPOINT}\"${callContext.host}\",")
                 addLine("${AMAZON_METHOD}\"${callContext.method}\",")
@@ -30,7 +30,7 @@ class AmazonTaskRenderer(
             renderHeaders()
             renderAuth()
             addEmptyLine()
-            add(AMAZON_CLOSE_BRACKET)
+            add(AMAZON_CLOSE_OBJECT)
         }
 //        val prefix = renderingContext.getIndentationString()
 //        return buildString {
@@ -56,7 +56,7 @@ class AmazonTaskRenderer(
         val prefix = renderingContext.getIndentationString()
 
         return buildString {
-            appendLine("${prefix}${AMAZON_RESULT_SELECTOR}")
+            appendLine("${prefix}${AMAZON_START_RESULT_SELECTOR}")
             appendLine("${prefix}${TAB}\"${callContext.result}.\$\": \"\$.${AMAZON_RESPONSE_BODY}\"")
             appendLine("${prefix}},")
             val finish = if (nextStepName == null) {
@@ -79,7 +79,7 @@ class AmazonTaskRenderer(
                         addLine("\"${it.key}.\$\": $value")
                     }
                 }
-                add(AMAZON_CLOSE_BRACKET)
+                add(AMAZON_CLOSE_OBJECT)
             }
         }
     }

@@ -1,9 +1,10 @@
 package costaber.com.github.omniflow.model
 
 enum class BinaryOperator {
-    AND,
     EQUAL_TO,
+    NOT_EQUAL_TO,
     GREATER_THAN,
+    GREATER_THAN_OR_EQUAL,
     LESS_THAN,
-    OR,
+    LESS_THAN_OR_EQUAL,
 }

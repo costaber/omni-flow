@@ -1,7 +1,10 @@
 package costaber.com.github.omniflow.model
 
-data class BinaryExpression<T, R>(
-    val left: Term<T>,
+sealed class BinaryExpression<R>(
+    val left: Variable,
     val operator: BinaryOperator,
     val right: Term<R>,
-) : Expression
+) : Expression, Node {
+
+    override fun childNodes() = emptyList<Node>()
+}

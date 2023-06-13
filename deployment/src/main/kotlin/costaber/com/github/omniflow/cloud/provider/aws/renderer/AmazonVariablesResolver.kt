@@ -12,18 +12,16 @@ class AmazonVariablesResolver(
 
     override val element: Node = variableInitialization
 
-    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
-        render(renderingContext) {
-            add("\"${variableInitialization.variable.name}\": ${variableInitialization.term.term()}")
-        }
-
-    override fun internalEndRender(renderingContext: IndentedRenderingContext): String {
+    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String {
         val amazonContext = renderingContext as AmazonRenderingContext
         return render(renderingContext) {
-            if (amazonContext.isLastVariable(variableInitialization)) {
-                add(",")
+            add("\"${variableInitialization.variable.name}\": ${variableInitialization.term.term()}")
+            if (amazonContext.isNotLastVariable(variableInitialization)) {
+                append(",")
             }
         }
     }
+
+    override fun internalEndRender(renderingContext: IndentedRenderingContext): String = "" // nothing
 
 }

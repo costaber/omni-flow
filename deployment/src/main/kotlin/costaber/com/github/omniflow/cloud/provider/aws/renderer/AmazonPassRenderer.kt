@@ -18,7 +18,7 @@ class AmazonPassRenderer(private val assignContext: AssignContext) : IndentedNod
         amazonContext.setVariables(assignContext.variables)
         return render(renderingContext) {
             addLine(AMAZON_PASS_TYPE)
-            addLine(AMAZON_RESULT)
+            add(AMAZON_START_RESULT)
         }
 //        val variablesMutable = mutableListOf<VariableInitialization<*>>()
 //        variablesMutable.addAll(assignContext.variables.toTypedArray())
@@ -37,7 +37,7 @@ class AmazonPassRenderer(private val assignContext: AssignContext) : IndentedNod
         val amazonContext = renderingContext as AmazonRenderingContext
         val nextStepName = amazonContext.getNextStepName()
         return render(renderingContext) {
-            add(AMAZON_CLOSE_BRACKET)
+            addLine(AMAZON_CLOSE_OBJECT)
             if (nextStepName == null) {
                 add(AMAZON_END)
             }

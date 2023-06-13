@@ -1,9 +1,9 @@
 package costaber.com.github.omniflow.model
 
 data class Condition(
-    val expression: Expression,
+    val expression: BinaryExpression<*>,
     val jump: String,
 ) : Node {
 
-    override fun childNodes() = emptyList<Node>()
+    override fun childNodes() = listOf<Node>(expression)
 }

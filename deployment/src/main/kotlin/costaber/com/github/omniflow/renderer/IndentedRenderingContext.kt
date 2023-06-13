@@ -30,6 +30,10 @@ open class IndentedRenderingContext(
         stringBuilder.append("${getIndentationString()}$value")
     }
 
+    fun append(value: String) {
+        stringBuilder.append(value)
+    }
+
     fun tab(block: IndentedRenderingContext.() -> Unit) {
         incIndentationLevel()
         block()

@@ -1,6 +1,5 @@
 package costaber.com.github.omniflow.cloud.provider.aws.renderer
 
-import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_CLOSE_BRACKET
 import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_COMMENT
 import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_START_AT
 import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_STATES
@@ -8,7 +7,6 @@ import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.model.Workflow
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
-import costaber.com.github.omniflow.resource.TAB
 import costaber.com.github.omniflow.resource.util.render
 
 class AmazonStateMachineRenderer(private val workflow: Workflow) : IndentedNodeRenderer {
@@ -24,11 +22,15 @@ class AmazonStateMachineRenderer(private val workflow: Workflow) : IndentedNodeR
 
         return render(renderingContext) {
             addLine("{")
-            addLine("${AMAZON_COMMENT}: \"${workflow.description}\",")
-            addLine("${AMAZON_START_AT}: \"${context.getNextStepNameAndAdvance()}\",")
             tab {
-                addLine("${AMAZON_STATES}: {")
+                addLine("${AMAZON_COMMENT}: \"${workflow.description}\",")
+                addLine("${AMAZON_START_AT}: \"${context.getNextStepNameAndAdvance()}\",")
+                tab {
+                    add("${AMAZON_STATES}: {")
+                }
             }
+            incIndentationLevel()
+            incIndentationLevel()
         }
 
 //        val prefix = renderingContext.getIndentationString()

@@ -1,12 +1,11 @@
 package costaber.com.github.omniflow.cloud.provider.aws.renderer
 
-import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_CLOSE_BRACKET
+import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_CLOSE_OBJECT
 import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_COMMENT
 import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.model.Step
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
-import costaber.com.github.omniflow.resource.TAB
 import costaber.com.github.omniflow.resource.util.render
 
 class AmazonStateRenderer(private val step: Step) : IndentedNodeRenderer {
@@ -33,11 +32,8 @@ class AmazonStateRenderer(private val step: Step) : IndentedNodeRenderer {
         val hasNextStep = amazonContext.getNextStepNameAndAdvance() != null
         return render(renderingContext) {
             if (hasNextStep) {
-                tab {
-                    add(AMAZON_CLOSE_BRACKET)
-                }
-            }
-            else {
+                add(AMAZON_CLOSE_OBJECT)
+            } else {
                 add("}")
             }
         }
