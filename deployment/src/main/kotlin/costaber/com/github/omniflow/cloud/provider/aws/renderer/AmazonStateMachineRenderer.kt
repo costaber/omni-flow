@@ -14,47 +14,26 @@ class AmazonStateMachineRenderer(private val workflow: Workflow) : IndentedNodeR
     override val element: Node = workflow
 
     override fun internalBeginRender(renderingContext: IndentedRenderingContext): String {
-        // TODO: the steps are mandatory so, make validation somewhere
-
-        // Add steps to the context
         val context = renderingContext as AmazonRenderingContext
         context.setSteps(workflow.steps)
-
         return render(renderingContext) {
             addLine("{")
             tab {
-                addLine("${AMAZON_COMMENT}: \"${workflow.description}\",")
-                addLine("${AMAZON_START_AT}: \"${context.getNextStepNameAndAdvance()}\",")
-                tab {
-                    add("${AMAZON_STATES}: {")
-                }
+                addLine("${AMAZON_COMMENT}\"${workflow.description}\",")
+                addLine("${AMAZON_START_AT}\"${context.getNextStepNameAndAdvance()}\",")
+                add(AMAZON_STATES)
             }
             incIndentationLevel()
-            incIndentationLevel()
         }
-
-//        val prefix = renderingContext.getIndentationString()
-//        val firstStepName = context.getNextStepNameAndAdvance()
-//        return buildString {
-//            appendLine("{")
-//            appendLine("${prefix}${AMAZON_COMMENT}: \"${workflow.description}\",")
-//            appendLine("${prefix}${AMAZON_START_AT}: \"${firstStepName}\",")
-//            append("${TAB}${AMAZON_STATES}: {")
-//        }
     }
 
-    override fun internalEndRender(renderingContext: IndentedRenderingContext): String {
-        return render(renderingContext) {
+    override fun internalEndRender(renderingContext: IndentedRenderingContext): String =
+        render(renderingContext) {
+            decIndentationLevel()
             tab {
                 addLine("}")
             }
             add("}")
         }
-//        val prefix = renderingContext.getIndentationString()
-//        return buildString {
-//            appendLine("${prefix}}")
-//            append("}")
-//        }
-    }
 
 }

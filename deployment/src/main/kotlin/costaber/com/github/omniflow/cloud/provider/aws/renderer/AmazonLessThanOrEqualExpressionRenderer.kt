@@ -22,7 +22,7 @@ class AmazonLessThanOrEqualExpressionRenderer(
                 is Value<*> -> add("\"NumericLessThanEquals\": ")
                 is Variable -> add("\"NumericLessThanEqualsPath\": ")
             }
-            add("${lessThanOrEqualExpression.right.term()},")
+            append("${lessThanOrEqualExpression.right.term()},")
         }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String = "" // nothing

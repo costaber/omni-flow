@@ -1,57 +1,96 @@
 {
-  "Comment": "A description of my state machine",
-  "StartAt": "Increment1",
+  "Comment": "Calculator example",
+  "StartAt": "InitVariables",
   "States": {
-    "Increment1": {
-      "Type": "Task",
-      "Resource": "arn:aws:states:::apigateway:invoke",
-      "Parameters": {
-        "ApiEndpoint": "ak7u4tmof2.execute-api.us-east-1.amazonaws.com",
-        "Method": "GET",
-        "Path": "/default/increment",
-        "QueryParameters": {
-          "increment.$": "States.Array(States.Format('{}', $.number))"
-        },
-        "AuthType": "IAM_ROLE"
+    "InitVariables": {
+      "Comment": "Initialize variables",
+      "Type": "Pass",
+      "Result": {
+        "a": 1933043015,
+        "b": 28046803,
+        "c": -456756239
       },
-      "ResultSelector": {
-        "number.$": "$.ResponseBody"
-      },
-      "Next": "Increment2"
+      "Next": "Sum"
     },
-    "Increment2": {
+    "Sum": {
+      "Comment": "Sum 2 random numbers",
       "Type": "Task",
       "Resource": "arn:aws:states:::apigateway:invoke",
-      "InputPath": "$.number",
+      "InputPath": "$",
       "Parameters": {
-        "ApiEndpoint": "ak7u4tmof2.execute-api.us-east-1.amazonaws.com",
+        "ApiEndpoint": "https://us-central1-workflow-test-380423.cloudfunctions.net",
         "Method": "GET",
-        "Path": "/default/increment",
-        "QueryParameters": {
-          "increment.$": "States.Array(States.Format('{}', $))"
+        "Path": "/calculator",
+        "Headers": {
+          "test.$": [
+            "t"
+          ],
+          "example.$": "States.Array(States.Format('{}', $.example))"
         },
-        "AuthType": "IAM_ROLE"
+        "QueryParameters": {
+          "number1.$": "States.Array(States.Format('{}', $.a))",
+          "number2.$": "States.Array(States.Format('{}', $.b))",
+          "op.$": [
+            "add"
+          ]
+        },
+        "RequestBody": {
+          "name": "test",
+          "description": null,
+          "input": null,
+          "steps": [],
+          "result": "result"
+        }
       },
       "ResultSelector": {
-        "number.$": "$.ResponseBody"
+        "sumResult.$": "$.ResponseBody"
       },
-      "Next": "Increment3"
+      "Next": "Condition"
     },
-    "Increment3": {
+    "Condition": {
+      "Comment": "condition",
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.c",
+          "StringEquals": "0",
+          "Next": "DivWithC"
+        },
+        {
+          "Variable": "$.number",
+          "NumericGreaterThan": 123,
+          "Next": "DivWithC"
+        }
+      ],
+      "Default": "Assign1ToC"
+    },
+    "Assign1ToC": {
+      "Comment": "If c equal to 0 affect C with 1",
+      "Type": "Pass",
+      "Result": {
+        "c": 1
+      },
+      "Next": "DivWithC"
+    },
+    "DivWithC": {
+      "Comment": "Divide the previous result by a random value",
       "Type": "Task",
       "Resource": "arn:aws:states:::apigateway:invoke",
-      "InputPath": "$.number",
+      "InputPath": "$",
       "Parameters": {
-        "ApiEndpoint": "ak7u4tmof2.execute-api.us-east-1.amazonaws.com",
+        "ApiEndpoint": "https://us-central1-workflow-test-380423.cloudfunctions.net",
         "Method": "GET",
-        "Path": "/default/increment",
+        "Path": "/calculator",
         "QueryParameters": {
-          "increment.$": "States.Array(States.Format('{}', $))"
-        },
-        "AuthType": "IAM_ROLE"
+          "number1.$": "States.Array(States.Format('{}', $.sumResult))",
+          "number2.$": "States.Array(States.Format('{}', $.c))",
+          "op.$": [
+            "div"
+          ]
+        }
       },
       "ResultSelector": {
-        "number.$": "$.ResponseBody"
+        "divResult.$": "$.ResponseBody"
       },
       "End": true
     }

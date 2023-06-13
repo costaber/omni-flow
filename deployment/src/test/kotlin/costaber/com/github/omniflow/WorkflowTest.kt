@@ -6,6 +6,7 @@ import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleCloudDe
 import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleDeployContext
 import costaber.com.github.omniflow.dsl.*
 import costaber.com.github.omniflow.model.HttpMethod.GET
+import costaber.com.github.omniflow.model.Workflow
 import org.junit.Test
 import java.util.*
 
@@ -39,6 +40,11 @@ internal class WorkflowTest {
                             "number2" to variable("b"),
                             "op" to value("add")
                         )
+                        header(
+                            "test" to value("t"),
+                            "example" to variable("example"),
+                        )
+                        body("asdasd")
                         result("sumResult")
                     }
                 )

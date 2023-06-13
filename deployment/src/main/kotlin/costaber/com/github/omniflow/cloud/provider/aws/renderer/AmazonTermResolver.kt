@@ -8,6 +8,6 @@ object AmazonTermResolver : TermResolver {
     override fun resolveVariable(variable: Variable): String {
         val variableName = variable.name
         val termDefinition = if (variableName.isNotEmpty()) "\$.${variableName}" else "\$"
-        return "States.Array(States.Format('{}', ${termDefinition}))"
+        return "\"States.Array(States.Format('{}', ${termDefinition}))\""
     }
 }

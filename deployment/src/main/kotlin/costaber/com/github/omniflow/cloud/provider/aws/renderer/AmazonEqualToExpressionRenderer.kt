@@ -15,20 +15,19 @@ class AmazonEqualToExpressionRenderer(
 
     override val element: Node = equalToExpression
 
-    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String {
-        return render(renderingContext) {
+    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
+        render(renderingContext) {
             addLine("$AMAZON_VARIABLE\"\$.${equalToExpression.left.term()}\",")
             when (equalToExpression.right) {
                 is Variable -> add("$AMAZON_STRING_EQUALS_PATH\"\$.${equalToExpression.right.term()}\",")
                 is Value<*> -> renderValue(equalToExpression.right)
             }
         }
-    }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String = "" // nothing
 
     private fun IndentedRenderingContext.renderValue(value: Value<*>) {
-        when(value.value) {
+        when (value.value) {
             is Number -> add("$AMAZON_NUMERIC_EQUALS${value.term()},")
             is String -> add("$AMAZON_STRING_EQUALS\"${value.term()}\",")
             is Boolean -> add("$AMAZON_BOOLEAN_EQUALS${value.term()},")

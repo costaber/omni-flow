@@ -12,32 +12,23 @@ class AmazonStateRenderer(private val step: Step) : IndentedNodeRenderer {
 
     override val element: Node = step
 
-    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String {
-        return render(renderingContext) {
+    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
+        render(renderingContext) {
             addLine("\"${step.name}\": {")
             tab {
-                add("${AMAZON_COMMENT}: \"${step.description}\",")
+                add("${AMAZON_COMMENT}\"${step.description}\",")
             }
         }
-//        val prefix = renderingContext.getIndentationString()
-//        return buildString {
-//            appendLine("${prefix}\"${step.name}\": {")
-//            append("${prefix}${TAB}${AMAZON_COMMENT}: \"${step.description}\",")
-//        }
-    }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String {
         val amazonContext = renderingContext as AmazonRenderingContext
-        // val prefix = amazonContext.getIndentationString()
-        val hasNextStep = amazonContext.getNextStepNameAndAdvance() != null
         return render(renderingContext) {
-            if (hasNextStep) {
+            if (amazonContext.getNextStepNameAndAdvance() != null) {
                 add(AMAZON_CLOSE_OBJECT)
             } else {
                 add("}")
             }
         }
-        //return prefix + (if (hasNextStep) "}," else "}")
     }
 
 }

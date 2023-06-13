@@ -17,12 +17,12 @@ class AmazonGreaterThanExpressionRenderer(
 
     override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
         render(renderingContext) {
-            addLine("$AMAZON_VARIABLE\"\$.${renderingContext}\",")
+            addLine("$AMAZON_VARIABLE\"\$.${greaterThanExpression.left.term()}\",")
             when (greaterThanExpression.right) {
                 is Value<*> -> add("\"NumericGreaterThan\": ")
                 is Variable -> add("\"NumericGreaterThanPath\": ")
             }
-            add("${greaterThanExpression.right.term()},")
+            append("${greaterThanExpression.right.term()},")
         }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String = "" // nothing

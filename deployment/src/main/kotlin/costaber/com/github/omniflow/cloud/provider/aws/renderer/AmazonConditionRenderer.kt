@@ -2,7 +2,8 @@ package costaber.com.github.omniflow.cloud.provider.aws.renderer
 
 import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_CLOSE_OBJECT
 import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_NEXT
-import costaber.com.github.omniflow.model.*
+import costaber.com.github.omniflow.model.Condition
+import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
 import costaber.com.github.omniflow.resource.util.render
@@ -13,7 +14,7 @@ class AmazonConditionRenderer(private val condition: Condition) : IndentedNodeRe
 
     override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
         render(renderingContext) {
-            addLine("{")
+            add("{")
         }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String {
@@ -24,8 +25,7 @@ class AmazonConditionRenderer(private val condition: Condition) : IndentedNodeRe
             }
             if (amazonContext.isLastCondition(condition)) {
                 add("}")
-            }
-            else {
+            } else {
                 add(AMAZON_CLOSE_OBJECT)
             }
         }

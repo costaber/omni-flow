@@ -15,16 +15,15 @@ class AmazonGreaterThanOrEqualExpressionRenderer(
 
     override val element: Node = greaterThanOrEqualExpression
 
-    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String {
-        return render(renderingContext) {
+    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
+        render(renderingContext) {
             addLine("$AMAZON_VARIABLE\"\$.${renderingContext}\",")
-            when(greaterThanOrEqualExpression.right) {
+            when (greaterThanOrEqualExpression.right) {
                 is Value<*> -> add("\"NumericGreaterThanEquals\": ")
                 is Variable -> add("\"NumericGreaterThanEqualsPath\": ")
             }
-            add("${greaterThanOrEqualExpression.right.term()},")
+            append("${greaterThanOrEqualExpression.right.term()},")
         }
-    }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String = "" // nothing
 

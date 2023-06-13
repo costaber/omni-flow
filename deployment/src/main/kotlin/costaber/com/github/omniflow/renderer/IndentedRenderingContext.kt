@@ -23,7 +23,7 @@ open class IndentedRenderingContext(
     }
 
     fun addEmptyLine() {
-        stringBuilder.appendLine(getIndentationString())
+        stringBuilder.appendLine()
     }
 
     fun add(value: String) {
