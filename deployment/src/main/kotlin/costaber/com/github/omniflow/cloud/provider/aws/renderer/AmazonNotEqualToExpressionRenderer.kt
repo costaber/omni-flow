@@ -39,5 +39,4 @@ class AmazonNotEqualToExpressionRenderer(
             is Boolean -> add("$AMAZON_BOOLEAN_EQUALS${value.term()},")
         }
     }
-
 }

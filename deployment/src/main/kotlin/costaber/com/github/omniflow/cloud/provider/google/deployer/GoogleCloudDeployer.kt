@@ -23,21 +23,19 @@ class GoogleCloudDeployer internal constructor(
     }
 
     override fun deploy(workflow: Workflow, deployContext: GoogleDeployContext) {
-        val context = IndentedRenderingContext(0)
         logger.info { "Starting to convert Workflow into a Workflow" }
-        val content = nodeTraversor.traverse(contextVisitor, workflow, context)
+        val content = nodeTraversor.traverse(contextVisitor, workflow, IndentedRenderingContext())
             .filterNot(String::isEmpty)
             .joinToStringNewLines()
-        println(content)
-//        googleWorkflowService.deploy(
-//            projectId = deployContext.projectId,
-//            zone = deployContext.zone,
-//            serviceAccount = deployContext.serviceAccount,
-//            workflowId = deployContext.workflowId,
-//            workflowDescription = deployContext.workflowDescription,
-//            workflowLabels = deployContext.workflowLabels,
-//            workflowSourceContents = content,
-//        )
+        googleWorkflowService.deploy(
+            projectId = deployContext.projectId,
+            zone = deployContext.zone,
+            serviceAccount = deployContext.serviceAccount,
+            workflowId = deployContext.workflowId,
+            workflowDescription = deployContext.workflowDescription,
+            workflowLabels = deployContext.workflowLabels,
+            workflowSourceContents = content,
+        )
     }
 
     class Builder {
@@ -52,6 +50,12 @@ class GoogleCloudDeployer internal constructor(
                 .addRendererStrategy(GoogleAssignStrategyFactory())
                 .addRendererStrategy(GoogleCallStrategyFactory())
                 .addRendererStrategy(GoogleConditionStrategyFactory())
+                .addRendererStrategy(GoogleEqualToExpressionStrategyFactory())
+                .addRendererStrategy(GoogleGreaterThanExpressionStrategyFactory())
+                .addRendererStrategy(GoogleGreaterThanOrEqualExpressionStrategyFactory())
+                .addRendererStrategy(GoogleLessThanExpressionStrategyFactory())
+                .addRendererStrategy(GoogleLessThanOrEqualExpressionStrategyFactory())
+                .addRendererStrategy(GoogleNotEqualToExpressionStrategyFactory())
                 .addRendererStrategy(GoogleStepStrategyFactory())
                 .addRendererStrategy(GoogleSwitchStrategyFactory())
                 .addRendererStrategy(GoogleVariableStrategyFactory())

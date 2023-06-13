@@ -16,5 +16,4 @@ class GoogleStepRenderer(private val step: Step) : IndentedNodeRenderer {
         }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext) = "" // nothing
-
 }

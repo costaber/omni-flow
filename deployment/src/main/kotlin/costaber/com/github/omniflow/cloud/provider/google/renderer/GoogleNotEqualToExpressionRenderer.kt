@@ -1,22 +1,21 @@
 package costaber.com.github.omniflow.cloud.provider.google.renderer
 
-import costaber.com.github.omniflow.model.Condition
 import costaber.com.github.omniflow.model.Node
+import costaber.com.github.omniflow.model.NotEqualToExpression
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
 import costaber.com.github.omniflow.resource.util.render
 
-class GoogleConditionRenderer(private val condition: Condition) : IndentedNodeRenderer {
+class GoogleNotEqualToExpressionRenderer(
+    private val notEqualToExpression: NotEqualToExpression<*>,
+) : IndentedNodeRenderer {
 
-    override val element: Node = condition
+    override val element: Node = notEqualToExpression
 
     override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
         render(renderingContext) {
-            add("- condition:")
+            add("\${${notEqualToExpression.left.term()} == ${notEqualToExpression.left.term()}}")
         }
 
-    override fun internalEndRender(renderingContext: IndentedRenderingContext): String =
-        render(renderingContext) {
-            add("  next: ${condition.jump}")
-        }
+    override fun internalEndRender(renderingContext: IndentedRenderingContext): String = "" // nothing
 }

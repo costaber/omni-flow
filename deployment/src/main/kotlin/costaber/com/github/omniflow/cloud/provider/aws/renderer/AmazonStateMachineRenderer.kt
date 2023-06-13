@@ -35,5 +35,4 @@ class AmazonStateMachineRenderer(private val workflow: Workflow) : IndentedNodeR
             }
             add("}")
         }
-
 }

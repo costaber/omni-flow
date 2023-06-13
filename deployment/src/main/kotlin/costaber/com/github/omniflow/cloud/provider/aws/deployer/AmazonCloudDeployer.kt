@@ -23,19 +23,17 @@ class AmazonCloudDeployer internal constructor(
     }
 
     override fun deploy(workflow: Workflow, deployContext: AmazonDeployContext) {
-        val context = AmazonRenderingContext()
         logger.info { "Starting to convert Workflow into a State Machine" }
-        val content = nodeTraversor.traverse(contextVisitor, workflow, context)
+        val content = nodeTraversor.traverse(contextVisitor, workflow, AmazonRenderingContext())
             .filterNot(String::isEmpty)
             .joinToStringNewLines()
-        println(content)
-//        amazonStateMachineService.createStateMachine(
-//            roleArn = deployContext.roleArn,
-//            region = deployContext.region,
-//            tags = deployContext.tags,
-//            stateMachineName = deployContext.stateMachineName,
-//            stateMachineDefinition = content,
-//        )
+        amazonStateMachineService.createStateMachine(
+            roleArn = deployContext.roleArn,
+            region = deployContext.region,
+            tags = deployContext.tags,
+            stateMachineName = deployContext.stateMachineName,
+            stateMachineDefinition = content,
+        )
     }
 
     class Builder {

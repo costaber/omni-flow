@@ -16,5 +16,4 @@ class GoogleAssignRenderer(assignContext: AssignContext) : IndentedNodeRenderer 
         }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext) = "" // nothing
-
 }

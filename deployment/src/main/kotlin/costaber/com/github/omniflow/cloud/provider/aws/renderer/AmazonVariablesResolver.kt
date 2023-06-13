@@ -23,5 +23,4 @@ class AmazonVariablesResolver(
     }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String = "" // nothing
-
 }

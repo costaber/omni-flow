@@ -26,5 +26,4 @@ class AmazonLessThanOrEqualExpressionRenderer(
         }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String = "" // nothing
-
 }

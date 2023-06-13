@@ -1,15 +1,12 @@
-package costaber.com.github.omniflow.cloud.provider.aws.renderer
+package costaber.com.github.omniflow.cloud.provider.google.renderer
 
-import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_VARIABLE
 import costaber.com.github.omniflow.model.GreaterThanOrEqualExpression
 import costaber.com.github.omniflow.model.Node
-import costaber.com.github.omniflow.model.Value
-import costaber.com.github.omniflow.model.Variable
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
 import costaber.com.github.omniflow.resource.util.render
 
-class AmazonGreaterThanOrEqualExpressionRenderer(
+class GoogleGreaterThanOrEqualExpressionRenderer(
     private val greaterThanOrEqualExpression: GreaterThanOrEqualExpression<*>,
 ) : IndentedNodeRenderer {
 
@@ -17,12 +14,7 @@ class AmazonGreaterThanOrEqualExpressionRenderer(
 
     override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
         render(renderingContext) {
-            addLine("$AMAZON_VARIABLE\"\$.${renderingContext}\",")
-            when (greaterThanOrEqualExpression.right) {
-                is Value<*> -> add("\"NumericGreaterThanEquals\": ")
-                is Variable -> add("\"NumericGreaterThanEqualsPath\": ")
-            }
-            append("${greaterThanOrEqualExpression.right.term()},")
+            add("\${${greaterThanOrEqualExpression.left.term()} >= ${greaterThanOrEqualExpression.left.term()}}")
         }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String = "" // nothing

@@ -7,7 +7,7 @@ open class IndentedRenderingContext(
     private val stringBuilder: StringBuilder = StringBuilder(),
 ) : RenderingContext {
 
-    fun getIndentationString(): String =
+    private fun getIndentationString(): String =
         TAB.repeat(indentationLevel)
 
     fun incIndentationLevel() {

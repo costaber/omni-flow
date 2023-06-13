@@ -33,5 +33,4 @@ class AmazonEqualToExpressionRenderer(
             is Boolean -> add("$AMAZON_BOOLEAN_EQUALS${value.term()},")
         }
     }
-
 }

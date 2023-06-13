@@ -30,5 +30,4 @@ class AmazonStateRenderer(private val step: Step) : IndentedNodeRenderer {
             }
         }
     }
-
 }

@@ -31,5 +31,4 @@ class GoogleWorkflowRenderer(private val workflow: Workflow) : IndentedNodeRende
             addLine("params: [ ${workflow.input} ]")
         }
     }
-
 }

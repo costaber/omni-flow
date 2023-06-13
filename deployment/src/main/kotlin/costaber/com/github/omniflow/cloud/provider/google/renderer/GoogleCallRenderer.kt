@@ -24,6 +24,7 @@ class GoogleCallRenderer(
             }
             renderMap("headers", callContext.header)
             renderMap("query", callContext.query)
+            renderBody()
             renderAuth()
             renderTimeout()
         }
@@ -50,6 +51,12 @@ class GoogleCallRenderer(
                     add("${it.key}: $value")
                 }
             }
+        }
+    }
+
+    private fun IndentedRenderingContext.renderBody() {
+        callContext.body?.let {
+
         }
     }
 

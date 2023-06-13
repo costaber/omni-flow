@@ -30,5 +30,4 @@ class AmazonConditionRenderer(private val condition: Condition) : IndentedNodeRe
             }
         }
     }
-
 }

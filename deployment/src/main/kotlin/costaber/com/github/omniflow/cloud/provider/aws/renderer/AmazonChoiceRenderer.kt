@@ -16,7 +16,7 @@ class AmazonChoiceRenderer(private val switchContext: SwitchContext) : IndentedN
 
     override fun internalBeginRender(renderingContext: IndentedRenderingContext): String {
         val amazonRenderingContext = renderingContext as AmazonRenderingContext
-        amazonRenderingContext.setConditions(switchContext.conditions )
+        amazonRenderingContext.setConditions(switchContext.conditions)
         return render(renderingContext) {
             addLine(AMAZON_CHOICE_TYPE)
             add(AMAZON_START_CHOICES)

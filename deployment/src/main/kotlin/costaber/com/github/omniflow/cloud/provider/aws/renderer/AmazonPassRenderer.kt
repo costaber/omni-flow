@@ -32,5 +32,4 @@ class AmazonPassRenderer(private val assignContext: AssignContext) : IndentedNod
             }
         }
     }
-
 }
