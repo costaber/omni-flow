@@ -1,26 +1,42 @@
 main:
-  params: [ input ]
   steps:
-    - increment1:
+    - InitVariables:
+        assign:
+          - a: -620425120
+          - b: -1421662047
+          - c: -190845756
+    - Sum:
         call: http.get
         args:
-          url: https://us-central1-function-test-366510.cloudfunctions.net/function-1
+          url: https://us-central1-workflow-test-380423.cloudfunctions.net/calculator
+          headers:
+            test: "t"
+            example: ${example}
           query:
-            increment: ${input.number}
-        result: result1
-    - increment2:
-        call: http.get
-        args:
-          url: https://us-central1-function-test-366510.cloudfunctions.net/function-1
-          query:
-            increment: ${result1.body}
-        result: result2
-    - increment3:
-        call: http.get
-        args:
-          url: https://us-central1-function-test-366510.cloudfunctions.net/function-1
-          query:
-            increment: ${result2.body}
-        result: result3
-    - returnOutput:
-        return: ${result3.body}
+            number1: ${a}
+            number2: ${b}
+            op: "add"
+        result: sumResult
+    - Condition:
+        switch:
+          - condition:
+              ${c == c}
+            next: DivWithC
+          - condition:
+              ${number > number}
+            next: DivWithC
+        default: Assign1ToC
+- Assign1ToC:
+    assign:
+      - c: 1
+- DivWithC:
+    call: http.get
+    args:
+      url: https://us-central1-workflow-test-380423.cloudfunctions.net/calculator
+      query:
+        number1: ${sumResult}
+        number2: ${c}
+        op: "div"
+    result: divResult
+- returnOutput:
+    return: ${divResult}

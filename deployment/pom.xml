@@ -38,6 +38,17 @@
             <artifactId>google-cloud-workflows</artifactId>
             <version>${google-cloud-workflows.version}</version>
         </dependency>
+        <!-- - -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>${jackson-dataformat-yaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson-datatype-jsr310.version}</version>
+        </dependency>
         <!-- Logger -->
         <dependency>
             <groupId>io.github.microutils</groupId>

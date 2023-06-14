@@ -1,8 +1,8 @@
 package costaber.com.github.omniflow.renderer
 
-import costaber.com.github.omniflow.model.variable.Term
-import costaber.com.github.omniflow.model.variable.Value
-import costaber.com.github.omniflow.model.variable.Variable
+import costaber.com.github.omniflow.model.Term
+import costaber.com.github.omniflow.model.Value
+import costaber.com.github.omniflow.model.Variable
 
 interface TermResolver {
 
