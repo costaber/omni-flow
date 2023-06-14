@@ -89,7 +89,20 @@ class AmazonTaskRenderer(
         callContext.body?.let {
             append(",")
             addEmptyLine()
-            addLine("$AMAZON_REQUEST_BODY${objectMapper.writeValueAsString(callContext.body)}")
+            add(AMAZON_REQUEST_BODY)
+            val lines = objectMapper.writeValueAsString(it)
+                .split("{", "}", ",")
+                .filterNot(String::isEmpty)
+            if (lines.size == 1) {
+                append(lines.first())
+            } else {
+                append("{")
+                addEmptyLine()
+                tab {
+                    lines.forEach { line -> addLine(line) }
+                }
+                add("}")
+            }
         }
     }
 

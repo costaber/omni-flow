@@ -1,5 +1,7 @@
 package costaber.com.github.omniflow.cloud.provider.google.renderer
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import costaber.com.github.omniflow.model.CallContext
 import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.model.Term
@@ -11,6 +13,8 @@ class GoogleCallRenderer(
     private val callContext: CallContext,
     private val googleTermResolver: GoogleTermResolver,
 ) : IndentedNodeRenderer {
+
+    private val objectMapper = ObjectMapper(YAMLFactory())
 
     override val element: Node = callContext
 
@@ -56,7 +60,22 @@ class GoogleCallRenderer(
 
     private fun IndentedRenderingContext.renderBody() {
         callContext.body?.let {
-
+            val yamlString = objectMapper.writeValueAsString(it)
+                .replace("---", "\n")
+                .split("\n")
+                .filterNot(String::isEmpty)
+            addEmptyLine()
+            add("body:")
+            tab {
+                if (yamlString.size == 1) {
+                    append(yamlString.first())
+                } else {
+                    yamlString.forEach { line ->
+                        addEmptyLine()
+                        add(line)
+                    }
+                }
+            }
         }
     }
 

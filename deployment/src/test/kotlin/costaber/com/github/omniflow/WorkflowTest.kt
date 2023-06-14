@@ -43,7 +43,13 @@ internal class WorkflowTest {
                             "test" to value("t"),
                             "example" to variable("example"),
                         )
-                        body("asdasd")
+                        body(
+                            object {
+                                val firstName = "John"
+                                val lastName = "Week"
+                                val nif = "12312312312"
+                            }
+                        )
                         result("sumResult")
                     }
                 )
