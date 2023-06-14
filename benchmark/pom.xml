@@ -12,4 +12,12 @@
 
     <artifactId>omni-flow-benchmark</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>costaber.com.github</groupId>
+            <artifactId>omni-flow-deployment</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
 </project>
