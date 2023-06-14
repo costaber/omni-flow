@@ -10,12 +10,4 @@ data class Step(
     override fun childNodes(): List<Node> {
         return listOf(context)
     }
-
-    override fun childNodeSize(): Int {
-        return 1
-    }
-
-    override fun childNode(index: Int): Node {
-        return context
-    }
 }

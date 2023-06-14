@@ -6,36 +6,33 @@ import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_STATES
 import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.model.Workflow
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
-import costaber.com.github.omniflow.renderer.RenderingContext
-import costaber.com.github.omniflow.resource.TAB
+import costaber.com.github.omniflow.renderer.IndentedRenderingContext
+import costaber.com.github.omniflow.resource.util.render
 
 class AmazonStateMachineRenderer(private val workflow: Workflow) : IndentedNodeRenderer {
 
     override val element: Node = workflow
 
-    override fun internalBeginRender(renderingContext: RenderingContext): String {
-        // TODO: the steps are mandatory so, make validation somewhere
-
-        // Add steps to the context
+    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String {
         val context = renderingContext as AmazonRenderingContext
         context.setSteps(workflow.steps)
-
-        val prefix = getIndentationString(renderingContext)
-        val firstStepName = context.getNextStepNameAndAdvance()
-        return buildString {
-            appendLine("{")
-            appendLine("${prefix}${AMAZON_COMMENT}: \"${workflow.description}\",")
-            appendLine("${prefix}${AMAZON_START_AT}: \"${firstStepName}\",")
-            append("${TAB}${AMAZON_STATES}: {")
+        return render(renderingContext) {
+            addLine("{")
+            tab {
+                addLine("${AMAZON_COMMENT}\"${workflow.description}\",")
+                addLine("${AMAZON_START_AT}\"${context.getNextStepNameAndAdvance()}\",")
+                add(AMAZON_STATES)
+            }
+            incIndentationLevel()
         }
     }
 
-    override fun internalEndRender(renderingContext: RenderingContext): String {
-        val prefix = getIndentationString(renderingContext)
-        return buildString {
-            appendLine("${prefix}}")
-            append("}")
+    override fun internalEndRender(renderingContext: IndentedRenderingContext): String =
+        render(renderingContext) {
+            decIndentationLevel()
+            tab {
+                addLine("}")
+            }
+            add("}")
         }
-    }
-
 }

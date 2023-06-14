@@ -1,28 +1,32 @@
 package costaber.com.github.omniflow.cloud.provider.google.deployer
 
 import costaber.com.github.omniflow.cloud.provider.google.service.GoogleWorkflowService
-import costaber.com.github.omniflow.cloud.provider.google.strategy.GoogleCallStrategyFactory
-import costaber.com.github.omniflow.cloud.provider.google.strategy.GoogleStepStrategyFactory
-import costaber.com.github.omniflow.cloud.provider.google.strategy.GoogleWorkflowRendererStrategyFactory
+import costaber.com.github.omniflow.cloud.provider.google.strategy.*
 import costaber.com.github.omniflow.deployer.CloudDeployer
 import costaber.com.github.omniflow.factory.DefaultNodeRendererStrategyDecider
 import costaber.com.github.omniflow.factory.NodeRendererStrategyDecider
 import costaber.com.github.omniflow.model.Workflow
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
-import costaber.com.github.omniflow.traversor.DepthFirstNodeTraversor
+import costaber.com.github.omniflow.resource.util.joinToStringNewLines
+import costaber.com.github.omniflow.traversor.DepthFirstNodeVisitorTraversor
 import costaber.com.github.omniflow.visitor.NodeContextVisitor
+import mu.KotlinLogging
 
 class GoogleCloudDeployer internal constructor(
-    private val nodeTraversor: DepthFirstNodeTraversor,
+    private val nodeTraversor: DepthFirstNodeVisitorTraversor,
     private val contextVisitor: NodeContextVisitor,
     private val googleWorkflowService: GoogleWorkflowService,
 ) : CloudDeployer<GoogleDeployContext> {
 
+    private companion object {
+        private val logger = KotlinLogging.logger { }
+    }
+
     override fun deploy(workflow: Workflow, deployContext: GoogleDeployContext) {
-        val context = IndentedRenderingContext(0)
-        val content = nodeTraversor.traverse(contextVisitor, workflow, context)
-            .filter { it != "" }
-            .joinToString("\n")
+        logger.info { "Starting to convert Workflow into a Workflow" }
+        val content = nodeTraversor.traverse(contextVisitor, workflow, IndentedRenderingContext())
+            .filterNot(String::isEmpty)
+            .joinToStringNewLines()
         googleWorkflowService.deploy(
             projectId = deployContext.projectId,
             zone = deployContext.zone,
@@ -36,16 +40,26 @@ class GoogleCloudDeployer internal constructor(
 
     class Builder {
         fun build() = GoogleCloudDeployer(
-            nodeTraversor = DepthFirstNodeTraversor(),
+            nodeTraversor = DepthFirstNodeVisitorTraversor(),
             contextVisitor = NodeContextVisitor(createNodeRendererStrategyDecider()),
             googleWorkflowService = GoogleWorkflowService(),
         )
 
         private fun createNodeRendererStrategyDecider(): NodeRendererStrategyDecider {
             return DefaultNodeRendererStrategyDecider.Builder()
-                .addRendererStrategy(GoogleWorkflowRendererStrategyFactory())
-                .addRendererStrategy(GoogleStepStrategyFactory())
+                .addRendererStrategy(GoogleAssignStrategyFactory())
                 .addRendererStrategy(GoogleCallStrategyFactory())
+                .addRendererStrategy(GoogleConditionStrategyFactory())
+                .addRendererStrategy(GoogleEqualToExpressionStrategyFactory())
+                .addRendererStrategy(GoogleGreaterThanExpressionStrategyFactory())
+                .addRendererStrategy(GoogleGreaterThanOrEqualExpressionStrategyFactory())
+                .addRendererStrategy(GoogleLessThanExpressionStrategyFactory())
+                .addRendererStrategy(GoogleLessThanOrEqualExpressionStrategyFactory())
+                .addRendererStrategy(GoogleNotEqualToExpressionStrategyFactory())
+                .addRendererStrategy(GoogleStepStrategyFactory())
+                .addRendererStrategy(GoogleSwitchStrategyFactory())
+                .addRendererStrategy(GoogleVariableStrategyFactory())
+                .addRendererStrategy(GoogleWorkflowStrategyFactory())
                 .build()
         }
     }

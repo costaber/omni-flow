@@ -9,6 +9,7 @@ import costaber.com.github.omniflow.renderer.NodeRenderer
 import java.util.function.Predicate
 
 class AmazonStateStrategyFactory : NodeRendererStrategyFactory<String> {
+
     override fun getMatcher(): Predicate<Node> =
         DefaultPredicate(Step::class)
 

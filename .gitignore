@@ -42,3 +42,4 @@ build/
 venv/
 __pycache__/
 
+/deployment/src/test/resources/credentials/

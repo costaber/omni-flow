@@ -1,29 +1,33 @@
 package costaber.com.github.omniflow.cloud.provider.aws.renderer
 
+import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_CLOSE_OBJECT
 import costaber.com.github.omniflow.cloud.provider.aws.AMAZON_COMMENT
 import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.model.Step
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
-import costaber.com.github.omniflow.renderer.RenderingContext
-import costaber.com.github.omniflow.resource.TAB
+import costaber.com.github.omniflow.renderer.IndentedRenderingContext
+import costaber.com.github.omniflow.resource.util.render
 
 class AmazonStateRenderer(private val step: Step) : IndentedNodeRenderer {
 
     override val element: Node = step
 
-    override fun internalBeginRender(renderingContext: RenderingContext): String {
-        val prefix = getIndentationString(renderingContext)
-        return buildString {
-            appendLine("${prefix}\"${step.name}\": {")
-            append("${prefix}${TAB}${AMAZON_COMMENT}: \"${step.description}\",")
+    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
+        render(renderingContext) {
+            addLine("\"${step.name}\": {")
+            tab {
+                add("${AMAZON_COMMENT}\"${step.description}\",")
+            }
+        }
+
+    override fun internalEndRender(renderingContext: IndentedRenderingContext): String {
+        val amazonContext = renderingContext as AmazonRenderingContext
+        return render(renderingContext) {
+            if (amazonContext.getNextStepNameAndAdvance() != null) {
+                add(AMAZON_CLOSE_OBJECT)
+            } else {
+                add("}")
+            }
         }
     }
-
-    override fun internalEndRender(renderingContext: RenderingContext): String {
-        val amazonContext = renderingContext as AmazonRenderingContext
-        val prefix = getIndentationString(renderingContext)
-        val hasNextStep = amazonContext.getNextStepNameAndAdvance() != null
-        return prefix + (if (hasNextStep) "}," else "}")
-    }
-
 }

@@ -1,79 +1,105 @@
 package costaber.com.github.omniflow.cloud.provider.google.renderer
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import costaber.com.github.omniflow.model.CallContext
 import costaber.com.github.omniflow.model.Node
-import costaber.com.github.omniflow.model.call.CallContext
+import costaber.com.github.omniflow.model.Term
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
-import costaber.com.github.omniflow.renderer.RenderingContext
-import costaber.com.github.omniflow.resource.TAB
+import costaber.com.github.omniflow.renderer.IndentedRenderingContext
+import costaber.com.github.omniflow.resource.util.render
 
 class GoogleCallRenderer(
     private val callContext: CallContext,
-    //private val variableResolver: VariableResolver,
+    private val googleTermResolver: GoogleTermResolver,
 ) : IndentedNodeRenderer {
+
+    private val objectMapper = ObjectMapper(YAMLFactory())
 
     override val element: Node = callContext
 
-    override fun internalBeginRender(renderingContext: RenderingContext): String {
-        val prefix = getIndentationString(renderingContext)
-        val url = callContext.host + callContext.path
-        return buildString {
+    override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
+        render(renderingContext) {
             val httpMethod = callContext.method.name.lowercase()
-            appendLine("${prefix}call: http.${httpMethod}")
-            appendLine("${prefix}args:")
-            append("${prefix}${TAB}url: $url")
-            renderMap("headers", callContext.header, prefix, this)
-            renderAuth(callContext, prefix, this)
-            renderMap("query", callContext.query, prefix, this)
-            renderTimeout(callContext, prefix, this)
+            addLine("call: http.${httpMethod}")
+            addLine("args:")
+            tab {
+                add("url: ${callContext.host + callContext.path}")
+            }
+            renderMap("headers", callContext.header)
+            renderMap("query", callContext.query)
+            renderBody()
+            renderAuth()
+            renderTimeout()
         }
-    }
 
-    override fun internalEndRender(renderingContext: RenderingContext): String {
-        val prefix = getIndentationString(renderingContext)
-        return "${prefix}result: ${callContext.result}"
-    }
+    override fun internalEndRender(renderingContext: IndentedRenderingContext): String =
+        render(renderingContext) {
+            add("result: ${callContext.result}")
+        }
 
-    private fun renderMap(
+    private fun IndentedRenderingContext.renderMap(
         mapName: String,
-        mapToRender: Map<String, String>,
-        prefix: String,
-        stringBuilder: StringBuilder,
+        mapToRender: Map<String, Term<*>>,
     ) {
         if (mapToRender.isEmpty())
             return
 
-        stringBuilder.run {
-            appendLine()
-            appendLine("${prefix}${TAB}$mapName:")
+        tab {
+            addEmptyLine()
+            add("$mapName:")
             mapToRender.forEach {
-                append("${prefix}${TAB}${TAB}${it.key}: ${it.value}")
+                addEmptyLine()
+                val value = googleTermResolver.resolve(it.value)
+                tab {
+                    add("${it.key}: $value")
+                }
             }
         }
     }
 
-    private fun renderAuth(
-        callContext: CallContext,
-        prefix: String,
-        stringBuilder: StringBuilder
-    ) {
-        callContext.authentication?.let {
-            stringBuilder.appendLine()
-            stringBuilder.appendLine("${prefix}${TAB}auth:")
-            stringBuilder.appendLine("${prefix}${TAB}${TAB}type: ${it.type}")
-            stringBuilder.appendLine("${prefix}${TAB}${TAB}scope: ${it.scope}")
-            stringBuilder.appendLine("${prefix}${TAB}${TAB}scopes: ${it.scopes}")
-            stringBuilder.append("${prefix}${TAB}${TAB}audience: ${it.audience}")
+    private fun IndentedRenderingContext.renderBody() {
+        callContext.body?.let {
+            val yamlString = objectMapper.writeValueAsString(it)
+                .replace("---", "\n")
+                .split("\n")
+                .filterNot(String::isEmpty)
+            addEmptyLine()
+            add("body:")
+            tab {
+                if (yamlString.size == 1) {
+                    append(yamlString.first())
+                } else {
+                    yamlString.forEach { line ->
+                        addEmptyLine()
+                        add(line)
+                    }
+                }
+            }
         }
     }
 
-    private fun renderTimeout(
-        callContext: CallContext,
-        prefix: String,
-        stringBuilder: StringBuilder
-    ) {
+    private fun IndentedRenderingContext.renderAuth() {
+        callContext.authentication?.let {
+            addEmptyLine()
+            tab {
+                addLine("auth:")
+                tab {
+                    addLine("type: ${it.type}")
+                    addLine("scope: ${it.scope}")
+                    addLine("scopes: ${it.scopes}")
+                    add("audience: ${it.audience}")
+                }
+            }
+        }
+    }
+
+    private fun IndentedRenderingContext.renderTimeout() {
         callContext.timeoutInSeconds?.let {
-            stringBuilder.appendLine()
-            stringBuilder.append("${prefix}${TAB}timeout: $it")
+            addEmptyLine()
+            tab {
+                add("timeout: $it")
+            }
         }
     }
 }

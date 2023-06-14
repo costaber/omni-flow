@@ -1,3 +1,3 @@
 package costaber.com.github.omniflow.model
 
-interface StepContext : Node
+sealed interface StepContext : Node

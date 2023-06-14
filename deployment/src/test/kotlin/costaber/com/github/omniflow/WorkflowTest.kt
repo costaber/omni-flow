@@ -5,140 +5,102 @@ import costaber.com.github.omniflow.cloud.provider.aws.deployer.AmazonDeployCont
 import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleCloudDeployer
 import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleDeployContext
 import costaber.com.github.omniflow.dsl.*
-import costaber.com.github.omniflow.model.call.HttpMethod.GET
+import costaber.com.github.omniflow.model.HttpMethod.GET
 import org.junit.Test
 import java.util.*
 
 internal class WorkflowTest {
 
-    private val googleWorkflow = workflow {
-        name("myFirstWorkflow")
-        description("My first Workflow")
-        params("input")
-        variables(
-            variable {
-                name("number")
-                value(0)
-            },
-            variable {
-                name("randomNumber")
-                value(Random().nextInt())
-            },
-        )
+    private val generalWorkflow = workflow {
+        name("calculatorWorkflow")
+        description("Calculator example")
         steps(
             step {
-                name("increment1")
-                description("Increment the input number by one")
+                name("InitVariables")
+                description("Initialize variables")
                 context(
-                    call {
-                        method(GET)
-                        host("https://us-central1-function-test-366510.cloudfunctions.net")
-                        path("/function-1")
-                        query("increment" to "\${input.number}")
-                        result("result1")
+                    assign {
+                        variable("a" equal Random().nextInt())
+                        variable("b" equal Random().nextInt())
+                        variable("c" equal Random().nextInt())
                     }
                 )
             },
             step {
-                name("increment2")
-                description("Increment the input number by one, second time")
+                name("Sum")
+                description("Sum 2 random numbers")
                 context(
                     call {
                         method(GET)
-                        host("https://us-central1-function-test-366510.cloudfunctions.net")
-                        path("/function-1")
-                        query("increment" to "\${result1.body}")
-                        result("result2")
+                        host("https://us-central1-workflow-test-380423.cloudfunctions.net")
+                        path("/calculator")
+                        query(
+                            "number1" to variable("a"),
+                            "number2" to variable("b"),
+                            "op" to value("add")
+                        )
+                        header(
+                            "test" to value("t"),
+                            "example" to variable("example"),
+                        )
+                        body(
+                            object {
+                                val firstName = "John"
+                                val lastName = "Week"
+                                val nif = "12312312312"
+                            }
+                        )
+                        result("sumResult")
                     }
                 )
             },
             step {
-                name("increment3")
-                description("Increment the input number by one, third time")
+                name("Condition")
+                description("condition")
+                context(
+                    switch {
+                        conditions(
+                            condition {
+                                match(variable("c") equalTo value("0"))
+                                jump("DivWithC")
+                            },
+                            condition {
+                                match(variable("number") greaterThan value(123))
+                                jump("DivWithC")
+                            }
+                        )
+                        default("Assign1ToC")
+                    }
+                )
+            },
+            step {
+                name("Assign1ToC")
+                description("If c equal to 0 affect C with 1")
+                context(
+                    assign {
+                        variable("c" equal 1)
+                    }
+                )
+            },
+            step {
+                name("DivWithC")
+                description("Divide the previous result by a random value")
                 context(
                     call {
                         method(GET)
-                        host("https://us-central1-function-test-366510.cloudfunctions.net")
-                        path("/function-1")
-                        query("increment" to "\${result2.body}")
-                        result("result3")
+                        host("https://us-central1-workflow-test-380423.cloudfunctions.net")
+                        path("/calculator")
+                        query(
+                            "number1" to variable("sumResult"),
+                            "number2" to variable("c"),
+                            "op" to value("div")
+                        )
+                        result("divResult")
                     }
                 )
             }
         )
-        result("\${result3.body}")
-    }
-
-    private val amazonWorkflow = workflow {
-        name("myFirstWorkflow")
-        description("A description of my state machine")
-        variables(
-            variable {
-                name("number")
-                value(0)
-            },
-            variable {
-                name("randomNumber")
-                value(Random().nextInt())
-            },
-        )
-        steps(
-            step {
-                name("Increment1")
-                description("Increment the input number by one")
-                context(
-                    call {
-                        method(GET)
-                        host("ak7u4tmof2.execute-api.us-east-1.amazonaws.com")
-                        path("/default/increment")
-                        query("increment.\$" to "States.Array(States.Format('{}', $.number))")
-                        authentication(
-                            authentication {
-                                type("IAM_ROLE")
-                            }
-                        )
-                        result("number")
-                    }
-                )
-            },
-            step {
-                name("Increment2")
-                description("Increment the input number by one, second time")
-                context(
-                    call {
-                        method(GET)
-                        host("ak7u4tmof2.execute-api.us-east-1.amazonaws.com")
-                        path("/default/increment")
-                        query("increment.\$" to "States.Array(States.Format('{}', $))")
-                        authentication(
-                            authentication {
-                                type("IAM_ROLE")
-                            }
-                        )
-                        result("number")
-                    }
-                )
-            },
-            step {
-                name("Increment3")
-                description("Increment the input number by one, third time")
-                context(
-                    call {
-                        method(GET)
-                        host("ak7u4tmof2.execute-api.us-east-1.amazonaws.com")
-                        path("/default/increment")
-                        query("increment.\$" to "States.Array(States.Format('{}', $))")
-                        authentication(
-                            authentication {
-                                type("IAM_ROLE")
-                            }
-                        )
-                        result("number")
-                    }
-                )
-            }
-        )
-        result("result")
+        result("divResult")
     }
 
     @Test
@@ -149,11 +111,11 @@ internal class WorkflowTest {
             zone = "us-east1",
             serviceAccount = "projects/workflow-test-380423/serviceAccounts/" +
                     "service-account-test@workflow-test-380423.iam.gserviceaccount.com",
-            workflowId = "testing_client_library_3",
-            workflowDescription = "Testing the creation of a workflow using Client Library",
+            workflowId = "calculator_workflow",
+            workflowDescription = "Calculator Workflow for testing",
             workflowLabels = mapOf("environment" to "testing", "app" to "omni-flow"),
         )
-        deployer.deploy(googleWorkflow, googleDeployContext)
+        deployer.deploy(generalWorkflow, googleDeployContext)
     }
 
     @Test
@@ -167,8 +129,8 @@ internal class WorkflowTest {
                 "environment" to "testing",
                 "app" to "omni-flow"
             ),
-            stateMachineName = "state_machine_test_deployment_1"
+            stateMachineName = "state_machine_calculator"
         )
-        deployer.deploy(amazonWorkflow, amazonDeployContext)
+        deployer.deploy(generalWorkflow, amazonDeployContext)
     }
 }

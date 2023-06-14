@@ -5,8 +5,13 @@ import com.google.cloud.workflows.v1.LocationName
 import com.google.cloud.workflows.v1.Workflow
 import com.google.cloud.workflows.v1.WorkflowsClient
 import costaber.com.github.omniflow.resource.exception.ExternalCloudClientException
+import mu.KotlinLogging
 
 class GoogleWorkflowService {
+
+    private companion object {
+        private val logger = KotlinLogging.logger { }
+    }
 
     /**
      * REQUIRED 1 ENV VARIABLE
@@ -21,6 +26,7 @@ class GoogleWorkflowService {
         workflowLabels: Map<String, String> = emptyMap(),
         workflowSourceContents: String,
     ) {
+        logger.info { "Creating deployment request for Workflow $workflowId" }
         val workflowsClient = WorkflowsClient.create()
         try {
             val projectLocation = LocationName.of(projectId, zone).toString()
@@ -35,7 +41,9 @@ class GoogleWorkflowService {
                 .setWorkflowId(workflowId)
                 .setWorkflow(workflow)
                 .build()
-            workflowsClient.createWorkflowAsync(createWorkflowRequest)
+            val workflowCreationResult = workflowsClient.createWorkflowAsync(createWorkflowRequest)
+            logger.info { "Workflow creation result ${workflowCreationResult.get()}" }
+            logger.info { "Metadata: ${workflowCreationResult.metadata}" }
         } catch (exception: Exception) {
             throw ExternalCloudClientException(
                 workflowName = workflowId,
