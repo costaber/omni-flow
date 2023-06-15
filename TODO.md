@@ -2,9 +2,8 @@
 
 - Add the `.body` to the Google variables coming from the result
 - Fix bugs with aws deploy
-- Maybe check the number of generated lines for each cloud provider 
+- Add some validation layer before rendering it
 - Do unit and integration tests
-- Create a script to generate N workflows
 
 # Future Work
 
