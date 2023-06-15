@@ -22,6 +22,7 @@
 - [May 09, 2023](#may-09-2023)
 - [May 24, 2023](#may-24-2023)
 - [June 02, 2023](#june-02-2023)
+- [June 15, 2023](#june-15-2023)
 
 ---
 
@@ -174,3 +175,13 @@
   - Variables
   - Conditional step
 - Evaluate the next steps: Benchmarking
+
+## June 15, 2023
+
+- Show the example graphics for metrics
+- Demonstration of the Conditional and Variable Steps
+- Possible workflow relations to measure the time spent and memory usage:
+  - Independent steps
+  - Using Variables
+  - With Conditional steps (binary and multiple decision)
+- Demonstration of some time measure results
