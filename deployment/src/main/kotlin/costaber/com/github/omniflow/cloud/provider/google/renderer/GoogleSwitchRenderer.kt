@@ -1,14 +1,14 @@
 package costaber.com.github.omniflow.cloud.provider.google.renderer
 
 import costaber.com.github.omniflow.model.Node
-import costaber.com.github.omniflow.model.SwitchContext
+import costaber.com.github.omniflow.model.ConditionalContext
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
 import costaber.com.github.omniflow.resource.util.render
 
-class GoogleSwitchRenderer(private val switchContext: SwitchContext) : IndentedNodeRenderer {
+class GoogleSwitchRenderer(private val conditionalContext: ConditionalContext) : IndentedNodeRenderer {
 
-    override val element: Node = switchContext
+    override val element: Node = conditionalContext
 
     override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
         render(renderingContext) {
@@ -17,7 +17,7 @@ class GoogleSwitchRenderer(private val switchContext: SwitchContext) : IndentedN
 
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String =
-        switchContext.default?.let {
+        conditionalContext.default?.let {
             render(renderingContext) {
                 add("next: $it")
             }
