@@ -1,7 +1,7 @@
 package costaber.com.github.omniflow
 
-import costaber.com.github.omniflow.cloud.provider.aws.deployer.AmazonCloudDeployer
-import costaber.com.github.omniflow.cloud.provider.aws.deployer.AmazonDeployContext
+import costaber.com.github.omniflow.cloud.provider.amazon.deployer.AmazonCloudDeployer
+import costaber.com.github.omniflow.cloud.provider.amazon.deployer.AmazonDeployContext
 import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleCloudDeployer
 import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleDeployContext
 import costaber.com.github.omniflow.dsl.*

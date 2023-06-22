@@ -1,6 +1,6 @@
 package costaber.com.github.omniflow.service
 
-import costaber.com.github.omniflow.cloud.provider.aws.service.AmazonStateMachineService
+import costaber.com.github.omniflow.cloud.provider.amazon.service.AmazonStateMachineService
 import costaber.com.github.omniflow.util.getResourceContent
 import org.junit.Ignore
 import org.junit.Test
@@ -9,7 +9,7 @@ internal class AmazonStateMachineServiceTest {
 
     @Test
     @Ignore
-    fun `aws deploy test happy path`() {
+    fun `amazon deploy test happy path`() {
         val stateMachineDefinition = this::class.java.classLoader
             .getResourceContent("workflows/AwsStateMachine.json")
         val asd = AmazonStateMachineService()
