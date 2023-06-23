@@ -1,8 +1,6 @@
 package costaber.com.github.omniflow;
 
-import costaber.com.github.omniflow.analyzer.BenchmarkAmazonDeployer;
 import costaber.com.github.omniflow.analyzer.BenchmarkAmazonRenderer;
-import costaber.com.github.omniflow.analyzer.BenchmarkGoogleDeployer;
 import costaber.com.github.omniflow.analyzer.BenchmarkGoogleRenderer;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
@@ -15,8 +13,6 @@ public class BenchmarkApplication {
         Options opt = new OptionsBuilder()
                 .include(BenchmarkGoogleRenderer.class.getSimpleName())
                 .include(BenchmarkAmazonRenderer.class.getSimpleName())
-                .include(BenchmarkGoogleDeployer.class.getSimpleName())
-                .include(BenchmarkAmazonDeployer.class.getSimpleName())
                 .build();
 
         new Runner(opt).run();
