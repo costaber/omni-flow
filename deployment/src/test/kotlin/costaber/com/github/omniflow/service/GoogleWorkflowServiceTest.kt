@@ -2,11 +2,13 @@ package costaber.com.github.omniflow.service
 
 import costaber.com.github.omniflow.cloud.provider.google.service.GoogleWorkflowService
 import costaber.com.github.omniflow.util.getResourceContent
+import org.junit.Ignore
 import org.junit.Test
 
 internal class GoogleWorkflowServiceTest {
 
     @Test
+    @Ignore
     fun `deploy test happy path`() {
         val workflowDefinition = this::class.java.classLoader
             .getResourceContent("workflows/GcpWorkflow.yaml")

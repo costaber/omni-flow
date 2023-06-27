@@ -2,10 +2,8 @@
 
 - Add the `.body` to the Google variables coming from the result
 - Fix bugs with aws deploy
-- Finish the TODOs
-- Check headers/Query string and more fields for amazon and google
+- Add some validation layer before rendering it
 - Do unit and integration tests
-- Create a script to generate N workflows
 
 # Future Work
 

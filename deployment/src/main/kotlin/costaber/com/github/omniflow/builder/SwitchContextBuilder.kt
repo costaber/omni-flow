@@ -1,7 +1,7 @@
 package costaber.com.github.omniflow.builder
 
 import costaber.com.github.omniflow.model.StepType
-import costaber.com.github.omniflow.model.SwitchContext
+import costaber.com.github.omniflow.model.ConditionalContext
 
 class SwitchContextBuilder : ContextBuilder {
 
@@ -14,7 +14,7 @@ class SwitchContextBuilder : ContextBuilder {
 
     override fun stepType() = StepType.CONDITIONAL
 
-    override fun build() = SwitchContext(
+    override fun build() = ConditionalContext(
         conditions = conditions.map { it.build() },
         default = default,
     )

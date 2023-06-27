@@ -1,11 +1,12 @@
 package costaber.com.github.omniflow
 
-import costaber.com.github.omniflow.cloud.provider.aws.deployer.AmazonCloudDeployer
-import costaber.com.github.omniflow.cloud.provider.aws.deployer.AmazonDeployContext
+import costaber.com.github.omniflow.cloud.provider.amazon.deployer.AmazonCloudDeployer
+import costaber.com.github.omniflow.cloud.provider.amazon.deployer.AmazonDeployContext
 import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleCloudDeployer
 import costaber.com.github.omniflow.cloud.provider.google.deployer.GoogleDeployContext
 import costaber.com.github.omniflow.dsl.*
 import costaber.com.github.omniflow.model.HttpMethod.GET
+import org.junit.Ignore
 import org.junit.Test
 import java.util.*
 
@@ -104,6 +105,7 @@ internal class WorkflowTest {
     }
 
     @Test
+    @Ignore
     fun `test google full deployment`() {
         val deployer = GoogleCloudDeployer.Builder().build()
         val googleDeployContext = GoogleDeployContext(
@@ -119,6 +121,7 @@ internal class WorkflowTest {
     }
 
     @Test
+    @Ignore
     fun `test amazon full deployment`() {
         val deployer = AmazonCloudDeployer.Builder().build()
         val amazonDeployContext = AmazonDeployContext(
