@@ -16,10 +16,10 @@ public class BenchmarkGoogleRenderer extends WorkflowBenchmark {
 
     @Setup
     public void setup() {
-        workflowWithIndependentSteps = WorkflowGenerator.withIndependentSteps(stepsNumber);
-        workflowUsingVariables = WorkflowGenerator.usingVariables(stepsNumber);
-        workflowWithBinaryConditions = WorkflowGenerator.withBinaryConditions(stepsNumber);
-        workflowWithMultipleDecisions = WorkflowGenerator.withMultipleDecisions(stepsNumber);
+        workflowWithIndependentSteps = WorkflowGenerator.withIndependentSteps(numberOfSteps);
+        workflowUsingVariables = WorkflowGenerator.usingVariables(numberOfSteps);
+        workflowWithBinaryConditions = WorkflowGenerator.withBinaryConditions(numberOfSteps);
+        workflowWithMultipleDecisions = WorkflowGenerator.withMultipleDecisions(numberOfSteps);
         traversor = new DepthFirstNodeVisitorTraversor();
         googleContextVisitor = new NodeContextVisitor(StrategyDeciderProvider.googleNodeRendererStrategyDecider());
         googleRenderingContext = new IndentedRenderingContext();

@@ -7,13 +7,13 @@ import java.util.concurrent.TimeUnit;
 
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-@Warmup(iterations = 1, time = 1)
-@Measurement(iterations = 1, time = 1)
+@Warmup(iterations = 5, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 100, timeUnit = TimeUnit.MILLISECONDS)
 @State(Scope.Benchmark)
 public abstract class WorkflowBenchmark {
 
-    @Param({"1", "2", "5", "10", "50", "100", "1000", "10000", "100000"})
-    int stepsNumber = 0;
+    @Param({"1", "5", "10", "50", "100", "500", "1000", "10000", "100000"})
+    int numberOfSteps = 0;
     protected Workflow workflowWithIndependentSteps;
     protected Workflow workflowUsingVariables;
     protected Workflow workflowWithBinaryConditions;
