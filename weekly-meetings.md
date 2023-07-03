@@ -23,6 +23,8 @@
 - [May 24, 2023](#may-24-2023)
 - [June 02, 2023](#june-02-2023)
 - [June 15, 2023](#june-15-2023)
+- [June 23, 2023](#june-23-2023)
+- [June 30, 2023](#june-30-2023)
 
 ---
 
@@ -185,3 +187,15 @@
   - Using Variables
   - With Conditional steps (binary and multiple decision)
 - Demonstration of some time measure results
+
+## June 23, 2023
+
+- Presentation of the benchmarks
+- Explanation what final benchmarks will be done
+
+## June 30, 2023
+
+- Talk about the future work
+  - Validation layer
+  - Unit and integration tests
+- Evaluate the next steps: Paper writing

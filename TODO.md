@@ -3,7 +3,6 @@
 - Add the `.body` to the Google variables coming from the result
 - Fix bugs with aws deploy
 - Add some validation layer before rendering it
-- Do unit and integration tests
 
 # Future Work
 
