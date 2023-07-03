@@ -13,7 +13,7 @@ import costaber.com.github.omniflow.resource.util.render
 class AmazonTaskRenderer(
     private val callContext: CallContext,
     private val amazonTermResolver: AmazonTermResolver,
-) : IndentedNodeRenderer {
+) : IndentedNodeRenderer() {
 
     private val objectMapper = ObjectMapper()
 

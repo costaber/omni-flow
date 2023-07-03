@@ -8,7 +8,7 @@ import costaber.com.github.omniflow.resource.util.render
 
 class GoogleLessThanExpressionRenderer(
     private val lessThanExpression: LessThanExpression<*>
-) : IndentedNodeRenderer {
+) : IndentedNodeRenderer() {
 
     override val element: Node = lessThanExpression
 

@@ -11,7 +11,7 @@ import costaber.com.github.omniflow.resource.util.render
 
 class AmazonNotEqualToExpressionRenderer(
     private val notEqualToExpression: NotEqualToExpression<*>,
-) : IndentedNodeRenderer {
+) : IndentedNodeRenderer() {
 
     override val element: Node = notEqualToExpression
 

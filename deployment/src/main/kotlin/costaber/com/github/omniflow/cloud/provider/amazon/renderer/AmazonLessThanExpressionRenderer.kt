@@ -11,7 +11,7 @@ import costaber.com.github.omniflow.resource.util.render
 
 class AmazonLessThanExpressionRenderer(
     private val lessThanExpression: LessThanExpression<*>
-) : IndentedNodeRenderer {
+) : IndentedNodeRenderer() {
 
     override val element: Node = lessThanExpression
 

@@ -8,7 +8,7 @@ import costaber.com.github.omniflow.resource.util.render
 
 class GoogleVariableResolver(
     private val variableInitialization: VariableInitialization<*>
-) : IndentedNodeRenderer {
+) : IndentedNodeRenderer() {
 
     override val element: Node = variableInitialization
 

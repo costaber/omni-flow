@@ -8,7 +8,7 @@ import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
 import costaber.com.github.omniflow.resource.util.render
 
-class AmazonConditionRenderer(private val condition: Condition) : IndentedNodeRenderer {
+class AmazonConditionRenderer(private val condition: Condition) : IndentedNodeRenderer() {
 
     override val element: Node = condition
 

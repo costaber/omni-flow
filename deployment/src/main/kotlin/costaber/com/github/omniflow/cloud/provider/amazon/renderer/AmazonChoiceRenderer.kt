@@ -10,7 +10,7 @@ import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
 import costaber.com.github.omniflow.resource.util.render
 
-class AmazonChoiceRenderer(private val conditionalContext: ConditionalContext) : IndentedNodeRenderer {
+class AmazonChoiceRenderer(private val conditionalContext: ConditionalContext) : IndentedNodeRenderer() {
 
     override val element: Node = conditionalContext
 

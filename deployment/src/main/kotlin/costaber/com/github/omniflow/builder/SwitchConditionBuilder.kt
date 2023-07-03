@@ -45,5 +45,4 @@ class SwitchConditionBuilder : Builder<Condition> {
         left = this,
         right = rightTerm,
     )
-
 }

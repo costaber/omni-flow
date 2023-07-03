@@ -6,7 +6,7 @@ import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
 import costaber.com.github.omniflow.resource.util.render
 
-class GoogleWorkflowRenderer(private val workflow: Workflow) : IndentedNodeRenderer {
+class GoogleWorkflowRenderer(private val workflow: Workflow) : IndentedNodeRenderer() {
 
     override val element: Node = workflow
 

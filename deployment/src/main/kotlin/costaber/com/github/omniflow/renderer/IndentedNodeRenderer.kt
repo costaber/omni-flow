@@ -1,6 +1,6 @@
 package costaber.com.github.omniflow.renderer
 
-interface IndentedNodeRenderer : NodeRenderer<String> {
+abstract class IndentedNodeRenderer : NodeRenderer<String> {
 
     override fun beginRender(renderingContext: RenderingContext): String {
         val indentedRenderingContext = renderingContext as IndentedRenderingContext
@@ -15,8 +15,7 @@ interface IndentedNodeRenderer : NodeRenderer<String> {
         return internalEndRender(indentedRenderingContext)
     }
 
-    fun internalBeginRender(renderingContext: IndentedRenderingContext): String
+    protected abstract fun internalBeginRender(renderingContext: IndentedRenderingContext): String
 
-    fun internalEndRender(renderingContext: IndentedRenderingContext): String
-
+    protected abstract fun internalEndRender(renderingContext: IndentedRenderingContext): String
 }
