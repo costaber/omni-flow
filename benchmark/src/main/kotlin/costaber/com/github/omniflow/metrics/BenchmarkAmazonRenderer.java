@@ -1,4 +1,4 @@
-package costaber.com.github.omniflow.analyzer;
+package costaber.com.github.omniflow.metrics;
 
 import costaber.com.github.omniflow.cloud.provider.amazon.renderer.AmazonRenderingContext;
 import costaber.com.github.omniflow.generator.WorkflowGenerator;

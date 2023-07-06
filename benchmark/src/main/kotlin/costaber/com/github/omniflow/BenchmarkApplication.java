@@ -1,7 +1,7 @@
 package costaber.com.github.omniflow;
 
-import costaber.com.github.omniflow.analyzer.BenchmarkAmazonRenderer;
-import costaber.com.github.omniflow.analyzer.BenchmarkGoogleRenderer;
+import costaber.com.github.omniflow.metrics.BenchmarkAmazonRenderer;
+import costaber.com.github.omniflow.metrics.BenchmarkGoogleRenderer;
 import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;

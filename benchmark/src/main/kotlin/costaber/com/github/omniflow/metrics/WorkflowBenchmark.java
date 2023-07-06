@@ -1,4 +1,4 @@
-package costaber.com.github.omniflow.analyzer;
+package costaber.com.github.omniflow.metrics;
 
 import costaber.com.github.omniflow.model.Workflow;
 import org.openjdk.jmh.annotations.*;
