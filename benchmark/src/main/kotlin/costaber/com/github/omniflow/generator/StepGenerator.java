@@ -10,7 +10,7 @@ public class StepGenerator {
     public static Step independent(String stepName, int index) {
         return new Step(
                 stepName + index,
-                "Call Step Example",
+                "Independent call step example",
                 StepType.CALL,
                 StepContextGenerator.independentCall()
         );
@@ -19,7 +19,7 @@ public class StepGenerator {
     public static Step usingVariables(String stepName, int index) {
         return new Step(
                 stepName + index,
-                "Call Step Example",
+                "Call step using variables example",
                 StepType.CALL,
                 StepContextGenerator.callUsingVariables()
         );
@@ -28,7 +28,7 @@ public class StepGenerator {
     public static Step assign(String stepName, int index) {
         return new Step(
                 stepName + index,
-                "Call Step Example",
+                "Assign step example",
                 StepType.ASSIGN,
                 StepContextGenerator.hardcodedVariables()
         );
@@ -37,7 +37,7 @@ public class StepGenerator {
     public static Step binaryConditional(String stepName, int index) {
         return new Step(
                 stepName + index,
-                "Call Step Example",
+                "Binary condition step example",
                 StepType.CONDITIONAL,
                 StepContextGenerator.ifElseSwitch(index)
         );
@@ -46,7 +46,7 @@ public class StepGenerator {
     public static Step multipleDecision(String stepName, int index) {
         return new Step(
                 stepName + index,
-                "Call Step Example",
+                "Multiple decision step example",
                 StepType.CONDITIONAL,
                 StepContextGenerator.multipleSwitch(index)
         );
