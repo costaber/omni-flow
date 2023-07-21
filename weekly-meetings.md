@@ -25,6 +25,7 @@
 - [June 15, 2023](#june-15-2023)
 - [June 23, 2023](#june-23-2023)
 - [June 30, 2023](#june-30-2023)
+- [July 21, 2023](#july-21-2023)
 
 ---
 
@@ -199,3 +200,11 @@
   - Validation layer
   - Unit and integration tests
 - Evaluate the next steps: Paper writing
+
+## July 21, 2023
+
+- Report Structure
+  - Proposed Solution
+  - Implementation
+- How the metrics results should be approached
+  - Graphs
