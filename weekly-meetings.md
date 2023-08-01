@@ -26,6 +26,7 @@
 - [June 23, 2023](#june-23-2023)
 - [June 30, 2023](#june-30-2023)
 - [July 21, 2023](#july-21-2023)
+- [July 28, 2023](#july-28-2023)
 
 ---
 
@@ -41,56 +42,57 @@
 - Talk about the next steps
 - Paper structure that should be followed
 - Overview and billing of FaaS providers:
-  - [Google Cloud Platform](https://cloud.google.com/functions)
-  - [AWS](https://aws.amazon.com/pt/lambda/)
-  - [Azure](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview)
+    - [Google Cloud Platform](https://cloud.google.com/functions)
+    - [AWS](https://aws.amazon.com/pt/lambda/)
+    - [Azure](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview)
 
 ## November 03, 2022
 
 - Talk about the work done:
-  - Demo of Cloud Functions of GCP
-  - Paper Status
+    - Demo of Cloud Functions of GCP
+    - Paper Status
 - Next Steps:
-  - Create FaaS with Azure Provider
-  - Explore Function orchestrators
+    - Create FaaS with Azure Provider
+    - Explore Function orchestrators
 
 ## November 21, 2022
 
 - Azure Functions
 - Orchestrators in Azure
-  - The problem encountered
-  - The API
-  - Use cases
+    - The problem encountered
+    - The API
+    - Use cases
 - Next Steps:
-  - Complete the [sample](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sequence?tabs=csharp)
-  - Create a sample of orchestrators in GCP
-  - Start document the function and orchestrators in the different provider (ideally also should be done in AWS)
+    - Complete
+      the [sample](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-sequence?tabs=csharp)
+    - Create a sample of orchestrators in GCP
+    - Start document the function and orchestrators in the different provider (ideally also should be done in AWS)
 
 ## December 06, 2022
 
 - Cloud Functions and his orchestration in Azure and GCP
 - Some issues doing the AWS State machine
 - Next Steps:
-  - Creation of a Domain Specific Language (DSL)
-  - Transpile my DSL for each specific cloud provider DSL
+    - Creation of a Domain Specific Language (DSL)
+    - Transpile my DSL for each specific cloud provider DSL
 
 ## January 04, 2023
 
 - Discussed some aspects about the DSL
-  - Next Steps
-  - Programming language
-  - Translation of the DSL to the providers language
-  - How providers do it
+    - Next Steps
+    - Programming language
+    - Translation of the DSL to the providers language
+    - How providers do it
 - Next Steps:
-  - Creation of initial diagram
-  - Creation of the model of my language
+    - Creation of initial diagram
+    - Creation of the model of my language
 
 ## January 09, 2023
 
 - Talking about the model and diagrams
 - Checking for some related work:
-  - [FaaSFlow](https://github.com/s8sg/faas-flow)
-  - [ASPLOS'22 Session 7](https://www.youtube.com/watch?v=xCMx4J6Ur_c)
+    - [FaaSFlow](https://github.com/s8sg/faas-flow)
+    - [ASPLOS'22 Session 7](https://www.youtube.com/watch?v=xCMx4J6Ur_c)
 
 ## January 18, 2023
 
@@ -113,21 +115,21 @@
 ## February 20, 2023
 
 - Complete paper introduction:
-  - Architecture chapter
-  - Workflow examples
+    - Architecture chapter
+    - Workflow examples
 
 ## February 27, 2023
 
 - Update the paper structure
-  - Move patterns to chapter 2
-  - Create Chapter 4 with a timeline
-  - Make listing smaller
+    - Move patterns to chapter 2
+    - Create Chapter 4 with a timeline
+    - Make listing smaller
 - Introduction:
-  - Motivation for the work
-  - Problem to solve
-  - What was done in this area
-  - Proposal for a solution
-  - The structure of the document
+    - Motivation for the work
+    - Problem to solve
+    - What was done in this area
+    - Proposal for a solution
+    - The structure of the document
 
 ## March 06, 2023
 
@@ -142,7 +144,7 @@
 ## March 22, 2023
 
 - Demonstration of using the GCP and AWS client libraries
-- Alignment for the next steps and iteration for software 
+- Alignment for the next steps and iteration for software
 - Last phase would be the creation of a GUI for the lib
 
 ## April 19, 2023
@@ -168,15 +170,15 @@
 - Demonstration of variables usage
 - Alignment for the next project steps
 - Benchmarking the project
-  - Execution and Deployment time for complex workflows
-  - CPU and Memory allocation
-  - The time spent for rendering the workflow (exponential or linear)
+    - Execution and Deployment time for complex workflows
+    - CPU and Memory allocation
+    - The time spent for rendering the workflow (exponential or linear)
 
 ## June 02, 2023
 
 - Alignment about the project state
-  - Variables
-  - Conditional step
+    - Variables
+    - Conditional step
 - Evaluate the next steps: Benchmarking
 
 ## June 15, 2023
@@ -184,9 +186,9 @@
 - Show the example graphics for metrics
 - Demonstration of the Conditional and Variable Steps
 - Possible workflow relations to measure the time spent and memory usage:
-  - Independent steps
-  - Using Variables
-  - With Conditional steps (binary and multiple decision)
+    - Independent steps
+    - Using Variables
+    - With Conditional steps (binary and multiple decision)
 - Demonstration of some time measure results
 
 ## June 23, 2023
@@ -197,14 +199,21 @@
 ## June 30, 2023
 
 - Talk about the future work
-  - Validation layer
-  - Unit and integration tests
+    - Validation layer
+    - Unit and integration tests
 - Evaluate the next steps: Paper writing
 
 ## July 21, 2023
 
 - Report Structure
-  - Proposed Solution
-  - Implementation
+    - Proposed Solution
+    - Implementation
 - How the metrics results should be approached
-  - Graphs
+    - Graphs
+
+## July 28, 2023
+
+- Benchmarks enhancement
+    - Find official workflow examples for each cloud providers, ideally with use-cases supported by `omni-flow`
+    - Compare the example workflow with the generated by renderers (file dimension, ...)
+    - Not required to benchmark the framework in multiple machines, with different specs
