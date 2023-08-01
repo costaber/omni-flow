@@ -8,7 +8,8 @@ class IndentedRenderingContextTest {
 
     @Test
     fun `getString has expected results`() {
-        val indentedRenderingContext = IndentedRenderingContext()
+        // TODO : improve maybe
+        val indentedRenderingContext = IndentedRenderingContext(termContext = object : TermContext {})
 
         val expectedResult = "Line1!\nLine2!\nLine3!\n    Line4!\n    Line5!"
 

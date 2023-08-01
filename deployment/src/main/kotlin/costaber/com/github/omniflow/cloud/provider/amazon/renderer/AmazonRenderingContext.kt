@@ -4,8 +4,9 @@ import costaber.com.github.omniflow.model.Condition
 import costaber.com.github.omniflow.model.Step
 import costaber.com.github.omniflow.model.VariableInitialization
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
+import costaber.com.github.omniflow.renderer.TermContext
 
-class AmazonRenderingContext : IndentedRenderingContext() {
+class AmazonRenderingContext : IndentedRenderingContext(termContext = object : TermContext {}) {
 
     private lateinit var stepsNames: MutableList<String>
     private var lastVariable: VariableInitialization<*>? = null

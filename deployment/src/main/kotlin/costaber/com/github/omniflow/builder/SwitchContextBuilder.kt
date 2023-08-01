@@ -1,7 +1,7 @@
 package costaber.com.github.omniflow.builder
 
-import costaber.com.github.omniflow.model.StepType
 import costaber.com.github.omniflow.model.ConditionalContext
+import costaber.com.github.omniflow.model.StepType
 
 class SwitchContextBuilder : ContextBuilder {
 

@@ -76,7 +76,9 @@ internal object DefaultPredicateDataProvider {
         ),
         Arguments.of(
             Workflow::class,
-            object : Node { override fun childNodes(): List<Node> = emptyList() },
+            object : Node {
+                override fun childNodes(): List<Node> = emptyList()
+            },
             false,
         )
     )

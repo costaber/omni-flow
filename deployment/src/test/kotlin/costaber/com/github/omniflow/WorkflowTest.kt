@@ -40,17 +40,6 @@ internal class WorkflowTest {
                             "number2" to variable("b"),
                             "op" to value("add")
                         )
-                        header(
-                            "test" to value("t"),
-                            "example" to variable("example"),
-                        )
-                        body(
-                            object {
-                                val firstName = "John"
-                                val lastName = "Week"
-                                val nif = "12312312312"
-                            }
-                        )
                         result("sumResult")
                     }
                 )
@@ -62,11 +51,11 @@ internal class WorkflowTest {
                     switch {
                         conditions(
                             condition {
-                                match(variable("c") equalTo value("0"))
-                                jump("DivWithC")
+                                match(variable("c") equalTo value(0))
+                                jump("Assign1ToC")
                             },
                             condition {
-                                match(variable("number") greaterThan value(123))
+                                match(variable("c") greaterThan value(0))
                                 jump("DivWithC")
                             }
                         )
@@ -92,7 +81,7 @@ internal class WorkflowTest {
                         host("https://us-central1-workflow-test-380423.cloudfunctions.net")
                         path("/calculator")
                         query(
-                            "number1" to variable("sumResult"),
+                            "number1" to variable("sumResult.result"),
                             "number2" to variable("c"),
                             "op" to value("div")
                         )

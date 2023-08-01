@@ -20,14 +20,15 @@ class GoogleCallRenderer(
 
     override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
         render(renderingContext) {
+            val googleTermContext = termContext as GoogleTermContext
             val httpMethod = callContext.method.name.lowercase()
             addLine("call: http.${httpMethod}")
             addLine("args:")
             tab {
                 add("url: ${callContext.host + callContext.path}")
             }
-            renderMap("headers", callContext.header)
-            renderMap("query", callContext.query)
+            renderMap("headers", callContext.header, googleTermContext)
+            renderMap("query", callContext.query, googleTermContext)
             renderBody()
             renderAuth()
             renderTimeout()
@@ -35,12 +36,15 @@ class GoogleCallRenderer(
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String =
         render(renderingContext) {
+            val googleTermContext = termContext as GoogleTermContext
+            googleTermContext.addResultVariable(callContext.result)
             add("result: ${callContext.result}")
         }
 
     private fun IndentedRenderingContext.renderMap(
         mapName: String,
         mapToRender: Map<String, Term<*>>,
+        googleTermContext: GoogleTermContext,
     ) {
         if (mapToRender.isEmpty())
             return
@@ -50,7 +54,7 @@ class GoogleCallRenderer(
             add("$mapName:")
             mapToRender.forEach {
                 addEmptyLine()
-                val value = googleTermResolver.resolve(it.value)
+                val value = googleTermResolver.resolve(it.value, googleTermContext)
                 tab {
                     add("${it.key}: $value")
                 }
@@ -64,12 +68,10 @@ class GoogleCallRenderer(
                 .replace("---", "\n")
                 .split("\n")
                 .filterNot(String::isEmpty)
-            addEmptyLine()
-            add("body:")
             tab {
-                if (yamlString.size == 1) {
-                    append(yamlString.first())
-                } else {
+                addEmptyLine()
+                add("body:")
+                tab {
                     yamlString.forEach { line ->
                         addEmptyLine()
                         add(line)

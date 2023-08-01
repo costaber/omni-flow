@@ -5,6 +5,7 @@ import costaber.com.github.omniflow.resource.TAB
 open class IndentedRenderingContext(
     private var indentationLevel: Int = 0,
     private val stringBuilder: StringBuilder = StringBuilder(),
+    val termContext: TermContext,
 ) : RenderingContext {
 
     private fun getIndentationString(): String =

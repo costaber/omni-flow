@@ -1,5 +1,6 @@
 package costaber.com.github.omniflow.metrics;
 
+import costaber.com.github.omniflow.cloud.provider.google.renderer.GoogleTermContext;
 import costaber.com.github.omniflow.generator.WorkflowGenerator;
 import costaber.com.github.omniflow.provider.StrategyDeciderProvider;
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext;
@@ -22,7 +23,9 @@ public class BenchmarkGoogleRenderer extends WorkflowBenchmark {
         workflowWithMultipleDecisions = WorkflowGenerator.withMultipleDecisions(numberOfSteps);
         traversor = new DepthFirstNodeVisitorTraversor();
         googleContextVisitor = new NodeContextVisitor(StrategyDeciderProvider.googleNodeRendererStrategyDecider());
-        googleRenderingContext = new IndentedRenderingContext();
+        googleRenderingContext = new IndentedRenderingContext(
+                0, new StringBuilder(), new GoogleTermContext()
+        );
     }
 
     @Benchmark
