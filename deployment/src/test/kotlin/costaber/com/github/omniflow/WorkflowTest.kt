@@ -33,8 +33,8 @@ internal class WorkflowTest {
                 context(
                     call {
                         method(GET)
-                        host("https://us-central1-workflow-test-380423.cloudfunctions.net")
-                        path("/calculator")
+                        host("r1ro8xa7y8.execute-api.us-east-1.amazonaws.com")
+                        path("/default/calculator")
                         query(
                             "number1" to variable("a"),
                             "number2" to variable("b"),
@@ -78,8 +78,8 @@ internal class WorkflowTest {
                 context(
                     call {
                         method(GET)
-                        host("https://us-central1-workflow-test-380423.cloudfunctions.net")
-                        path("/calculator")
+                        host("r1ro8xa7y8.execute-api.us-east-1.amazonaws.com")
+                        path("/default/calculator")
                         query(
                             "number1" to variable("sumResult.result"),
                             "number2" to variable("c"),

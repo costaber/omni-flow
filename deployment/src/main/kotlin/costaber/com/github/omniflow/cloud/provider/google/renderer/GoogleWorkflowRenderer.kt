@@ -25,7 +25,7 @@ class GoogleWorkflowRenderer(
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String =
         render(renderingContext) {
             tab {
-                addLine("- returnOutput:")
+                addLine("- return_output:")
                 tab {
                     val googleTermContext = termContext as GoogleTermContext
                     val variable = googleTermResolver.resolve(Variable(workflow.result), googleTermContext)

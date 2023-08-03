@@ -12,7 +12,7 @@ public class WorkflowGenerator {
 
     private static final String WORKFLOW_NAME = "testWorkflow";
     private static final String WORKFLOW_DESCRIPTION = "Workflow Example";
-    private static final String WORKFLOW_INPUT = "input";
+    private static final String WORKFLOW_INPUT = "args";
     private static final String WORKFLOW_RESULT = "result";
 
     /**
@@ -117,6 +117,34 @@ public class WorkflowGenerator {
                 WORKFLOW_INPUT,
                 steps,
                 WORKFLOW_RESULT
+        );
+    }
+
+    public static Workflow textTranslator() {
+        List<Step> steps = new ArrayList<>();
+        steps.add(StepGenerator.newTranslation());
+        steps.add(StepGenerator.assignTranslation());
+        return new Workflow(
+                WORKFLOW_NAME,
+                WORKFLOW_DESCRIPTION,
+                WORKFLOW_INPUT,
+                steps,
+                "translation_result"
+        );
+    }
+
+    public static Workflow saveAndGetPetFromStore() {
+        List<Step> steps = new ArrayList<>();
+        steps.add(StepGenerator.addPetToStore());
+        steps.add(StepGenerator.checkSuccess());
+        steps.add(StepGenerator.getPetsFromStore());
+        steps.add(StepGenerator.notifyWatchers());
+        return new Workflow(
+                WORKFLOW_NAME,
+                "Calling APIGW HTTP Endpoint",
+                WORKFLOW_INPUT,
+                steps,
+                "NotificationStatus"
         );
     }
 }

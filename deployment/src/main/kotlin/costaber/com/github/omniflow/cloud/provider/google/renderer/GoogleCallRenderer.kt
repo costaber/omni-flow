@@ -29,8 +29,8 @@ class GoogleCallRenderer(
             }
             renderMap("headers", callContext.header, googleTermContext)
             renderMap("query", callContext.query, googleTermContext)
-            renderBody()
             renderAuth()
+            renderBody()
             renderTimeout()
         }
 
@@ -87,10 +87,19 @@ class GoogleCallRenderer(
             tab {
                 addLine("auth:")
                 tab {
-                    addLine("type: ${it.type}")
-                    addLine("scope: ${it.scope}")
-                    addLine("scopes: ${it.scopes}")
-                    add("audience: ${it.audience}")
+                    add("type: ${it.type}")
+                    it.scope?.let { scope ->
+                        addEmptyLine()
+                        add("scope: $scope")
+                    }
+                    it.scopes?.let { scopes ->
+                        addEmptyLine()
+                        add("scopes: $scopes")
+                    }
+                    it.audience?.let { audience ->
+                        addEmptyLine()
+                        add("audience: $audience")
+                    }
                 }
             }
         }

@@ -21,7 +21,7 @@ public class StepContextGenerator {
                 "example.com",
                 "/example",
                 null,
-                new Body("John", "Johnson"),
+                new PersonNameBody("John", "Johnson"),
                 headers,
                 queries,
                 5L,
@@ -38,7 +38,7 @@ public class StepContextGenerator {
                 "example.com",
                 "/example",
                 null,
-                new Body("John", "Johnson"),
+                new PersonNameBody("John", "Johnson"),
                 new HashMap<>(),
                 queries,
                 5L,
@@ -86,12 +86,88 @@ public class StepContextGenerator {
         return new ConditionalContext(conditions, STEP_NAME + (index + 4));
     }
 
-    static class Body {
+    public static StepContext callTranslationApi() {
+        return new CallContext(
+                HttpMethod.POST,
+                "https://translation.googleapis.com",
+                "/v3/projects/19823573:translateText",
+                new Authentication("OAuth2", null, null, null),
+                new TranslationApiBody("Hello, my name is John!", "en-US", "ru-RU"),
+                new HashMap<>(),
+                new HashMap<>(),
+                null,
+                "translate_response"
+        );
+    }
+
+    public static StepContext assignTranslationResult() {
+        List<VariableInitialization<?>> variables = new ArrayList<>();
+        Variable variableAssigned = new Variable("translation_result");
+        Variable variableNewValue = new Variable("translate_response.translations[0].translatedText");
+        VariableInitialization<String> translationResultVariable =
+                new VariableInitialization<>(variableAssigned, variableNewValue);
+        variables.add(translationResultVariable);
+        return new AssignContext(variables);
+    }
+
+    public static StepContext addPetToStoreCall() {
+        return new CallContext(
+                HttpMethod.POST,
+                "<POST_PETS_API_ENDPOINT>",
+                "pets",
+                new Authentication("IAM_ROLE", null, null, null),
+                "$.NewPet",
+                new HashMap<>(),
+                new HashMap<>(),
+                null,
+                "ResponseBody"
+        );
+    }
+
+    public static StepContext responseStatusCodeIs200() {
+        List<Condition> conditions = new ArrayList<>();
+        EqualToExpression<Integer> is200 = new EqualToExpression<>(
+                new Variable("StatusCode"),
+                new Value<>(200)
+        );
+        conditions.add(new Condition(is200, "Notify Success"));
+        return new ConditionalContext(conditions, "Notify Result");
+    }
+
+    public static StepContext getPetsCall() {
+        return new CallContext(
+                HttpMethod.GET,
+                "<GET_PETS_API_ENDPOINT>",
+                "pets",
+                new Authentication("IAM_ROLE", null, null, null),
+                null,
+                new HashMap<>(),
+                new HashMap<>(),
+                null,
+                "Pets"
+        );
+    }
+
+    public static StepContext callNotifyApi() {
+        return new CallContext(
+                HttpMethod.GET,
+                "<API_ENDPOINT>",
+                "/",
+                new Authentication("IAM_ROLE", null, null, null),
+                null,
+                new HashMap<>(),
+                new HashMap<>(),
+                null,
+                "NotificationStatus"
+        );
+    }
+
+    static class PersonNameBody {
 
         private String firstName;
         private String lastName;
 
-        public Body(String firstName, String lastName) {
+        public PersonNameBody(String firstName, String lastName) {
             this.firstName = firstName;
             this.lastName = lastName;
         }
@@ -110,6 +186,43 @@ public class StepContextGenerator {
 
         public void setLastName(String lastName) {
             this.lastName = lastName;
+        }
+    }
+
+    static class TranslationApiBody {
+
+        private String contents;
+        private String sourceLanguageCode;
+        private String targetLanguageCode;
+
+        public TranslationApiBody(String contents, String sourceLanguageCode, String targetLanguageCode) {
+            this.contents = contents;
+            this.sourceLanguageCode = sourceLanguageCode;
+            this.targetLanguageCode = targetLanguageCode;
+        }
+
+        public String getContents() {
+            return contents;
+        }
+
+        public void setContents(String contents) {
+            this.contents = contents;
+        }
+
+        public String getSourceLanguageCode() {
+            return sourceLanguageCode;
+        }
+
+        public void setSourceLanguageCode(String sourceLanguageCode) {
+            this.sourceLanguageCode = sourceLanguageCode;
+        }
+
+        public String getTargetLanguageCode() {
+            return targetLanguageCode;
+        }
+
+        public void setTargetLanguageCode(String targetLanguageCode) {
+            this.targetLanguageCode = targetLanguageCode;
         }
     }
 }

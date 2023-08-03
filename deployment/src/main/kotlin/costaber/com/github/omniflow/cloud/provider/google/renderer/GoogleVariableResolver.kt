@@ -7,14 +7,16 @@ import costaber.com.github.omniflow.renderer.IndentedRenderingContext
 import costaber.com.github.omniflow.resource.util.render
 
 class GoogleVariableResolver(
-    private val variableInitialization: VariableInitialization<*>
+    private val variableInitialization: VariableInitialization<*>,
+    private val googleTermResolver: GoogleTermResolver,
 ) : IndentedNodeRenderer() {
 
     override val element: Node = variableInitialization
 
     override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
         render(renderingContext) {
-            add("- ${variableInitialization.variable.name}: ${variableInitialization.term.term()}")
+            val term = googleTermResolver.resolve(variableInitialization.term, termContext)
+            add("- ${variableInitialization.variable.name}: $term")
         }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext) = "" // nothing
