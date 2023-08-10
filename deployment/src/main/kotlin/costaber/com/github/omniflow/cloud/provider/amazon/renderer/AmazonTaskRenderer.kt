@@ -89,26 +89,33 @@ class AmazonTaskRenderer(
 
     private fun IndentedRenderingContext.renderBody() {
         callContext.body?.let {
-            val lines = objectMapper.writeValueAsString(it)
-                .split("{", "}", ",")
-                .filterNot(String::isEmpty)
-                .toMutableList()
-
             append(",")
             addEmptyLine()
             add(AMAZON_REQUEST_BODY)
             append("{")
             addEmptyLine()
             tab {
-                lines.removeFirstOrNull()?.let { line -> add(line) }
-                lines.forEach { line ->
-                    append(",")
-                    addEmptyLine()
-                    add(line)
-                }
-                addEmptyLine()
+                processBody(it)
             }
             add("}")
+        }
+    }
+
+    private fun IndentedRenderingContext.processBody(body: Any) {
+        if (body is String) {
+            addLine("$AMAZON_REQUEST_PAYLOAD \"$body\"")
+        } else {
+            val lines = objectMapper.writeValueAsString(body)
+                .split("{", "}", ",")
+                .filterNot(String::isEmpty)
+                .toMutableList()
+            lines.removeFirstOrNull()?.let { line -> add(line) }
+            lines.forEach { line ->
+                append(",")
+                addEmptyLine()
+                add(line)
+            }
+            addEmptyLine()
         }
     }
 

@@ -113,8 +113,8 @@ public class StepContextGenerator {
     public static StepContext addPetToStoreCall() {
         return new CallContext(
                 HttpMethod.POST,
-                "<POST_PETS_API_ENDPOINT>",
-                "pets",
+                "petstore.execute-api.us-east-1.amazonaws.com",
+                "/pets",
                 new Authentication("IAM_ROLE", null, null, null),
                 "$.NewPet",
                 new HashMap<>(),
@@ -130,15 +130,15 @@ public class StepContextGenerator {
                 new Variable("StatusCode"),
                 new Value<>(200)
         );
-        conditions.add(new Condition(is200, "Notify Success"));
+        conditions.add(new Condition(is200, "Retrieve Pet Store Data"));
         return new ConditionalContext(conditions, "Notify Result");
     }
 
     public static StepContext getPetsCall() {
         return new CallContext(
                 HttpMethod.GET,
-                "<GET_PETS_API_ENDPOINT>",
-                "pets",
+                "petstore.execute-api.us-east-1.amazonaws.com",
+                "/pets",
                 new Authentication("IAM_ROLE", null, null, null),
                 null,
                 new HashMap<>(),
@@ -150,11 +150,11 @@ public class StepContextGenerator {
 
     public static StepContext callNotifyApi() {
         return new CallContext(
-                HttpMethod.GET,
-                "<API_ENDPOINT>",
+                HttpMethod.POST,
+                "notifyApp.execute-api.us-east-1.amazonaws.com",
                 "/",
                 new Authentication("IAM_ROLE", null, null, null),
-                null,
+                "Add pet to store status code - $.StatusCode",
                 new HashMap<>(),
                 new HashMap<>(),
                 null,

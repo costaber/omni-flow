@@ -23,9 +23,7 @@ public class BenchmarkGoogleRenderer extends BenchmarkWorkflowRenderer {
         workflowWithMultipleDecisions = WorkflowGenerator.withMultipleDecisions(numberOfSteps);
         traversor = new DepthFirstNodeVisitorTraversor();
         googleContextVisitor = new NodeContextVisitor(StrategyDeciderProvider.googleNodeRendererStrategyDecider());
-        googleRenderingContext = new IndentedRenderingContext(
-                0, new StringBuilder(), new GoogleTermContext()
-        );
+        googleRenderingContext = new IndentedRenderingContext(0, new StringBuilder(), new GoogleTermContext());
     }
 
     @Benchmark

@@ -1,7 +1,5 @@
 package costaber.com.github.omniflow;
 
-import costaber.com.github.omniflow.metrics.BenchmarkAmazonRenderer;
-import costaber.com.github.omniflow.metrics.BenchmarkGoogleRenderer;
 import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
@@ -21,9 +19,6 @@ public class BenchmarkApplication {
         }
 
         Options opt = new OptionsBuilder()
-                .include(BenchmarkGoogleRenderer.class.getSimpleName())
-                .include(BenchmarkAmazonRenderer.class.getSimpleName())
-                .forks(1)
                 .shouldDoGC(true)
                 .resultFormat(ResultFormatType.CSV)
                 .result(fileName)

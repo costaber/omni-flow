@@ -6,47 +6,60 @@
       "Type": "Task",
       "Resource": "arn:aws:states:::apigateway:invoke",
       "Parameters": {
-        "ApiEndpoint": "<POST_PETS_API_ENDPOINT>",
+        "ApiEndpoint": "petstore.execute-api.us-east-1.amazonaws.com",
         "Method": "POST",
-        "Stage": "default",
-        "Path": "pets",
-        "RequestBody.$": "$.NewPet",
+        "Path": "/pets",
+        "RequestBody": {
+          "Payload": "$.NewPet"
+        },
         "AuthType": "IAM_ROLE"
       },
+      "Next": "Pet was Added Successfully?",
       "ResultSelector": {
         "ResponseBody.$": "$.ResponseBody"
-      },
-      "Next": "Pet was Added Successfully?"
+      }
     },
     "Pet was Added Successfully?": {
       "Type": "Choice",
       "Choices": [
         {
-          "Variable": "$.ResponseBody.errors",
-          "IsPresent": true,
-          "Next": "Failure"
+          "Variable": "$.StatusCode",
+          "NumericEquals": 200,
+          "Next": "Retrieve Pet Store Data"
         }
       ],
-      "Default": "Retrieve Pet Store Data"
-    },
-    "Failure": {
-      "Type": "Fail"
+      "Default": "Notify Result"
     },
     "Retrieve Pet Store Data": {
       "Type": "Task",
       "Resource": "arn:aws:states:::apigateway:invoke",
       "Parameters": {
-        "ApiEndpoint": "<GET_PETS_API_ENDPOINT>",
+        "ApiEndpoint": "petstore.execute-api.us-east-1.amazonaws.com",
         "Method": "GET",
-        "Stage": "default",
-        "Path": "pets",
+        "Path": "/pets",
         "AuthType": "IAM_ROLE"
       },
+      "Next": "Notify Result",
       "ResultSelector": {
         "Pets.$": "$.ResponseBody"
+      }
+    },
+    "Notify Result": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::apigateway:invoke",
+      "Parameters": {
+        "ApiEndpoint": "notifyApp.execute-api.us-east-1.amazonaws.com",
+        "Method": "POST",
+        "Path": "/",
+        "RequestBody": {
+          "Payload": "Add pet to store status code - $.StatusCode"
+        },
+        "AuthType": "IAM_ROLE"
       },
-      "ResultPath": "$.ExistingPets",
-      "End": true
+      "End": true,
+      "ResultSelector": {
+        "Notification.$": "$.NotificationStatus"
+      }
     }
   }
 }
