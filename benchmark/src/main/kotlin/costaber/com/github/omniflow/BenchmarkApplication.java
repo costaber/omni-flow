@@ -13,15 +13,15 @@ public class BenchmarkApplication {
             throw new IllegalArgumentException("Argument corresponding to the file path is missing");
         }
 
-        String fileName = args[0];
-        if (!fileName.endsWith(".csv")) {
-            throw new IllegalArgumentException("The file format must be CSV");
+        String filePath = args[0];
+        if (!filePath.endsWith(".txt")) {
+            throw new IllegalArgumentException("The file format must be TXT");
         }
 
         Options opt = new OptionsBuilder()
                 .shouldDoGC(true)
-                .resultFormat(ResultFormatType.CSV)
-                .result(fileName)
+                .resultFormat(ResultFormatType.TEXT)
+                .result(filePath)
                 .build();
 
         new Runner(opt).run();
