@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.MethodSource
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
-class TermResolverTest {
+internal class TermResolverTest {
 
     @ParameterizedTest
     @MethodSource("costaber.com.github.omniflow.util.data.TermDataProvider#termResolveDataProvider")

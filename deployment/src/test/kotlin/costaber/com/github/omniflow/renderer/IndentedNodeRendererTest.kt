@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
-class IndentedNodeRendererTest {
+internal class IndentedNodeRendererTest {
 
     private companion object {
         const val RENDER_RESULT = "{ something }"

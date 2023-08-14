@@ -14,7 +14,7 @@ import strikt.assertions.containsExactly
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
-class SwitchContextBuilderTest {
+internal class SwitchContextBuilderTest {
 
     @Test
     fun `switch has expected result`() {

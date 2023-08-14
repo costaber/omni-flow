@@ -10,7 +10,7 @@ import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
-class StepBuilderTest {
+internal class StepBuilderTest {
 
     @Test
     fun `step has expected result`() {

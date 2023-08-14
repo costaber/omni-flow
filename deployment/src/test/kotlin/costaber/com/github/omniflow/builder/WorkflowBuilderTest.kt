@@ -12,7 +12,7 @@ import strikt.assertions.containsExactly
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
-class WorkflowBuilderTest {
+internal class WorkflowBuilderTest {
 
     @Test
     fun `workflow has expected result`() {

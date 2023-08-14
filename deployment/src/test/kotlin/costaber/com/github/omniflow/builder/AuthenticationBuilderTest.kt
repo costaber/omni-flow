@@ -11,7 +11,7 @@ import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
-class AuthenticationBuilderTest {
+internal class AuthenticationBuilderTest {
 
     @Test
     fun `authentication has expected result`() {

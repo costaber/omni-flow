@@ -10,7 +10,7 @@ import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
-class DslDefinitionTest {
+internal class DslDefinitionTest {
 
     @Test
     fun `variable has expected result`() {

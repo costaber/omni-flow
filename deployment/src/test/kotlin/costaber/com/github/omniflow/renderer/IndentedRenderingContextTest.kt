@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
 
-class IndentedRenderingContextTest {
+internal class IndentedRenderingContextTest {
 
     @Test
     fun `getString has expected results`() {

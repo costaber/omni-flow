@@ -7,7 +7,7 @@ import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
-class SwitchConditionBuilderTest {
+internal class SwitchConditionBuilderTest {
 
     @ParameterizedTest
     @MethodSource("costaber.com.github.omniflow.util.data.SwitchConditionBuilderDataProvider#switchConditionBuilderWithExpectedDataProvider")

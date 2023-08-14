@@ -16,7 +16,7 @@ import strikt.api.expect
 import strikt.assertions.isEqualTo
 import kotlin.test.assertFailsWith
 
-class DefaultNodeRendererStrategyDeciderTest {
+internal class DefaultNodeRendererStrategyDeciderTest {
 
     @Test
     fun `decide renderer has expected results`() {

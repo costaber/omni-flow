@@ -12,7 +12,7 @@ import strikt.assertions.containsExactly
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
-class AssignContextBuilderTest {
+internal class AssignContextBuilderTest {
 
     @Test
     fun `assign has expected result`() {

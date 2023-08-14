@@ -12,7 +12,7 @@ import strikt.assertions.containsKeys
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
-class CallContextBuilderTest {
+internal class CallContextBuilderTest {
 
     @Test
     fun `call has expected result`() {

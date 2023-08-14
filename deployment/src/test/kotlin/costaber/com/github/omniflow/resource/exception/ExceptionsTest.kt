@@ -6,7 +6,7 @@ import strikt.api.expectThat
 import strikt.assertions.isA
 import strikt.assertions.isEqualTo
 
-class ExceptionsTest {
+internal class ExceptionsTest {
 
     @Test
     fun `ExternalCloudClientException is correct`() {
