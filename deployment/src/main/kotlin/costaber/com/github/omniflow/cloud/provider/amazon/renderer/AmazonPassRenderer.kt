@@ -7,7 +7,7 @@ import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
 import costaber.com.github.omniflow.resource.util.render
 
-class AmazonPassRenderer(private val assignContext: AssignContext) : IndentedNodeRenderer {
+class AmazonPassRenderer(private val assignContext: AssignContext) : IndentedNodeRenderer() {
 
     override val element: Node = assignContext
 

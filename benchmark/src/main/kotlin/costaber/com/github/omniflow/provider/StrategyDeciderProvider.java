@@ -34,6 +34,7 @@ public class StrategyDeciderProvider {
                 .addRendererStrategy(new AmazonGreaterThanOrEqualExpressionStrategyFactory())
                 .addRendererStrategy(new AmazonLessThanExpressionStrategyFactory())
                 .addRendererStrategy(new AmazonLessThanOrEqualExpressionStrategyFactory())
+                .addRendererStrategy(new AmazonNotEqualToExpressionStrategyFactory())
                 .addRendererStrategy(new AmazonPassStrategyFactory())
                 .addRendererStrategy(new AmazonStateMachineStrategyFactory())
                 .addRendererStrategy(new AmazonStateStrategyFactory())

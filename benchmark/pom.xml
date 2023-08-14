@@ -61,7 +61,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>costaber.com.github.omniflow.BenchmarkApplicationKt</mainClass>
+                            <mainClass>costaber.com.github.omniflow.BenchmarkApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -81,7 +81,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>costaber.com.github.omniflow</mainClass>
+                                    <mainClass>costaber.com.github.omniflow.BenchmarkApplication</mainClass>
                                 </transformer>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>

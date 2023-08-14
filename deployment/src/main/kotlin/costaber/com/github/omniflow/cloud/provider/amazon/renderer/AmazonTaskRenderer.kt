@@ -8,12 +8,13 @@ import costaber.com.github.omniflow.model.Term
 import costaber.com.github.omniflow.model.Value
 import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
+import costaber.com.github.omniflow.renderer.TermContext
 import costaber.com.github.omniflow.resource.util.render
 
 class AmazonTaskRenderer(
     private val callContext: CallContext,
     private val amazonTermResolver: AmazonTermResolver,
-) : IndentedNodeRenderer {
+) : IndentedNodeRenderer() {
 
     private val objectMapper = ObjectMapper()
 
@@ -29,8 +30,8 @@ class AmazonTaskRenderer(
                 addLine("${AMAZON_API_ENDPOINT}\"${callContext.host}\",")
                 addLine("${AMAZON_METHOD}\"${callContext.method}\",")
                 add("${AMAZON_PATH}\"${callContext.path}\"")
-                renderMap(AMAZON_HEADERS, callContext.header)
-                renderMap(AMAZON_QUERY_PARAMETERS, callContext.query)
+                renderMap(AMAZON_HEADERS, callContext.header, renderingContext.termContext)
+                renderMap(AMAZON_QUERY_PARAMETERS, callContext.query, renderingContext.termContext)
                 renderBody()
                 renderAuth()
                 addEmptyLine()
@@ -58,7 +59,8 @@ class AmazonTaskRenderer(
 
     private fun IndentedRenderingContext.renderMap(
         title: String,
-        mapToRender: Map<String, Term<*>>
+        mapToRender: Map<String, Term<*>>,
+        termContext: TermContext,
     ) {
         if (mapToRender.isNotEmpty()) {
             append(",")
@@ -69,18 +71,18 @@ class AmazonTaskRenderer(
                 val last = mutableMap.entries.lastOrNull()
                 last?.let { mutableMap.remove(last.key) }
                 mutableMap.forEach {
-                    addLine("${renderMapEntry(it)},")
+                    addLine("${renderMapEntry(it, termContext)},")
                 }
-                last?.let { addLine(renderMapEntry(it)) }
+                last?.let { addLine(renderMapEntry(it, termContext)) }
             }
             add("}")
         }
     }
 
-    private fun renderMapEntry(mapEntry: Map.Entry<String, Term<*>>): String {
-        var value = amazonTermResolver.resolve(mapEntry.value)
-        if (mapEntry.value is Value<*>) {
-            value = "[$value]"
+    private fun renderMapEntry(mapEntry: Map.Entry<String, Term<*>>, termContext: TermContext): String {
+        var value = amazonTermResolver.resolve(mapEntry.value, termContext)
+        if (mapEntry.value is Value) {
+            value = "\"States.Array(States.Format('{}', $value))\""
         }
         return "\"${mapEntry.key}.\$\": $value"
     }
@@ -90,19 +92,30 @@ class AmazonTaskRenderer(
             append(",")
             addEmptyLine()
             add(AMAZON_REQUEST_BODY)
-            val lines = objectMapper.writeValueAsString(it)
+            append("{")
+            addEmptyLine()
+            tab {
+                processBody(it)
+            }
+            add("}")
+        }
+    }
+
+    private fun IndentedRenderingContext.processBody(body: Any) {
+        if (body is String) {
+            addLine("$AMAZON_REQUEST_PAYLOAD \"$body\"")
+        } else {
+            val lines = objectMapper.writeValueAsString(body)
                 .split("{", "}", ",")
                 .filterNot(String::isEmpty)
-            if (lines.size == 1) {
-                append(lines.first())
-            } else {
-                append("{")
+                .toMutableList()
+            lines.removeFirstOrNull()?.let { line -> add(line) }
+            lines.forEach { line ->
+                append(",")
                 addEmptyLine()
-                tab {
-                    lines.forEach { line -> addLine(line) }
-                }
-                add("}")
+                add(line)
             }
+            addEmptyLine()
         }
     }
 

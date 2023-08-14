@@ -1,4 +1,4 @@
-package costaber.com.github.omniflow.analyzer;
+package costaber.com.github.omniflow.metrics;
 
 import costaber.com.github.omniflow.cloud.provider.amazon.renderer.AmazonRenderingContext;
 import costaber.com.github.omniflow.generator.WorkflowGenerator;
@@ -9,7 +9,7 @@ import costaber.com.github.omniflow.visitor.NodeContextVisitor;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Setup;
 
-public class BenchmarkAmazonRenderer extends WorkflowBenchmark {
+public class BenchmarkAmazonRenderer extends BenchmarkWorkflowRenderer {
 
     private DepthFirstNodeVisitorTraversor traversor;
     private NodeContextVisitor amazonContextVisitor;

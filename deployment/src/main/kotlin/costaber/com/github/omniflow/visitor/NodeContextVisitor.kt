@@ -24,5 +24,4 @@ class NodeContextVisitor(
     private fun getRenderer(node: Node): NodeRenderer<*> {
         return nodeRendererStrategyDecider.decideRenderer(node)
     }
-
 }

@@ -3,7 +3,7 @@ package costaber.com.github.omniflow.factory
 import costaber.com.github.omniflow.model.Node
 import costaber.com.github.omniflow.renderer.NodeRenderer
 
-class DefaultNodeRendererStrategyDecider private constructor(
+class DefaultNodeRendererStrategyDecider internal constructor(
     private val rendererStrategyFactories: List<NodeRendererStrategyFactory<*>>,
 ) : NodeRendererStrategyDecider {
 

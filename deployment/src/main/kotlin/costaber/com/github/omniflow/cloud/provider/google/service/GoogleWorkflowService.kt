@@ -6,6 +6,7 @@ import com.google.cloud.workflows.v1.Workflow
 import com.google.cloud.workflows.v1.WorkflowsClient
 import costaber.com.github.omniflow.resource.exception.ExternalCloudClientException
 import mu.KotlinLogging
+import java.util.concurrent.TimeUnit
 
 class GoogleWorkflowService {
 
@@ -44,6 +45,8 @@ class GoogleWorkflowService {
             val workflowCreationResult = workflowsClient.createWorkflowAsync(createWorkflowRequest)
             logger.info { "Workflow creation result ${workflowCreationResult.get()}" }
             logger.info { "Metadata: ${workflowCreationResult.metadata}" }
+            workflowsClient.shutdown()
+            workflowsClient.awaitTermination(5000, TimeUnit.MILLISECONDS)
         } catch (exception: Exception) {
             throw ExternalCloudClientException(
                 workflowName = workflowId,

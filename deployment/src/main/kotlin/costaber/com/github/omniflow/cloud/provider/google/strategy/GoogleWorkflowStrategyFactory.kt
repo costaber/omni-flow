@@ -1,5 +1,6 @@
 package costaber.com.github.omniflow.cloud.provider.google.strategy
 
+import costaber.com.github.omniflow.cloud.provider.google.renderer.GoogleTermResolver
 import costaber.com.github.omniflow.cloud.provider.google.renderer.GoogleWorkflowRenderer
 import costaber.com.github.omniflow.factory.NodeRendererStrategyFactory
 import costaber.com.github.omniflow.model.Node
@@ -14,5 +15,5 @@ class GoogleWorkflowStrategyFactory : NodeRendererStrategyFactory<String> {
         DefaultPredicate(Workflow::class)
 
     override fun getRenderer(node: Node): NodeRenderer<String> =
-        GoogleWorkflowRenderer(node as Workflow)
+        GoogleWorkflowRenderer(node as Workflow, GoogleTermResolver)
 }

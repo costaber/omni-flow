@@ -8,7 +8,7 @@ import costaber.com.github.omniflow.renderer.IndentedNodeRenderer
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext
 import costaber.com.github.omniflow.resource.util.render
 
-class AmazonStateRenderer(private val step: Step) : IndentedNodeRenderer {
+class AmazonStateRenderer(private val step: Step) : IndentedNodeRenderer() {
 
     override val element: Node = step
 

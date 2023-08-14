@@ -37,6 +37,8 @@
         <jackson-datatype-jsr310.version>2.15.2</jackson-datatype-jsr310.version>
 
         <!-- Testing -->
+        <mockk-jvm.version>1.13.5</mockk-jvm.version>
+        <strikt-core.version>0.34.1</strikt-core.version>
         <junit.version>4.13.2</junit.version>
         <kotlin-test-junit.version>1.7.0</kotlin-test-junit.version>
     </properties>

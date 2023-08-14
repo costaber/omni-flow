@@ -1,5 +1,6 @@
-package costaber.com.github.omniflow.analyzer;
+package costaber.com.github.omniflow.metrics;
 
+import costaber.com.github.omniflow.cloud.provider.google.renderer.GoogleTermContext;
 import costaber.com.github.omniflow.generator.WorkflowGenerator;
 import costaber.com.github.omniflow.provider.StrategyDeciderProvider;
 import costaber.com.github.omniflow.renderer.IndentedRenderingContext;
@@ -8,7 +9,7 @@ import costaber.com.github.omniflow.visitor.NodeContextVisitor;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Setup;
 
-public class BenchmarkGoogleRenderer extends WorkflowBenchmark {
+public class BenchmarkGoogleRenderer extends BenchmarkWorkflowRenderer {
 
     private DepthFirstNodeVisitorTraversor traversor;
     private NodeContextVisitor googleContextVisitor;
@@ -22,7 +23,7 @@ public class BenchmarkGoogleRenderer extends WorkflowBenchmark {
         workflowWithMultipleDecisions = WorkflowGenerator.withMultipleDecisions(numberOfSteps);
         traversor = new DepthFirstNodeVisitorTraversor();
         googleContextVisitor = new NodeContextVisitor(StrategyDeciderProvider.googleNodeRendererStrategyDecider());
-        googleRenderingContext = new IndentedRenderingContext();
+        googleRenderingContext = new IndentedRenderingContext(0, new StringBuilder(), new GoogleTermContext());
     }
 
     @Benchmark

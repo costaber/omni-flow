@@ -8,7 +8,7 @@ import costaber.com.github.omniflow.resource.util.render
 
 class GoogleGreaterThanExpressionRenderer(
     private val greaterThanExpression: GreaterThanExpression<*>,
-) : IndentedNodeRenderer {
+) : IndentedNodeRenderer() {
 
     override val element: Node = greaterThanExpression
 
