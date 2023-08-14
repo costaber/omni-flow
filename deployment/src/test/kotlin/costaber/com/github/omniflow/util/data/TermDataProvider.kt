@@ -14,7 +14,7 @@ internal object TermDataProvider {
         ),
         Arguments.of(
             VALUE_1,
-            "\"$VALUE_OF_1\"",
+            "\'$VALUE_OF_1\'",
         ),
         Arguments.of(
             VALUE_2,
