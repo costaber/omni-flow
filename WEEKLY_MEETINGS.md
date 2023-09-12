@@ -28,6 +28,7 @@
 - [July 21, 2023](#july-21-2023)
 - [July 28, 2023](#july-28-2023)
 - [September 08, 2023](#september-08-2023)
+- [September 12, 2023](#september-12-2023)
 
 ---
 
@@ -223,5 +224,10 @@
 
 - Overview of work done during August
 - Paper next steps:
-  - Evaluation chapter revision
-  - Complete `Implementation` and `Proposed Solution` chapters
+    - Evaluation chapter revision
+    - Complete `Implementation` and `Proposed Solution` chapters
+
+## September 12, 2023
+
+- Topics about the DSL and architecture sections
+- Improvement on `Implementation` Chapter
