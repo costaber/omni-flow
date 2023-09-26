@@ -42,7 +42,7 @@ Maven Dependency:
 <dependency>
     <groupId>costaber.com.github</groupId>
     <artifactId>omni-flow-deployment</artifactId>
-    <version>${omni-flow-deploymen.version}</version>
+    <version>${omni-flow-deployment.version}</version>
 </dependency>
 ```
 

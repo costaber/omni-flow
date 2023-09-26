@@ -29,6 +29,8 @@
 - [July 28, 2023](#july-28-2023)
 - [September 08, 2023](#september-08-2023)
 - [September 12, 2023](#september-12-2023)
+- [September 21, 2023](#september-21-2023)
+- [September 26, 2023](#september-26-2023)
 
 ---
 
@@ -231,3 +233,17 @@
 
 - Topics about the DSL and architecture sections
 - Improvement on `Implementation` Chapter
+
+## September 21, 2023
+
+- Overall state of the thesis
+- Next step is to finish the conclusion and improve the writing
+
+## September 26, 2023
+
+- Thesis structural and visual improvement
+- Documents required for the delivery on the 30th of September
+- Summary of final master's work in article format
+    - Resume focused on the principal aspects of each chapter
+- Declaration of Conformity and Delivery Annex A documents need to be signed by both students and supervisors, the
+  sooner the bette 
