@@ -246,4 +246,4 @@
 - Summary of final master's work in article format
     - Resume focused on the principal aspects of each chapter
 - Declaration of Conformity and Delivery Annex A documents need to be signed by both students and supervisors, the
-  sooner the bette 
+  sooner, the better

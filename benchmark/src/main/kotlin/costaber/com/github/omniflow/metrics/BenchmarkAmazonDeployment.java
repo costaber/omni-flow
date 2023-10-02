@@ -20,7 +20,7 @@ import static costaber.com.github.omniflow.util.Constants.*;
 public class BenchmarkAmazonDeployment extends BenchmarkWorkflowDeployment {
 
     private static final String ARN = System.getenv(AWS_ROLE_ARN_ENV_VAR);
-    private static final String region = System.getenv(AWS_REGION_ENV_VAR);
+    private static final String REGION = System.getenv(AWS_REGION_ENV_VAR);
 
     private AmazonStateMachineService amazonStateMachineService;
     private final HashMap<String, String> tags = new HashMap<String, String>() {{
@@ -53,7 +53,7 @@ public class BenchmarkAmazonDeployment extends BenchmarkWorkflowDeployment {
     public void benchmarkGeneratedWorkflowDeployment() {
         amazonStateMachineService.createStateMachine(
                 ARN,
-                region,
+                REGION,
                 tags,
                 GENERATED_WORKFLOW_NAME,
                 generatedWorkflow
@@ -65,7 +65,7 @@ public class BenchmarkAmazonDeployment extends BenchmarkWorkflowDeployment {
     public void benchmarkExampleWorkflowDeployment() {
         amazonStateMachineService.createStateMachine(
                 ARN,
-                region,
+                REGION,
                 tags,
                 EXAMPLE_WORKFLOW_NAME,
                 exampleWorkflow
