@@ -23,13 +23,13 @@ public class BenchmarkGoogleDeployment extends BenchmarkWorkflowDeployment {
     private static final String PROJECT_ID = System.getenv(GOOGLE_PROJECT_ID_ENV_VAR);
     private static final String ZONE = System.getenv(GOOGLE_ZONE_ENV_VAR);
     private static final String SERVICE_ACCOUNT = System.getenv(GOOGLE_SERVICE_ACCOUNT_ENV_VAR);
-
-    private GoogleWorkflowService googleWorkflowService;
-    private final HashMap<String, String> labels = new HashMap<String, String>() {{
+    private static final HashMap<String, String> LABELS = new HashMap<String, String>() {{
         put(ORIGIN_LABEL, OMNI_FLOW_NAME);
         put(CLOUD_LABEL, GOOGLE);
         put(ENV_STR, ENVIRONMENT);
     }};
+
+    private GoogleWorkflowService googleWorkflowService;
 
     @Setup
     public void setup() throws IOException {
@@ -61,7 +61,7 @@ public class BenchmarkGoogleDeployment extends BenchmarkWorkflowDeployment {
                 SERVICE_ACCOUNT,
                 GENERATED_WORKFLOW_NAME,
                 GOOGLE_GENERATED_WORKFLOW_DESC,
-                labels,
+                LABELS,
                 generatedWorkflow
         );
     }
@@ -75,7 +75,7 @@ public class BenchmarkGoogleDeployment extends BenchmarkWorkflowDeployment {
                 SERVICE_ACCOUNT,
                 EXAMPLE_WORKFLOW_NAME,
                 GOOGLE_EXAMPLE_WORKFLOW_DESC,
-                labels,
+                LABELS,
                 exampleWorkflow
         );
     }
