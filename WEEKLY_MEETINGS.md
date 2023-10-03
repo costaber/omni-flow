@@ -31,6 +31,7 @@
 - [September 12, 2023](#september-12-2023)
 - [September 21, 2023](#september-21-2023)
 - [September 26, 2023](#september-26-2023)
+- [October 03, 2023](#october-03-2023)
 
 ---
 
@@ -247,3 +248,8 @@
     - Resume focused on the principal aspects of each chapter
 - Declaration of Conformity and Delivery Annex A documents need to be signed by both students and supervisors, the
   sooner, the better
+
+## October 03, 2023
+
+- Next steps of the resume in form of article
+- Waiting for advisors feedback
