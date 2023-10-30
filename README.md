@@ -1,7 +1,5 @@
 # OmniFlow
 
-## Overview
-
 OmniFlow is a library designed in [Kotlin][kotlin] to support the process of defining and deploying workflows across 
 multiple cloud providers. Developers can easily create workflows along with their corresponding steps, and metadata, 
 using a dedicated [Domain-Specific Language][dsl] (DSL). The primary goal is to abstract the details of workflow definition 
