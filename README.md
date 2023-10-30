@@ -2,12 +2,11 @@
 
 ## Overview
 
-OmniFlow is a versatile tool designed in [Kotlin][kotlin] to streamline the process of defining and deploying workflows
-across various cloud providers. Developers can easily create workflows along with their corresponding steps, and 
-metadata, using a dedicated [Domain-Specific Language][dsl]. The primary goal is to abstract the intricate details of 
-workflow definition and deployment, enabling a seamless translation of workflows across different cloud providers, 
-without the need to get familiarized with the schemas of each provider. Omniflow is responsible for translating the 
-defined workflow to the language, usually [JSON][json] and [YAML][yaml] formats, used by the selected cloud provider. 
+OmniFlow is a library designed in [Kotlin][kotlin] to support the process of defining and deploying workflows across 
+multiple cloud providers. Developers can easily create workflows along with their corresponding steps, and metadata, 
+using a dedicated [Domain-Specific Language][dsl] (DSL). The primary goal is to abstract the details of workflow definition 
+and deployment, enabling a seamless translation of workflows across different cloud providers, without the need to get 
+familiarized with the schemas of each provider.
 
 ## How to Build
 
@@ -24,11 +23,11 @@ defined workflow to the language, usually [JSON][json] and [YAML][yaml] formats,
 ## How to Benchmark
 
 To run the benchmarks successfully it is required the following environment variables:
-* AWS_ROLE_ARN - Amazon Resource Name format, for example `arn:partition:service:region:account:resource`
-* AWS_REGION - Region, for example `us-east-1`
-* GOOGLE_PROJECT_ID - Globally unique identifier for your project
-* GOOGLE_ZONE - Zone, for example `us-west1`
-* GOOGLE_SERVICE_ACCOUNT - Service account principals
+* `AWS_ROLE_ARN`: Amazon Resource Name format
+* `AWS_REGION`: Region
+* `GOOGLE_PROJECT_ID`: Globally unique identifier for your project
+* `GOOGLE_ZONE`: Zone
+* `GOOGLE_SERVICE_ACCOUNT`: Service account principals
 
 ```shell script
 java -jar /benchmarks/target/benchmarks.jar <path-to-txt-file> 
@@ -48,51 +47,49 @@ Maven Dependency:
 
 ### Workflow Definition
 
-At the core of **OmniFlow** lies the fundamental concept of function composition, referred to as a "workflow." A 
-workflow is a structured representation of desired steps and their execution order, complemented by essential metadata. 
-The workflow serves as an aggregator, encompassing all the behaviors outlined within its constituent steps, executing 
-them precisely as defined. A comprehensive workflow definition comprises several critical components: name, which acts 
-as the unique identifier for the workflow; description, a human-readable field for explaining the purpose and function 
-of the workflow; input, which designates the variable name that will capture all input parameters when the workflow is 
-executed; steps, dedicated to specifying the steps that encapsulate the workflow's behavior; result, is where the output
-of the workflow's execution is assigned. Among these components, "name," "steps," and "result" are mandatory, ensuring 
-the foundational structure of the workflow. The remaining fields, including "description" and "input," are optional, 
-allowing flexibility in workflow design.
+A workflow has a generic architecture, necessitating only a few essential components: a `name`, a `description`, an 
+`input`, and a `result`. The `name` and `description` serve descriptive purposes, while the `input` designates the 
+variable name where the execution arguments will be stored. The `steps` component encompasses the set of instructions 
+that specify the workflow's behaviour, and the `result` denotes the variable where the workflow's output will be stored. 
+Upon assigning a workflow to a variable, a Workflow model object is promptly created and allocated to the variable.
 
 ```kotlin
 workflow {
-    name("workflow-name") //mandatory
-    description("Workflow Description") //optional
-    input("args") //optional
-    steps() //mandatory
-    result("workflow-result") //mandatory
+    name("workflow-name")
+    description("Workflow Description")
+    input("args")
+    steps()
+    result("workflow-result")
 }
 ```
 
 The basic unit in this architecture is the Step, which, as the name suggests, represents a data processing unit with a 
-small objective, such as incrementing a number by one. A Step consists of metadata, such as name (identifier) and 
-description, which are human-readable and informative fields. The context of a step corresponds to the step behavior and
-purpose, for example, make HTTP requests, assign variables, and use conditions like if-else, or when Kotlin expressions.
-All the fields are mandatory. Currently, is supported by three types of contexts: `Assign`, `Call`, and `Conditional`.
+small objective, such as incrementing a number by one. A Step is composed by metadata, such as `name` (identifier) and 
+`description`, are string fields without restrictions. The `context` of a step corresponds to the step behaviour, for 
+example, make HTTP requests, assign variables, and use conditions like if-else, or when Kotlin expressions. All the 
+fields are mandatory. Currently, is supported by three types of contexts: `Assign`, `Call`, and `Conditional`.
 
 ```kotlin
 step {
-    name("call-step") //mandatory
-    description("Make request to example API") //mandatory
-    context() //mandatory
+    name("call-step")
+    description("Make request to example API")
+    context()
 }
 ```
 
 #### Call Step
 
-To initiate an HTTP request to an API or cloud function with specific requirements, the `Call Step` must be defined. 
-These specifications encompass the method, host, path, authentication, body, headers, query parameters, timeoutInSeconds
-, and result. It is important to note that while method, host, path, and result are mandatory fields, the other fields
-are optional offering flexibility based on the use case. Currently, the utilization of variables within this step type 
-is supported exclusively within query parameters. The `result` field serves as a variable where will be assigned the 
-outcome of the request, whether it is a success or failure. Regarding the `body` field, it accommodates both string and
-object types, offering versatility in your payload structure.
-
+To initiate an HTTP request to an API or cloud function with specific requirements, the `Call Step` must be defined.
+The `Call step` stands out as the most extensive, featuring a vast set of fields and meticulous details. Given its 
+coupling with the HTTP protocol, this step type necessitates a broad set of specifications. The `method` parameter is 
+determined by the HttpMethod enumerator, covering all the HTTP methods, including `GET`, `POST`, `DELETE`, `PUT`, and 
+more. `Host` and `path`, both are string-based fields, with no restrictions. The `authentication` field contains a type,
+scope, scopes, and audience, each of which is expressed as a string. `Body` declaration can take either a string or an 
+object. `Headers` and `queries`, are maps composed of multiple key-value pairs, where the key represents the header or 
+query name, and the value is the header value. `TimeoutInSeconds` is an integer field specifying the timeout duration of
+the request. Finally, the `result` denotes the variable name wherein the response will be stored. The `method`, `host` 
+and `path`, and `result` parameters are mandatory, as the `HTTP` protocol needs them to provide the request, while the 
+other parameters are optional.
 
 ```kotlin
 step {
@@ -100,23 +97,23 @@ step {
     description("Make HTTP request to API")
     context(
         call {
-            method(HttpMethod.POST) //mandatory
-            host("example-api.com") //mandatory
-            path("/default/v1/") //mandatory
+            method(HttpMethod.POST)
+            host("example-api.com")
+            path("/default/v1/")
             authentication(
                 type("OAuth2")
-            ) //optional
+            )
             body(
                 "Hello World!"
-            ) //optional
+            )
             header(
                 "Content-Type" to "application/json"
-            ) //optional
+            )
             query(
                 "filter" to value("name")
-            ) //optional
-            timeoutInSeconds(5) //optional
-            result("sumResult") //mandatory
+            )
+            timeoutInSeconds(5)
+            result("sumResult")
         }
     )
 }
@@ -124,12 +121,12 @@ step {
 
 #### Assign Step
 
-Assigning variables holds significant utility within workflows. To initialize or assign variables, the `Assign Step` is
-the essential tool. This step empowers the variables declaration of various types, harnessing the full potential of 
-Kotlin to process values dynamically. For instance, you can employ Kotlin expressions like `Random().nextInt()` to 
-generate values. When working within the assign context, it is essential to remember that at least one variable must be 
-assigned. This fundamental requirement ensures that the workflow operates smoothly and effectively.
-
+To facilitate variable assignments, the `Assign` context proves to be both intuitive and straightforward, as it 
+exclusively deals with variable assignment and creation. Defining a variable is by calling the method `variable`, 
+composed of a variable name, `equal` expression, and a value. The assigned value can take on all the Kotlin primitive 
+data types, allowing you to leverage Kotlin's capabilities to generate values, for instance, you can employ constants 
+like `Random.nextInt()`. The equals expression, an infix method in Kotlin, combines the left and right values – the 
+variable name and the assigned value – into a Pair object, offering a highly declarative approach.
 
 ```kotlin
 step {
@@ -147,13 +144,12 @@ step {
 
 #### Condition Step
 
-In order to manage the execution flow through conditional expressions is accomplished using the `Conditional Step`. This
-step type allows you to define conditional expressions with multiple branches, similar to the "when" statement in the
-Kotlin language. Within the Conditional Step, it is possible to specify two crucial fields: `jump` and `default`. These
-fields determine the step names to follow in case the condition is satisfied. The supported binary expressions available
-for defining conditions include: `equalTo`, `notEqualTo`, `greaterThan`, `greaterThanOrEqual`, `lessThan`,
-`lessThanOrEqual`. When defining a condition it is mandatory to compare a value with a variable. When crafting a 
-condition, it's imperative to make comparisons between a variable and a predefined, hardcoded value.
+The `Switch` step shares similarities with the [when][kotlin-when] statement in the Kotlin programming language, allowing you to 
+create multiple conditional branches. This step comprises a set of conditions, and a `default` branch, which gets 
+executed if none of the conditions are met. Each condition consists of a binary expression used for matching, when is 
+matched, the step name specified in the `jump` field, will be executed next. A binary expression encloses a variable, a
+binary operator, and a constant value. Supported binary operators include `equalTo`, `notEqualTo`, `greaterThan`, 
+`greaterThanOrEqual`, `lessThan`, and `lessThanOrEqual`.
 
 ```kotlin
 step {
@@ -163,15 +159,15 @@ step {
         switch {
             conditions(
                 condition {
-                    match(variable("c") equalTo value(0)) //mandatory
-                    jump("Assign1ToC") //mandatory
+                    match(variable("c") equalTo value(0))
+                    jump("Assign1ToC")
                 },
                 condition {
-                    match(variable("c") greaterThan value(0)) //mandatory
-                    jump("DivWithC") //mandatory
+                    match(variable("c") greaterThan value(0))
+                    jump("DivWithC")
                 }
             )
-            default("Assign1ToC") //optional
+            default("Assign1ToC")
         }
     )
 }
@@ -179,42 +175,40 @@ step {
 
 ### Cloud Provider Deployment
 
-Once the workflow is defined, the next crucial step is deploying it to the chosen cloud provider. As mentioned earlier, 
-the supported cloud providers include Amazon's State Machines and Google's Cloud Workflows, each with its unique set of 
-parameters and credential requirements. To successfully complete the deployment phase, is required to create a 
-deployment context tailored to the cloud provider's specific needs. The deployment services necessitate two primary 
-inputs: the deployment context and the predefined workflow. It is important to note that while both cloud providers have
-their distinct deployment prerequisites, the workflow to be deployed remains the same - the Workflow model previously 
-crafted using the DSL.
+Once the workflow is defined, the next phase is deploying it to the chosen cloud provider. The supported cloud providers
+include Amazon's State Machines and Google's Cloud Workflows, each with its unique set of parameters and credential 
+requirements. To successfully complete the deployment phase, is required to create a deployment context tailored to the
+cloud provider's specific needs. The deployment services necessitate two primary inputs: the deployment context, and the
+predefined workflow. It is important to note that while both cloud providers have their distinct deployment
+prerequisites, the workflow to be deployed remains the same - the Workflow model previously crafted using the DSL.
 
 #### Google Cloud Platform
 
 Google's deployment prerequisites encompass various aspects of Google's project, and service account to which the 
-workflow will be linked to. It is required to specify essential details such as the workflow's identifier, description, 
-labels, and zone, all of which are outlined in Listing\ref{lst:googleDeploy} for your reference. It is decisive to note
-that running this piece of code necessitates user credentials to authenticate the user's identity and verify access to 
-the specified project and service account. To provide this proof, the environment variable 
-`GOOGLE_APPLICATION_CREDENTIALS` must be set, which should point to the location of a credential JSON file. This JSON 
-file can take one of two forms: a credential configuration file for workload identity federation or a service account 
-key. It is also worth mentioning that Google's Application Default Credentials strategy is employed by their 
-authentication libraries to automatically locate the appropriate credentials based on the application environment, 
+workflow will be linked to. It is required to specify essential details, such as, the workflow's identifier, description
+, labels, and zone. It is decisive to note that running this piece of code necessitates user credentials to authenticate 
+the user's identity and verify access to the specified project and service account. To provide this proof, the 
+environment variable`GOOGLE_APPLICATION_CREDENTIALS` must be set, which should point to the location of a credential 
+JSON file. This JSON file can take one of two forms: a credential configuration file for workload identity federation or
+a service account key. It is also worth mentioning that Google's Application Default Credentials strategy is employed by
+their authentication libraries to automatically locate the appropriate credentials based on the application environment, 
 simplifying the authentication process.
 
 ```kotlin
 val googleDeployContext = GoogleDeployContext(
-    workflowId = "example_workflow",
-    workflowDescription = "Workflow for testing",
-    workflowLabels = mapOf("environment" to "testing", "app" to "omni-flow"),
+    workflowId = "<workflow-id>",
+    workflowDescription = "<workflow-description>",
+    workflowLabels = mapOf(
+        "environment" to "testing",
+        "app" to "omni-flow",
+    ),
     projectId = "<your-project-id>",
     serviceAccount = "<your-service-account>",
     zone = "<zone>",
 )
 GoogleCloudDeployer.Builder()
     .build()
-    .deploy(
-        workflow = workflow,
-        deployContext = googleDeployContext,
-    )
+    .deploy(workflow, googleDeployContext)
 ```
 
 #### Amazon Web Services
@@ -227,17 +221,17 @@ cryptographically signed and issued by AWS for secure authentication.
 
 ```kotlin
 val amazonDeployContext = AmazonDeployContext(
-    stateMachineName = "example_state_machine",
+    stateMachineName = "<state-machine-name>",
     roleArn = "<your-role-arn>",
-    tags = mapOf("environment" to "testing", "app" to "omni-flow"),
+    tags = mapOf(
+        "environment" to "testing",
+        "app" to "omni-flow",
+    ),
     region = "<zone>",
 )
 AmazonCloudDeployer.Builder()
     .build()
-    .deploy(
-        workflow = workflow,
-        deployContext = amazonDeployContext,
-    )
+    .deploy(workflow, amazonDeployContext)
 ```
 
 ## Additional Documentations
@@ -253,9 +247,8 @@ Please refer to the following documents if you need more details on the tools an
 [Google Cloud Application Default Credentials][google-cloud-adc]
 
 [kotlin]: https://kotlinlang.org/
+[kotlin-when]: https://kotlinlang.org/docs/control-flow.html#when-expression
 [dsl]: https://www.jetbrains.com/mps/concepts/domain-specific-languages/
-[json]: https://www.json.org/
-[yaml]: https://yaml.org/
 [aws-step-functions]: https://aws.amazon.com/step-functions
 [aws-credentials-provider]: https://docs.aws.amazon.com/sdk-for-kotlin/latest/developer-guide/credential-providers.html
 [google-cloud-workflows]: https://cloud.google.com/workflows
