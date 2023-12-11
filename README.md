@@ -1,10 +1,15 @@
 # OmniFlow
 
+![logo](/assets/images/omniflow.jpeg)
+
 OmniFlow is a library designed in [Kotlin][kotlin] to support the process of defining and deploying workflows across 
 multiple cloud providers. Developers can easily create workflows along with their corresponding steps, and metadata, 
 using a dedicated [Domain-Specific Language][dsl] (DSL). The primary goal is to abstract the details of workflow definition 
 and deployment, enabling a seamless translation of workflows across different cloud providers, without the need to get 
 familiarized with the schemas of each provider.
+
+This project was developed as part of the Master's thesis in Computer Science and Engineering at the [Instituto Superior
+de Engenharia de Lisboa (ISEL)][isel], entitled "Function Composition in Function-as-a-Service Platforms"
 
 ## How to Build
 
@@ -56,7 +61,7 @@ workflow {
     name("workflow-name")
     description("Workflow Description")
     input("args")
-    steps()
+    steps(/** The workflow steps **/)
     result("workflow-result")
 }
 ```
@@ -71,7 +76,7 @@ fields are mandatory. Currently, is supported by three types of contexts: `Assig
 step {
     name("call-step")
     description("Make request to example API")
-    context()
+    context(/** The step behavior **/)
 }
 ```
 
@@ -142,7 +147,7 @@ step {
 
 #### Condition Step
 
-The `Switch` step shares similarities with the [when][kotlin-when] statement in the Kotlin programming language, allowing you to 
+The `Switch` step shares similarities with [when][kotlin-when] statement in the Kotlin programming language, allowing you to 
 create multiple conditional branches. This step comprises a set of conditions, and a `default` branch, which gets 
 executed if none of the conditions are met. Each condition consists of a binary expression used for matching, when is 
 matched, the step name specified in the `jump` field, will be executed next. A binary expression encloses a variable, a
@@ -251,3 +256,4 @@ Please refer to the following documents if you need more details on the tools an
 [aws-credentials-provider]: https://docs.aws.amazon.com/sdk-for-kotlin/latest/developer-guide/credential-providers.html
 [google-cloud-workflows]: https://cloud.google.com/workflows
 [google-cloud-adc]: https://cloud.google.com/docs/authentication/application-default-credentials
+[isel]: https://www.isel.pt/en/curso/masters-degree/master-computer-science-and-engineering
