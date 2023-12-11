@@ -1,6 +1,6 @@
 # OmniFlow
 
-<img alt="al" src="https://github.com/costaber/omni-flow/blob/feature/update-readme/assets/images/omniflow.jpeg"/>
+<img alt="al" src="https://github.com/costaber/omni-flow/blob/feature/update-readme/assets/images/omniflow.png"/>
 
 OmniFlow is a library designed in [Kotlin][kotlin] to support the process of defining and deploying workflows across 
 multiple cloud providers. Developers can easily create workflows along with their corresponding steps, and metadata, 
