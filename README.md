@@ -1,12 +1,12 @@
 # OmniFlow
 
-![logo](/assets/images/omniflow.jpeg)
+<img alt="al" src="https://github.com/costaber/omni-flow/blob/feature/update-readme/assets/images/omniflow.jpeg"/>
 
 OmniFlow is a library designed in [Kotlin][kotlin] to support the process of defining and deploying workflows across 
 multiple cloud providers. Developers can easily create workflows along with their corresponding steps, and metadata, 
-using a dedicated [Domain-Specific Language][dsl] (DSL). The primary goal is to abstract the details of workflow definition 
-and deployment, enabling a seamless translation of workflows across different cloud providers, without the need to get 
-familiarized with the schemas of each provider.
+using a dedicated [Domain-Specific Language][dsl] (DSL). The primary goal is to abstract the details of workflow 
+definition and deployment, enabling a seamless translation of workflows across different cloud providers, without the 
+need to get familiarized with the schemas of each provider.
 
 This project was developed as part of the Master's thesis in Computer Science and Engineering at the [Instituto Superior
 de Engenharia de Lisboa (ISEL)][isel], entitled "Function Composition in Function-as-a-Service Platforms"
