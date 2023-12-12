@@ -60,7 +60,7 @@ Upon assigning a workflow to a variable, a Workflow model object is promptly cre
 workflow {
     name("workflow-name")
     description("Workflow Description")
-    input("args")
+    params("args")
     steps(/** The workflow steps **/)
     result("workflow-result")
 }
@@ -106,9 +106,7 @@ step {
             authentication(
                 type("OAuth2")
             )
-            body(
-                "Hello World!"
-            )
+            body("Hello World!")
             header(
                 "Content-Type" to "application/json"
             )
