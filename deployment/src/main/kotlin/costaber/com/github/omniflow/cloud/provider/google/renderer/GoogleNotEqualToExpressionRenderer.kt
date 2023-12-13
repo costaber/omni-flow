@@ -14,7 +14,7 @@ class GoogleNotEqualToExpressionRenderer(
 
     override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
         render(renderingContext) {
-            add("\${${notEqualToExpression.left.term()} == ${notEqualToExpression.left.term()}}")
+            add("\${${notEqualToExpression.left.term()} == ${notEqualToExpression.right.term()}}")
         }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String = "" // nothing

@@ -14,7 +14,7 @@ class GoogleGreaterThanOrEqualExpressionRenderer(
 
     override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
         render(renderingContext) {
-            add("\${${greaterThanOrEqualExpression.left.term()} >= ${greaterThanOrEqualExpression.left.term()}}")
+            add("\${${greaterThanOrEqualExpression.left.term()} >= ${greaterThanOrEqualExpression.right.term()}}")
         }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String = "" // nothing

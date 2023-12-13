@@ -14,7 +14,7 @@ class GoogleEqualToExpressionRenderer(
 
     override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
         render(renderingContext) {
-            add("\${${equalToExpression.left.term()} == ${equalToExpression.left.term()}}")
+            add("\${${equalToExpression.left.term()} == ${equalToExpression.right.term()}}")
         }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String = "" // nothing

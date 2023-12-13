@@ -14,7 +14,7 @@ class GoogleLessThanOrEqualExpressionRenderer(
 
     override fun internalBeginRender(renderingContext: IndentedRenderingContext): String =
         render(renderingContext) {
-            add("\${${lessThanOrEqualExpression.left.term()} == ${lessThanOrEqualExpression.left.term()}}")
+            add("\${${lessThanOrEqualExpression.left.term()} == ${lessThanOrEqualExpression.right.term()}}")
         }
 
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String = "" // nothing
