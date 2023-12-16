@@ -81,7 +81,7 @@ internal class WorkflowTest {
                         host("r1ro8xa7y8.execute-api.us-east-1.amazonaws.com")
                         path("/default/calculator")
                         query(
-                            "number1" to variable("sumResult.result"),
+                            "number1" to variable("sumResult"),
                             "number2" to variable("c"),
                             "op" to value("div")
                         )
@@ -110,7 +110,6 @@ internal class WorkflowTest {
     }
 
     @Test
-    @Ignore
     fun `test amazon full deployment`() {
         val deployer = AmazonCloudDeployer.Builder().build()
         val amazonDeployContext = AmazonDeployContext(

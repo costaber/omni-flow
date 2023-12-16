@@ -42,12 +42,18 @@ class AmazonTaskRenderer(
     override fun internalEndRender(renderingContext: IndentedRenderingContext): String {
         val amazonContext = renderingContext as AmazonRenderingContext
         val nextStepName = amazonContext.getNextStepName()
+        val currentStepName = amazonContext.getCurrentStepName()
+        amazonTermResolver.addVariable(
+            prefix = amazonContext.getCurrentStepName().orEmpty(),
+            name = callContext.result,
+        )
         return render(renderingContext) {
             addLine(AMAZON_START_RESULT_SELECTOR)
             tab {
                 addLine("\"${callContext.result}.\$\": \"\$.${AMAZON_RESPONSE_BODY}\"")
             }
             addLine(AMAZON_CLOSE_OBJECT)
+            addLine("$AMAZON_START_RESULT_PATH\"\$.${currentStepName}\",")
             if (nextStepName == null) {
                 add(AMAZON_END)
             } else {

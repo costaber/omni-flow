@@ -6,9 +6,18 @@ import costaber.com.github.omniflow.renderer.TermResolver
 
 object AmazonTermResolver : TermResolver {
 
+    private val variableTranslator = mutableMapOf<String, String>()
+
     override fun resolveVariable(variable: Variable, termContext: TermContext): String {
-        val variableName = variable.name
+        val variableName = translateVariable(variable.name)
         val termDefinition = if (variableName.isNotEmpty()) "\$.${variableName}" else "\$"
         return "\"States.Array(States.Format('{}', ${termDefinition}))\""
     }
+
+    fun addVariable(prefix: String, name: String) {
+        variableTranslator[name] = "$prefix.$name"
+    }
+
+    private fun translateVariable(variableName: String): String =
+        variableTranslator[variableName] ?: variableName
 }

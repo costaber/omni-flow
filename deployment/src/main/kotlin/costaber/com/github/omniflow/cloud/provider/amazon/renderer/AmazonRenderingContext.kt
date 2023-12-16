@@ -9,6 +9,7 @@ import costaber.com.github.omniflow.renderer.TermContext
 class AmazonRenderingContext : IndentedRenderingContext(termContext = object : TermContext {}) {
 
     private lateinit var stepsNames: MutableList<String>
+    private var currentStepName: String? = null
     private var lastVariable: VariableInitialization<*>? = null
     private var lastCondition: Condition? = null
 
@@ -34,6 +35,11 @@ class AmazonRenderingContext : IndentedRenderingContext(termContext = object : T
     fun getNextStepName(): String? =
         stepsNames.firstOrNull()
 
-    fun getNextStepNameAndAdvance(): String? =
-        stepsNames.removeFirstOrNull()
+    fun getNextStepNameAndAdvance(): String? {
+        currentStepName = stepsNames.removeFirstOrNull()
+        return currentStepName
+    }
+
+    fun getCurrentStepName(): String? =
+        currentStepName
 }
