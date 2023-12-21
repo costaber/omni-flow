@@ -10,7 +10,7 @@ need to get familiarized with the schemas of each provider.
 
 This project was developed as part of the Master's thesis in Computer Science and Engineering at the [Instituto Superior
 de Engenharia de Lisboa (ISEL)][isel], entitled "Function Composition in Function-as-a-Service Platforms". The project
-was advised by Professors Filipe Freitas and José Simão, and the developed by Bernardo Costa.
+was advised by Professors Filipe Freitas and José Simão, and developed by Bernardo Costa.
 
 ## How to Build
 
